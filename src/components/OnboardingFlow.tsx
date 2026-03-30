@@ -365,7 +365,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
   };
 
   const handleRemove = (id: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setFolders(folders.filter(f => f.id !== id));
   };
 
@@ -429,7 +429,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
             {FOLDER_COLORS.map(color => (
               <button
                 key={color}
-                onClick={() => { triggerHaptic('light'); setSelectedColor(color); }}
+                onClick={() => { triggerHaptic('heavy'); setSelectedColor(color); }}
                 className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-transform active:scale-90"
                 style={{
                   backgroundColor: color,
@@ -595,7 +595,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
             {sections.map(s => (
               <motion.button
                 key={s.id}
-                onClick={() => { triggerHaptic('light'); setSelectedSection(selectedSection === s.id ? '' : s.id); }}
+                onClick={() => { triggerHaptic('heavy'); setSelectedSection(selectedSection === s.id ? '' : s.id); }}
                 className="px-3 py-1.5 rounded-xl text-[13px] font-medium cursor-pointer"
                 style={{
                   backgroundColor: selectedSection === s.id ? `${s.color}20` : '#f3f4f6',
@@ -619,7 +619,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
             {folders.map(f => (
               <motion.button
                 key={f.id}
-                onClick={() => { triggerHaptic('light'); setSelectedFolder(selectedFolder === f.id ? '' : f.id); }}
+                onClick={() => { triggerHaptic('heavy'); setSelectedFolder(selectedFolder === f.id ? '' : f.id); }}
                 className="px-3 py-1.5 rounded-xl text-[13px] font-medium cursor-pointer"
                 style={{
                   backgroundColor: selectedFolder === f.id ? '#3c78f010' : '#f3f4f6',
@@ -642,7 +642,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
           {priorityOptions.map(p => (
             <motion.button
               key={p.value}
-              onClick={() => { triggerHaptic('light'); setSelectedPriority(p.value); }}
+              onClick={() => { triggerHaptic('heavy'); setSelectedPriority(p.value); }}
               className="flex-1 py-2 rounded-xl text-[13px] font-medium cursor-pointer"
               style={{
                 backgroundColor: selectedPriority === p.value ? `${p.color}15` : '#f3f4f6',
@@ -661,7 +661,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
       <div className="flex flex-col gap-1.5">
         <span className="text-[12px] font-medium text-[#767b7e]">Due Date</span>
         <motion.button
-          onClick={() => { triggerHaptic('light'); }}
+          onClick={() => { triggerHaptic('heavy'); }}
           className="relative w-full cursor-pointer"
           whileTap={{ scale: 0.98 }}
         >
@@ -680,7 +680,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
                 {selectedDate && (
                   <span
                     className="ml-auto text-[11px] underline"
-                    onClick={(e) => { e.stopPropagation(); setSelectedDate(undefined); triggerHaptic('light'); }}
+                    onClick={(e) => { e.stopPropagation(); setSelectedDate(undefined); triggerHaptic('heavy'); }}
                   >
                     Clear
                   </span>
@@ -1110,12 +1110,12 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectGoal = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedGoal(option);
   }, []);
 
   const handleToggleProductivity = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedProductivity(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
@@ -1125,17 +1125,17 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectFocus = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedFocus(option);
   }, []);
 
   const handleSelectSchedule = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedSchedule(option);
   }, []);
 
   const handleToggleCelebrate = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedCelebrate(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
@@ -1145,7 +1145,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleToggleProgressTrack = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedProgressTrack(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
@@ -1155,37 +1155,37 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectConsistency = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedConsistency(option);
   }, []);
 
   const handleSelectStreak = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedStreak(option);
   }, []);
 
   const handleToggleRemind = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedRemind(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
   }, []);
 
   const handleToggleFeatureInterest = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedFeatureInterest(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
   }, []);
 
   const handleToggleImprove = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedImprove(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
   }, []);
 
   const handleSelectSource = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedSource(option);
   }, []);
 
   const handleToggleChallenge = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedChallenges(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
@@ -1195,17 +1195,17 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectExperience = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedExperience(option);
   }, []);
 
   const handleSelectWorkStyle = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedWorkStyle(option);
   }, []);
 
   const handleSelectEnergy = useCallback(async (option: string) => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     setSelectedEnergy(option);
   }, []);
 
@@ -1335,7 +1335,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   // 24:JOURNEY_SELECT 25:showcase 26:loading 27:welcome
 
   const goNext = useCallback(async () => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
 
     if (step === 0) {
       if (!selectedGoal) return;
@@ -1468,7 +1468,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, [step, selectedGoal, selectedSource, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
 
   const handleFinishWelcome = useCallback(async () => {
-    triggerHaptic('light');
+    triggerHaptic('heavy');
     // If user earned the first step badge, show celebration before paywall
     const earned = onboardingNoteSaved && sketchSaved && createdTasks.length > 0;
     if (earned && !firstStepShown) {
@@ -1485,7 +1485,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, [onComplete, openPaywall, onboardingNoteSaved, sketchSaved, createdTasks.length, firstStepShown, userName]);
 
   const handleBack = useCallback(async () => {
-    await triggerHaptic('light');
+    await triggerHaptic('heavy');
     // On interactive steps, back saves and goes FORWARD (next question)
     if (step === 6) {
       // Note editor handles its own saving via onSave
@@ -1663,7 +1663,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
                 transition={{ duration: 0.25, delay: 0.1 + i * 0.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={async () => {
-                  await triggerHaptic('light');
+                  await triggerHaptic('heavy');
                   setSelectedLang(lang.code);
                   i18n.changeLanguage(lang.code);
                   localStorage.setItem('flowist_language', lang.code);
@@ -2091,7 +2091,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.15 + i * 0.06 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => { triggerHaptic('light'); setSelectedJourneyId(selectedJourneyId === journey.id ? null : journey.id); }}
+                onClick={() => { triggerHaptic('heavy'); setSelectedJourneyId(selectedJourneyId === journey.id ? null : journey.id); }}
                 className="w-full text-left p-4 rounded-2xl transition-all cursor-pointer"
                 style={{
                   backgroundColor: selectedJourneyId === journey.id ? `${ONBOARDING_COLOR}20` : '#ffffff',
