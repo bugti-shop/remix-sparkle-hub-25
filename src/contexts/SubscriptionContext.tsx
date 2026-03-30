@@ -77,12 +77,12 @@ export const RECURRING_ONLY_FEATURES: readonly PremiumFeature[] = [] as const;
 
 export type PremiumFeature = typeof PREMIUM_FEATURES[number];
 
-// Free limits
+// No free limits — hard paywall with free trial grants full access
 export const FREE_LIMITS = {
-  maxNoteFolders: 3,
-  maxTaskFolders: 3,
-  maxTaskSections: 1,
-  maxNotes: 10,
+  maxNoteFolders: Infinity,
+  maxTaskFolders: Infinity,
+  maxTaskSections: Infinity,
+  maxNotes: Infinity,
 };
 
 interface UnifiedBillingContextType {
