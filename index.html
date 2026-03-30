@@ -2,22 +2,360 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Lovable App</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+    <title>Flowist - Notes, To-Do Lists &amp; Daily Planner App | Stay Organized</title>
+    <meta name="description" content="Flowist is a free all-in-one productivity app with smart notes, to-do lists, habit tracking, sketching &amp; daily planner. Organize your life effortlessly.">
+    <meta name="author" content="Flowist" />
+    <meta name="keywords" content="notes app, to-do list, daily planner, habit tracker, sketch editor, productivity app, task manager, note taking, free planner app, Flowist">
+    <link rel="apple-touch-icon" href="/favicon.webp">
+    <meta name="theme-color" content="#3c78f0">
+    <link rel="canonical" href="https://voice-art-canvas.lovable.app/">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="rating" content="general">
+    <meta name="revisit-after" content="7 days">
 
-    <!-- TODO: Update og:title to match your application name -->
-    <meta property="og:title" content="Lovable App" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- Hreflang tags for international SEO -->
+    <link rel="alternate" hreflang="en" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="ar" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="de" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="es" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="fr" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="he" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="hi" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="it" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="ja" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="ko" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="pt" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="tr" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="ur" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="zh" href="https://voice-art-canvas.lovable.app/">
+    <link rel="alternate" hreflang="x-default" href="https://voice-art-canvas.lovable.app/">
+
+    
+    
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content="https://voice-art-canvas.lovable.app/og-image.jpg">
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Flowist - Notes, To-Do Lists & Daily Planner App" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+    <meta name="twitter:site" content="@Flowist" />
+    <meta name="twitter:image" content="https://voice-art-canvas.lovable.app/og-image.jpg">
+
+    <!-- Preconnect & DNS-Prefetch: saves 100-300ms on first API call -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://accounts.google.com" crossorigin>
+    <link rel="preconnect" href="https://api.mapbox.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googleapis.com">
+    <link rel="dns-prefetch" href="https://accounts.google.com">
+    <link rel="dns-prefetch" href="https://api.mapbox.com">
+    <link rel="dns-prefetch" href="https://events.mapbox.com">
+    <link rel="dns-prefetch" href="https://tiles.mapbox.com">
+
+    <!-- Critical font: preload Inter for instant UI text rendering -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
+    <!-- Non-critical fonts: load on demand via JS after first paint to avoid blocking -->
+    <script>
+      requestIdleCallback ? requestIdleCallback(loadExtraFonts, {timeout:4000}) : setTimeout(loadExtraFonts, 2000);
+      function loadExtraFonts(){
+        var l=document.createElement('link');l.rel='stylesheet';
+        l.href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&family=Lato:wght@400;700&family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Merriweather:wght@400;700&family=Crimson+Text:wght@400;600;700&family=Dancing+Script:wght@400;500;600;700&family=Pacifico&family=Indie+Flower&family=Shadows+Into+Light&family=Permanent+Marker&family=Courier+Prime:wght@400;700&family=Space+Mono:wght@400;700&family=Fira+Code:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500;600;700&family=Noto+Serif:wght@400;700&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&family=Figtree:wght@400;500;600;700&display=swap';
+        document.head.appendChild(l);
+      }
+    </script>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"></noscript>
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:site_name" content="Flowist">
+  <meta property="og:url" content="https://voice-art-canvas.lovable.app/">
+
+    <!-- JSON-LD Structured Data for Google Rich Results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Flowist",
+      "url": "https://voice-art-canvas.lovable.app/",
+      "description": "Flowist is a free all-in-one productivity app with smart notes, to-do lists, habit tracking, sketching & daily planner. Organize your life effortlessly.",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Web, Android, iOS",
+      "inLanguage": ["en","ar","de","es","fr","he","hi","it","ja","ko","pt","tr","ur","zh"],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Smart Notes with Rich Text Editor",
+        "To-Do Lists & Task Manager",
+        "Daily Planner & Calendar",
+        "Habit Tracker",
+        "Sketch Editor with Custom Brushes",
+        "Voice Notes & Reminders",
+        "Google Drive Sync"
+      ],
+      "image": "https://voice-art-canvas.lovable.app/og-image.jpg",
+      "screenshot": "https://voice-art-canvas.lovable.app/og-image.jpg",
+      "author": {
+        "@type": "Organization",
+        "name": "Flowist"
+      }
+    }
+    </script>
+
+    <!-- Breadcrumb Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://voice-art-canvas.lovable.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Notes",
+          "item": "https://voice-art-canvas.lovable.app/notes"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "To-Do",
+          "item": "https://voice-art-canvas.lovable.app/todo/today"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Habits",
+          "item": "https://voice-art-canvas.lovable.app/todo/habits"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Settings",
+          "item": "https://voice-art-canvas.lovable.app/settings"
+        }
+      ]
+    }
+    </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  <link rel="icon" type="image/x-icon" href="/favicon.webp">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Flowist - Notes, To-Do Lists &amp; Daily Planner App | Stay Organized">
+  <meta name="twitter:title" content="Flowist - Notes, To-Do Lists &amp; Daily Planner App | Stay Organized">
+  <meta property="og:description" content="Flowist is a free all-in-one productivity app with smart notes, to-do lists, habit tracking, sketching &amp; daily planner. Organize your life effortlessly.">
+  <meta name="twitter:description" content="Flowist is a free all-in-one productivity app with smart notes, to-do lists, habit tracking, sketching &amp; daily planner. Organize your life effortlessly.">
+</head>
 
   <body>
     <div id="root"></div>
