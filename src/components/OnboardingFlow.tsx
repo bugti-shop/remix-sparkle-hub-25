@@ -1110,12 +1110,12 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectGoal = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedGoal(option);
   }, []);
 
   const handleToggleProductivity = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedProductivity(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
@@ -1125,17 +1125,17 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectFocus = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedFocus(option);
   }, []);
 
   const handleSelectSchedule = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedSchedule(option);
   }, []);
 
   const handleToggleCelebrate = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedCelebrate(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
@@ -1145,7 +1145,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleToggleProgressTrack = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedProgressTrack(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
@@ -1155,37 +1155,37 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectConsistency = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedConsistency(option);
   }, []);
 
   const handleSelectStreak = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedStreak(option);
   }, []);
 
   const handleToggleRemind = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedRemind(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
   }, []);
 
   const handleToggleFeatureInterest = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedFeatureInterest(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
   }, []);
 
   const handleToggleImprove = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedImprove(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
   }, []);
 
   const handleSelectSource = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedSource(option);
   }, []);
 
   const handleToggleChallenge = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedChallenges(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
@@ -1195,17 +1195,17 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectExperience = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedExperience(option);
   }, []);
 
   const handleSelectWorkStyle = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedWorkStyle(option);
   }, []);
 
   const handleSelectEnergy = useCallback(async (option: string) => {
-    triggerHaptic('heavy');
+    triggerSelectionHaptic();
     setSelectedEnergy(option);
   }, []);
 
