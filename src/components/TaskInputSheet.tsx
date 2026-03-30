@@ -1100,7 +1100,7 @@ export const TaskInputSheet = ({ isOpen, onClose, onAddTask, folders, selectedFo
             </div>
           )}
 
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div className="flex items-center gap-2 overflow-x-auto pb-0.5 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {/* Template button - always first */}
             <button
               onClick={() => setShowTemplateSheet(true)}
