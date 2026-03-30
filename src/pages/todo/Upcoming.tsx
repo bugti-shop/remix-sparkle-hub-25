@@ -584,7 +584,7 @@ const Upcoming = () => {
           setIsInputOpen(true);
         }}
         className="fixed left-4 right-4 z-30 h-12 text-base font-semibold"
-        style={{ bottom: 'calc(5rem + env(safe-area-inset-bottom, 0px))' }}
+        style={{ bottom: 'calc(4.25rem + env(safe-area-inset-bottom, 0px))' }}
         size="lg"
       >
         <Plus className="h-5 w-5" />{t('common.addTask')}
