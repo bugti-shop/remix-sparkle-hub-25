@@ -315,7 +315,7 @@ const TodoSettings = () => {
   );
 
   return (
-    <div className="min-h-screen min-h-screen-dynamic bg-background pb-16 sm:pb-20">
+    <div className="min-h-screen min-h-screen-dynamic bg-background pb-14">
       <header className="border-b sticky top-0 bg-card z-10" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <div className="container mx-auto px-2 xs:px-3 sm:px-4 py-2 xs:py-3 sm:py-4">
           <div className="flex items-center gap-1.5 xs:gap-2 min-w-0">

@@ -150,7 +150,7 @@ const NotesCalendar = () => {
   const noteDates = notes.map(n => new Date(n.createdAt));
 
   return (
-    <div className="min-h-screen min-h-screen-dynamic bg-background pb-16 sm:pb-20 flex flex-col">
+    <div className="min-h-screen min-h-screen-dynamic bg-background pb-14 flex flex-col">
       <div style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }} className="flex-1 flex flex-col overflow-hidden">
         {/* Header with App Logo */}
         <div className="flex items-center gap-2 px-4 pt-3 pb-1">
