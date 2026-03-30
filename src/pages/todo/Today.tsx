@@ -534,7 +534,7 @@ const Today = () => {
           </div>
 
           {isSelectionMode && selectedTaskIds.size > 0 && (
-            <div className="fixed left-4 right-4 z-40 bg-card border rounded-lg shadow-lg p-4" style={{ bottom: 'calc(5rem + env(safe-area-inset-bottom, 0px))' }}>
+            <div className="fixed left-4 right-4 z-40 bg-card border rounded-lg shadow-lg p-4" style={{ bottom: 'calc(4.25rem + env(safe-area-inset-bottom, 0px))' }}>
               <p className="text-sm mb-3 font-medium">{t('bulk.tasksSelected', { count: selectedTaskIds.size })}</p>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" onClick={() => setIsSelectActionsOpen(true)}>{t('common.actions', 'Actions')}</Button>
@@ -718,7 +718,7 @@ const Today = () => {
         </div>
       </main>
 
-      <Button data-tour="todo-add-task" onClick={async () => { try { await Haptics.impact({ style: ImpactStyle.Heavy }); } catch {} setIsInputOpen(true); }} className="fixed left-4 right-4 z-30 h-12 text-base font-semibold" style={{ bottom: 'calc(5rem + env(safe-area-inset-bottom, 0px))' }} size="lg">
+      <Button data-tour="todo-add-task" onClick={async () => { try { await Haptics.impact({ style: ImpactStyle.Heavy }); } catch {} setIsInputOpen(true); }} className="fixed left-4 right-4 z-30 h-12 text-base font-semibold" style={{ bottom: 'calc(4.25rem + env(safe-area-inset-bottom, 0px))' }} size="lg">
         <Plus className="h-5 w-5" />{t('tasks.addTask')}
       </Button>
 

@@ -1178,7 +1178,7 @@ const TodoCalendar = () => {
           <Button 
             size="lg"
             className="fixed right-6 h-14 w-14 rounded-full shadow-lg z-30"
-            style={{ bottom: 'calc(5rem + env(safe-area-inset-bottom, 0px))' }}
+            style={{ bottom: 'calc(4.25rem + env(safe-area-inset-bottom, 0px))' }}
           >
             <Plus className="h-6 w-6" />
           </Button>
