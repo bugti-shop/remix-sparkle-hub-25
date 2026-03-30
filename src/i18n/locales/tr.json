@@ -1481,9 +1481,9 @@
       "purchaseFailed": "Satın alma başarısız. Lütfen tekrar deneyin.",
       "noPurchasesFound": "Önceki satın alma bulunamadı",
       "restoreFailed": "Satın alımlar geri yüklenemedi",
-      "freeTrial14": "17 gün ücretsiz deneme",
-      "tryFree14": "17 gün boyunca tüm Pro özellikleri ücretsiz deneyin",
-      "freeTrialThen": "17 gün ücretsiz, sonra {{price}}",
+      "freeTrial14": "8 gün ücretsiz deneme",
+      "tryFree14": "8 gün boyunca tüm Pro özellikleri ücretsiz deneyin",
+      "freeTrialThen": "8 gün ücretsiz, sonra {{price}}",
       "tryForFree": "Bugün {{price}} karşılığında deneyin",
       "continueWith": "{{price}} ile devam et",
       "enterCode": "Kodu girin",
@@ -1626,7 +1626,7 @@
     "streakTitle": "Meydan okuma zamanı! Kaç gün üst üste takip edebilirsin, {{name}}?",
     "streak50": "50 gün üst üste (Durdurulamaz)",
     "streak30": "30 gün üst üste (İnanılmaz)",
-    "streak14": "17 gün üst üste (Harika)",
+    "streak14": "8 gün üst üste (Harika)",
     "streak7": "7 gün üst üste (İyi)",
     "remindTitle": "{{name}}, nasıl hatırlatılmasını istersin?",
     "remindPush": "Anlık bildirimler",
@@ -3129,7 +3129,7 @@
     },
     "streak_14": {
       "name": "İki Hafta Şampiyonu",
-      "description": "17 günlük seri sürdür"
+      "description": "8 günlük seri sürdür"
     },
     "streak_30": {
       "name": "Aylık Usta",

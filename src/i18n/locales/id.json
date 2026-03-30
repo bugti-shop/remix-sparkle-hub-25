@@ -1549,9 +1549,9 @@
       "continueWithPrice": "Lanjutkan dengan {{price}}",
       "noOfferings": "Tidak ada penawaran yang tersedia",
       "packageNotFound": "Paket tidak ditemukan untuk {{plan}}",
-      "freeTrial14": "Uji Coba Gratis 17 Hari",
-      "tryFree14": "Coba semua fitur Pro secara gratis selama 17 hari",
-      "freeTrialThen": "17 Hari Gratis, lalu {{price}}",
+      "freeTrial14": "Uji Coba Gratis 8 Hari",
+      "tryFree14": "Coba semua fitur Pro secara gratis selama 8 hari",
+      "freeTrialThen": "8 Hari Gratis, lalu {{price}}",
       "tryForFree": "Coba Gratis {{price}} Hari Ini",
       "continueWith": "Lanjutkan dengan {{price}}",
       "enterCode": "Masukkan kode",
@@ -1693,7 +1693,7 @@
     "streakTitle": "Waktunya tantangan! Berapa hari berturut-turut Anda bisa melacak, {{name}}?",
     "streak50": "50 hari berturut-turut (Tak Terhentikan)",
     "streak30": "30 hari berturut-turut (Luar Biasa)",
-    "streak14": "17 hari berturut-turut (Hebat)",
+    "streak14": "8 hari berturut-turut (Hebat)",
     "streak7": "7 hari berturut-turut (Bagus)",
     "remindTitle": "{{name}}, bagaimana Anda ingin diingatkan?",
     "remindPush": "Pemberitahuan push",
@@ -3099,7 +3099,7 @@
     },
     "streak_14": {
       "name": "Juara Dua Minggu",
-      "description": "Pertahankan streak 17 hari"
+      "description": "Pertahankan streak 8 hari"
     },
     "streak_30": {
       "name": "Master Bulanan",

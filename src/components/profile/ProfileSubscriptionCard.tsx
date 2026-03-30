@@ -4,7 +4,7 @@ import { Crown, Gift, Calendar, Clock, ChevronRight, Shield } from 'lucide-react
 import { useSubscription } from '@/contexts/SubscriptionContext';
 
 const ENTITLEMENT_ID = 'npd Pro';
-const TRIAL_TOTAL_DAYS = 17;
+const TRIAL_TOTAL_DAYS = 8;
 
 export const ProfileSubscriptionCard = () => {
   const { t } = useTranslation();
