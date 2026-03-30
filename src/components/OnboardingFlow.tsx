@@ -357,7 +357,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
 
   const handleCreate = () => {
     if (!folderName.trim()) return;
-    triggerHaptic('medium');
+    triggerHaptic('heavy');
     const newFolder = { id: crypto.randomUUID(), name: folderName.trim(), color: selectedColor };
     setFolders([...folders, newFolder]);
     setFolderName('');
@@ -488,7 +488,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
       {/* Bottom buttons */}
       <div className="px-6 pb-6 pt-2" style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 24px)' }}>
         <motion.button
-          onClick={() => { triggerHaptic('medium'); goNext(); }}
+          onClick={() => { triggerHaptic('heavy'); goNext(); }}
           className="w-full py-3 rounded-2xl text-[17px] font-bold"
           style={{ backgroundColor: '#333333', color: '#ffffff', boxShadow: '0 8px 0 0 #000000' }}
           whileTap={{ scale: 0.97 }}
