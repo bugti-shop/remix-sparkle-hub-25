@@ -323,7 +323,7 @@ const Notes = () => {
   };
 
   return (
-    <div className="min-h-screen min-h-screen-dynamic bg-background <div className="min-h-screen min-h-screen-dynamic bg-background pb-14">">
+    <div className="min-h-screen min-h-screen-dynamic bg-background pb-14">
       <header className="border-b bg-background sticky top-0 z-10" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <div className="container mx-auto px-2 xs:px-3 sm:px-4 py-2">
           <div className="flex items-center justify-between gap-1 xs:gap-2">

@@ -239,7 +239,7 @@ export default function Profile() {
   const displayName = profile.name || user?.name || t('profile.guest', 'Guest User');
 
   return (
-    <div className="min-h-screen bg-background <div className="min-h-screen bg-background pb-14">">
+    <div className="min-h-screen bg-background pb-14">
       {/* Header bar */}
       <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-sm" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <div className="flex items-center justify-between px-4 h-12">

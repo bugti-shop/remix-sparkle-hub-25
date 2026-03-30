@@ -1021,7 +1021,7 @@ const TodoCalendar = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background <div className="min-h-screen bg-background pb-14">">
+    <div className="min-h-screen bg-background pb-14">
       <div style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         {/* Selection mode actions */}
         {isSelectionMode && (
