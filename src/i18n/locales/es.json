@@ -1642,9 +1642,9 @@
       "purchaseFailed": "Error en la compra. Por favor intenta de nuevo.",
       "noPurchasesFound": "No se encontraron compras anteriores",
       "restoreFailed": "Error al restaurar compras",
-      "freeTrial14": "17 días de prueba gratis",
-      "tryFree14": "Prueba todas las funciones Pro gratis durante 17 días",
-      "freeTrialThen": "17 días gratis, luego {{price}}",
+      "freeTrial14": "8 días de prueba gratis",
+      "tryFree14": "Prueba todas las funciones Pro gratis durante 8 días",
+      "freeTrialThen": "8 días gratis, luego {{price}}",
       "tryForFree": "Prueba por {{price}} hoy",
       "continueWith": "Continuar con {{price}}",
       "enterCode": "Ingrese el código",
@@ -1787,7 +1787,7 @@
     "streakTitle": "¡Hora del desafío! ¿Cuántos días seguidos puedes rastrear, {{name}}?",
     "streak50": "50 días seguidos (Imparable)",
     "streak30": "30 días seguidos (Increíble)",
-    "streak14": "17 días seguidos (Genial)",
+    "streak14": "8 días seguidos (Genial)",
     "streak7": "7 días seguidos (Bien)",
     "remindTitle": "{{name}}, ¿cómo te gustaría que te recuerden?",
     "remindPush": "Notificaciones push",
@@ -3129,7 +3129,7 @@
     },
     "streak_14": {
       "name": "Campeón de Dos Semanas",
-      "description": "Mantén una racha de 17 días"
+      "description": "Mantén una racha de 8 días"
     },
     "streak_30": {
       "name": "Maestro Mensual",

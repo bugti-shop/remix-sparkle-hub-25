@@ -1642,9 +1642,9 @@
       "purchaseFailed": "购买失败。请重试。",
       "noPurchasesFound": "未找到以前的购买记录",
       "restoreFailed": "恢复购买失败",
-      "freeTrial14": "17天免费试用",
-      "tryFree14": "免费试用所有Pro功能17天",
-      "freeTrialThen": "17天免费，之后{{price}}",
+      "freeTrial14": "8天免费试用",
+      "tryFree14": "免费试用所有Pro功能8天",
+      "freeTrialThen": "8天免费，之后{{price}}",
       "tryForFree": "今天以{{price}}试用",
       "continueWith": "以{{price}}继续",
       "enterCode": "输入代码",
@@ -1787,7 +1787,7 @@
     "streakTitle": "挑战时间！{{name}}，你能连续追踪多少天？",
     "streak50": "连续50天（无法阻挡）",
     "streak30": "连续30天（难以置信）",
-    "streak14": "连续17天（太棒了）",
+    "streak14": "连续8天（太棒了）",
     "streak7": "连续7天（不错）",
     "remindTitle": "{{name}}，你希望如何被提醒？",
     "remindPush": "推送通知",
@@ -3129,7 +3129,7 @@
     },
     "streak_14": {
       "name": "两周冠军",
-      "description": "保持17天连续记录"
+      "description": "保持8天连续记录"
     },
     "streak_30": {
       "name": "月度大师",

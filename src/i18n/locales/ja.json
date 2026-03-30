@@ -1481,9 +1481,9 @@
       "purchaseFailed": "購入に失敗しました。もう一度お試しください。",
       "noPurchasesFound": "以前の購入が見つかりません",
       "restoreFailed": "購入の復元に失敗しました",
-      "freeTrial14": "17日間の無料トライアル",
-      "tryFree14": "17日間すべてのPro機能を無料でお試し",
-      "freeTrialThen": "17日間無料、その後{{price}}",
+      "freeTrial14": "8日間の無料トライアル",
+      "tryFree14": "8日間すべてのPro機能を無料でお試し",
+      "freeTrialThen": "8日間無料、その後{{price}}",
       "tryForFree": "今日{{price}}でお試し",
       "continueWith": "{{price}}で続ける",
       "enterCode": "コードを入力",
@@ -3129,7 +3129,7 @@
     },
     "streak_14": {
       "name": "2週間チャンピオン",
-      "description": "17日間の連続記録を維持"
+      "description": "8日間の連続記録を維持"
     },
     "streak_30": {
       "name": "月間マスター",

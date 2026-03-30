@@ -1642,9 +1642,9 @@
       "purchaseFailed": "구매에 실패했습니다. 다시 시도해 주세요.",
       "noPurchasesFound": "이전 구매를 찾을 수 없습니다",
       "restoreFailed": "구매 복원 실패",
-      "freeTrial14": "17일 무료 체험",
-      "tryFree14": "17일 동안 모든 Pro 기능을 무료로 사용해 보세요",
-      "freeTrialThen": "17일 무료, 이후 {{price}}",
+      "freeTrial14": "8일 무료 체험",
+      "tryFree14": "8일 동안 모든 Pro 기능을 무료로 사용해 보세요",
+      "freeTrialThen": "8일 무료, 이후 {{price}}",
       "tryForFree": "오늘 {{price}}에 체험하기",
       "continueWith": "{{price}}로 계속하기",
       "enterCode": "코드를 입력하세요",
@@ -1787,7 +1787,7 @@
     "streakTitle": "도전 시간! {{name}}님, 연속 며칠 추적할 수 있나요?",
     "streak50": "50일 연속 (멈출 수 없음)",
     "streak30": "30일 연속 (놀라움)",
-    "streak14": "17일 연속 (훌륭)",
+    "streak14": "8일 연속 (훌륭)",
     "streak7": "7일 연속 (좋음)",
     "remindTitle": "{{name}}님, 어떻게 알림을 받으시겠어요?",
     "remindPush": "푸시 알림",
@@ -3129,7 +3129,7 @@
     },
     "streak_14": {
       "name": "2주 챔피언",
-      "description": "17일 연속 기록 유지"
+      "description": "8일 연속 기록 유지"
     },
     "streak_30": {
       "name": "월간 마스터",
