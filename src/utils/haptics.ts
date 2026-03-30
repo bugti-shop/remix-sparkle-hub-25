@@ -29,6 +29,19 @@ export const triggerHaptic = async (style: HapticIntensity = 'heavy') => {
   }
 };
 
+// Double heavy burst for strong tactile feedback on selections
+export const triggerSelectionHaptic = async () => {
+  if (!Capacitor.isNativePlatform()) return;
+
+  try {
+    await Haptics.impact({ style: ImpactStyle.Heavy });
+    await new Promise(resolve => setTimeout(resolve, 50));
+    await Haptics.impact({ style: ImpactStyle.Heavy });
+  } catch (error) {
+    console.log('Haptics not available:', error);
+  }
+};
+
 // Triple heavy haptic burst for maximum attention on reminders
 export const triggerTripleHeavyHaptic = async () => {
   if (!Capacitor.isNativePlatform()) return;
