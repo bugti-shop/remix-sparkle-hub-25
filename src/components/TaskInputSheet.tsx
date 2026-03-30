@@ -785,8 +785,8 @@ export const TaskInputSheet = ({ isOpen, onClose, onAddTask, folders, selectedFo
         onTouchEnd={handleSwipeTouchEnd}
       >
         {/* Swipe handle */}
-        <div className="flex justify-center pt-1.5 pb-0.5">
-          <div className="w-10 h-1 rounded-full bg-muted-foreground/30" />
+        <div className="flex justify-center pt-1 pb-0">
+          <div className="w-9 h-1 rounded-full bg-muted-foreground/30" />
         </div>
         <div className="px-4 pt-0.5 pb-1">
           <div className="flex items-center gap-3 mb-1.5">
