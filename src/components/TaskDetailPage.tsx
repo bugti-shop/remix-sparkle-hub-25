@@ -1317,7 +1317,7 @@ export const TaskDetailPage = ({
       </div>
 
       {/* Safe area padding for bottom */}
-      <div style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 16px)' }} />
+      <div style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }} />
 
       {/* TaskDateTimePage */}
       <TaskDateTimePage

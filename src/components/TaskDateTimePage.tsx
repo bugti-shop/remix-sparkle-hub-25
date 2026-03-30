@@ -543,7 +543,7 @@ export const TaskDateTimePage = ({
       </div>
 
       {/* Safe area padding */}
-      <div style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 16px)' }} />
+      <div style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }} />
     </div>
   );
 };
