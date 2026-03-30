@@ -777,7 +777,7 @@ const Index = () => {
   });
 
   return (
-    <div className="min-h-screen min-h-screen-dynamic bg-background <div className="min-h-screen min-h-screen-dynamic bg-background pb-14">">
+    <div className="min-h-screen min-h-screen-dynamic bg-background pb-14">
       <header 
         className="border-b sticky top-0 bg-background z-10"
         style={{
