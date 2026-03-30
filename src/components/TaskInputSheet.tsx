@@ -788,7 +788,7 @@ export const TaskInputSheet = ({ isOpen, onClose, onAddTask, folders, selectedFo
         <div className="flex justify-center pt-2 pb-1">
           <div className="w-10 h-1 rounded-full bg-muted-foreground/30" />
         </div>
-        <div className="px-5 pt-2 pb-6">
+        <div className="px-5 pt-2 pb-3">
           <div className="flex items-center gap-3 mb-5">
             <Input
               ref={inputRef}
