@@ -95,7 +95,7 @@ export const TodoLayout = ({ children, title, searchValue, onSearchChange }: Tod
           </div>
         </div>
       </header>
-      <main className="pb-16 sm:pb-20">
+      <main className="<main className="pb-14">">
         {children}
       </main>
       <TodoBottomNavigation />

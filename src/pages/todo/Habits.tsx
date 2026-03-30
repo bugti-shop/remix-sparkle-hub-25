@@ -134,7 +134,7 @@ const Habits = () => {
   const totalCount = habits.length;
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background <div className="min-h-screen bg-background pb-14">">
       {/* Header */}
       <div className="sticky top-0 z-30 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="flex items-center justify-between px-4 py-3">

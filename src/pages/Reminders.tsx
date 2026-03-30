@@ -7,7 +7,7 @@ const Reminders = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background <div className="min-h-screen bg-background pb-14">">
       <header className="border-b sticky top-0 bg-card z-10" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         <div className="container mx-auto px-4 py-2">
           <div className="flex items-center gap-2">
