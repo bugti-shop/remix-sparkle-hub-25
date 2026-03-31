@@ -249,7 +249,6 @@ const AppContent = () => {
   const handleOnboardingComplete = useCallback(() => {
     startTransition(() => {
       setShowOnboarding(false);
-      setShowJourneyIntro(true);
     });
   }, []);
   
