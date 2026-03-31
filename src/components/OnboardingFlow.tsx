@@ -1441,6 +1441,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       } else {
         setStep(5); // → info screen + folders
       }
+    } else if (step === 29) {
+      setStep(5); // adventure begins → info screen + folders
     } else if (step === 7) {
       if (selectedProductivity.size === 0) return;
       await setSetting('onboarding_productivity', Array.from(selectedProductivity));
