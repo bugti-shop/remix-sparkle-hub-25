@@ -567,7 +567,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [showOnboardingCertificate, setShowOnboardingCertificate] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { openPaywall } = useSubscription();
-  const { getPriorityColor } = usePriorities();
+  
 
   // ===== ONBOARDING STATE PERSISTENCE =====
   // Load saved onboarding state on mount
