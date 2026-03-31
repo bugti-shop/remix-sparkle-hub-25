@@ -221,8 +221,8 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
             </div>
           </Suspense>
           <div>
-            <p style={{ color: '#ffffffcc', fontSize: 11, fontWeight: 700, margin: 0 }}>Flowist</p>
-            <p style={{ color: '#ffffff60', fontSize: 7, margin: 0 }}>Notepad & To Do List</p>
+            <p style={{ color: '#000000cc', fontSize: 11, fontWeight: 700, margin: 0 }}>Flowist</p>
+            <p style={{ color: '#00000060', fontSize: 7, margin: 0 }}>Notepad & To Do List</p>
           </div>
         </div>
 
