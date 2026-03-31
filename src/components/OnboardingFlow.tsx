@@ -1165,7 +1165,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleToggleRemind = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
+    triggerHaptic('medium');
     setSelectedRemind(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
   }, []);
 
