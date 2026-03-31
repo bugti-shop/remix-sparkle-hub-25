@@ -875,7 +875,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       firstStepShown,
     };
     setSetting('onboarding_progress_state', state);
-  }, [step, userName, avatarPreview, selectedGoal, selectedSource, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, onboardingNoteSaved, sketchSaved, createdTasks, selectedJourneyId, notesFolders, tasksFolders, selectedLang, firstStepShown]);
+  }, [step, userName, avatarPreview, selectedGoal, selectedSource, selectedPreviousApp, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, onboardingNoteSaved, sketchSaved, createdTasks, selectedJourneyId, notesFolders, tasksFolders, selectedLang, firstStepShown]);
 
   // ===== FIRST STEP CELEBRATION — triggered after welcome screen =====
   // (No longer auto-triggers at step 15; instead triggered when user taps "Let's Go" on welcome screen)
