@@ -2093,7 +2093,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.15 + i * 0.06 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => { triggerHaptic('heavy'); setSelectedJourneyId(selectedJourneyId === journey.id ? null : journey.id); }}
+                onClick={() => { triggerHaptic('medium'); setSelectedJourneyId(selectedJourneyId === journey.id ? null : journey.id); }}
                 className="w-full text-left p-4 rounded-2xl transition-all cursor-pointer"
                 style={{
                   backgroundColor: selectedJourneyId === journey.id ? `${ONBOARDING_COLOR}20` : '#ffffff',
