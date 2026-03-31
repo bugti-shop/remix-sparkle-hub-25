@@ -1130,7 +1130,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectSchedule = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
+    triggerHaptic('medium');
     setSelectedSchedule(option);
   }, []);
 
