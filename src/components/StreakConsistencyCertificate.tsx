@@ -142,7 +142,7 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
           position: 'relative',
           zIndex: 1,
           textShadow: `0 4px 20px ${colors.glow}60`,
-          textAlign: 'center',
+          textAlign: 'left',
         }}>
           {currentStreak}
         </p>
