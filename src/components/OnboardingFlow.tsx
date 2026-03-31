@@ -1593,6 +1593,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (INFO_STEPS.has(step)) return true;
     if (INTERACTIVE_STEPS.has(step)) return true;
     if (step === 2) return !!selectedExperience;
+    if (step === 28) return !!selectedPreviousApp;
     if (step === 9) return !!selectedWorkStyle;
     if (step === 18) return true; // theme step skipped
     if (step === 0) return !!selectedGoal;
