@@ -1900,9 +1900,9 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     const canAddMore = createdTasks.length < MAX_ONBOARDING_TASKS;
 
     return (
-      <div className="fixed inset-0 z-[300] flex flex-col bg-white" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+      <div className="fixed inset-0 z-[300] flex flex-col bg-white" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         {/* Onboarding progress header */}
-        <div className="flex items-center gap-3 px-4 pt-3 pb-2 relative z-50 bg-white">
+        <div className="flex items-center gap-3 px-4 pt-1 pb-1 relative z-50 bg-white">
           <button className="w-9 h-9 flex items-center justify-center rounded-full" onClick={handleBack} aria-label="Back">
             <ArrowLeft className="h-5 w-5 text-[#1a1a1a]" />
           </button>
@@ -1923,12 +1923,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </Suspense>
         </div>
 
-        {/* Bottom buttons */}
-        <div className="px-6 pb-6 pt-2 flex flex-col gap-2 relative z-50 bg-white" style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 24px)' }}>
-          <motion.button onClick={goNext} className="w-full py-3 rounded-2xl text-[17px] font-bold" style={{ backgroundColor: '#333333', color: '#ffffff', boxShadow: '0 8px 0 0 #000000' }} whileTap={{ scale: 0.97 }}>
-            {createdTasks.length > 0 ? `${t('onboarding.continue')} · ${createdTasks.length} task${createdTasks.length > 1 ? 's' : ''}` : t('onboarding.continue')}
-          </motion.button>
-        </div>
+        {/* Bottom buttons - hide when task input sheet is open */}
+        {!isTaskInputSheetOpen && (
+          <div className="px-4 pb-2 pt-1 flex flex-col gap-1.5 relative z-50 bg-white" style={{ paddingBottom: 'env(safe-area-inset-bottom, 8px)' }}>
+            <motion.button onClick={goNext} className="w-full py-3 rounded-2xl text-[17px] font-bold" style={{ backgroundColor: '#333333', color: '#ffffff', boxShadow: '0 8px 0 0 #000000' }} whileTap={{ scale: 0.97 }}>
+              {createdTasks.length > 0 ? `${t('onboarding.continue')} · ${createdTasks.length} task${createdTasks.length > 1 ? 's' : ''}` : t('onboarding.continue')}
+            </motion.button>
+          </div>
+        )}
 
         {/* TaskInputSheet auto-opens */}
         {canAddMore && (
