@@ -2895,41 +2895,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </motion.div>
         )}
 
-        {step === 19 && (
-          <motion.div key="step19" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.streakTitle', { name: displayName })}
-            </motion.h1>
-            {renderSingleSelect(tStreakOptions, selectedStreak, handleSelectStreak)}
-          </motion.div>
-        )}
-
-        {step === 20 && (
-          <motion.div key="step20" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.remindTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tRemindOptions, selectedRemind, handleToggleRemind)}
-          </motion.div>
-        )}
-
-        {step === 22 && (
-          <motion.div key="step22" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.featuresTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tFeatureInterestOptions, selectedFeatureInterest, handleToggleFeatureInterest)}
-          </motion.div>
-        )}
-
-        {step === 23 && (
-          <motion.div key="step23" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.improveTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tImproveOptions, selectedImprove, handleToggleImprove)}
-          </motion.div>
-        )}
 
       </AnimatePresence>
 
