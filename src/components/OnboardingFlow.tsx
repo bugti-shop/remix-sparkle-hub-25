@@ -775,11 +775,9 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     const firstGoal = selectedGoal.size > 0 ? Array.from(selectedGoal)[0] : null;
     const goalEntry = firstGoal ? goalPointMap[firstGoal] : null;
     if (goalEntry) points.push({ icon: goalEntry.icon, bg: goalEntry.bg, color: goalEntry.color, text: t(`onboarding.${goalEntry.key}`) });
-    const expEntry = selectedExperience ? expPointMap[selectedExperience] : null;
-    if (expEntry) points.push({ icon: expEntry.icon, bg: expEntry.bg, color: expEntry.color, text: t(`onboarding.${expEntry.key}`) });
     points.push({ icon: Trophy, bg: '#FEFCE8', color: '#CA8A04', text: t('onboarding.infoPersonalizedPoint3') });
     return points;
-  }, [selectedGoal, selectedExperience, goalPointMap, expPointMap, t]);
+  }, [selectedGoal, goalPointMap, t]);
 
   const tInfoScreens = useMemo(() => ({
     15: {
