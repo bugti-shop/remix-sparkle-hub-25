@@ -787,6 +787,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [editTaskDesc, setEditTaskDesc] = useState('');
   
   const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
+  const [selectedFrustration, setSelectedFrustration] = useState<string | null>(null);
   const [firstStepShown, setFirstStepShown] = useState(false);
   const [showStreakDay1, setShowStreakDay1] = useState(false);
   const [showOnboardingCertificate, setShowOnboardingCertificate] = useState(false);
