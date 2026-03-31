@@ -747,3 +747,8 @@ body.onboarding-active [vaul-overlay],
 body.onboarding-active [data-vaul-drawer] {
   z-index: 500 !important;
 }
+
+/* Remove double safe-area padding when Today page is embedded inside onboarding */
+.onboarding-embedded header {
+  padding-top: 12px !important;
+}
