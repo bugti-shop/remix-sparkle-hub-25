@@ -70,13 +70,6 @@ export const StreakDay1Screen = ({ userName, onContinue }: StreakDay1ScreenProps
           transition={{ delay: 0.2 }}
           className="w-full max-w-sm bg-card rounded-2xl p-6 border shadow-sm"
         >
-          {/* Speech bubble message */}
-          <div className="relative bg-muted rounded-xl p-4 mb-6">
-            <p className="text-sm text-foreground">
-              {displayName ? `${displayName}, great start!` : 'Great start!'} Let's keep going tomorrow.
-            </p>
-            <div className="absolute -bottom-2 left-8 w-4 h-4 bg-muted rotate-45" />
-          </div>
 
           {/* Big Flame — identical to Progress page */}
           <div className="flex flex-col items-center py-6">
