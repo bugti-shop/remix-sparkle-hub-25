@@ -1432,7 +1432,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       if (!onboardingNoteSaved && (onboardingNoteTitle.trim() || onboardingNoteContent.trim())) {
         await saveOnboardingNote();
       }
-      setStep(7); // → productivity (skip journey, already done earlier)
+      setStep(10); // → sketch (skip question screens)
     } else if (step === 24) {
       // Save journey selection, then show adventure begins or skip to info
       if (selectedJourneyId) {
@@ -1443,64 +1443,17 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       }
     } else if (step === 29) {
       setStep(5); // adventure begins → info screen + folders
-    } else if (step === 7) {
-      if (selectedProductivity.size === 0) return;
-      await setSetting('onboarding_productivity', Array.from(selectedProductivity));
-      setStep(8);
-    } else if (step === 8) {
-      if (!selectedFocus) return;
-      await setSetting('onboarding_focus', selectedFocus);
-      setStep(9);
-    } else if (step === 9) {
-      if (!selectedWorkStyle) return;
-      await setSetting('onboarding_workstyle', selectedWorkStyle);
-      setStep(10); // workstyle+energy → create sketch
     } else if (step === 10) {
       // Save sketch if not saved
       if (!sketchSaved) {
         await saveOnboardingSketch();
       }
-      setStep(11);
-    } else if (step === 11) {
-      if (!selectedSchedule) return;
-      await setSetting('onboarding_schedule', selectedSchedule);
-      setStep(12);
-    } else if (step === 12) {
-      if (selectedCelebrate.size === 0) return;
-      await setSetting('onboarding_celebrate', Array.from(selectedCelebrate));
-      setStep(13);
+      setStep(13); // → INFO before task creation (skip question screens)
     } else if (step === 13) {
       setStep(14); // INFO → create task
     } else if (step === 14) {
-      // Tasks saved via Today page, skip old step 15, go directly to 16
-      setStep(16);
-    } else if (step === 15) {
-    } else if (step === 16) {
-      if (selectedProgressTrack.size === 0) return;
-      await setSetting('onboarding_progress_track', Array.from(selectedProgressTrack));
-      setStep(17);
-    } else if (step === 17) {
-      if (!selectedConsistency) return;
-      await setSetting('onboarding_consistency', selectedConsistency);
-      setStep(19); // Skip theme step, go directly to streak
-    } else if (step === 19) {
-      if (!selectedStreak) return;
-      await setSetting('onboarding_streak_goal', selectedStreak);
-      setStep(20);
-    } else if (step === 20) {
-      if (selectedRemind.size === 0) return;
-      await setSetting('onboarding_remind', Array.from(selectedRemind));
-      setStep(21);
-    } else if (step === 21) {
-      setStep(22); // INFO → features
-    } else if (step === 22) {
-      if (selectedFeatureInterest.size === 0) return;
-      await setSetting('onboarding_feature_interest', Array.from(selectedFeatureInterest));
-      setStep(23);
-    } else if (step === 23) {
-      if (selectedImprove.size === 0) return;
-      await setSetting('onboarding_improve', Array.from(selectedImprove));
-      setStep(25); // skip journey (already done), go to showcase
+      // Tasks saved via Today page, go to showcase
+      setStep(25); // → showcase (skip all question screens)
     } else if (step === 25) {
       setStep(26); // loading screen
     }
@@ -1532,31 +1485,29 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (step === 6) {
       // Note editor handles its own saving via onSave
       setOnboardingNoteSaved(true);
-      setStep(7);
+      setStep(10); // skip to sketch
       return;
     }
     if (step === 10) {
       setSketchSaved(true);
-      setStep(11);
+      setStep(13); // skip to INFO before task
       return;
     }
     if (step === 14) {
-      setStep(16);
-      return;
-    }
-    if (step === 16) {
-      setStep(14);
+      setStep(25); // skip to showcase
       return;
     }
     if (step === 0) setStep(-3);
     else if (step === 28) setStep(2); // back from previous app → experience
     else if (step === 3) setStep(28); // back from profile → previous app
     else if (step === 15) setStep(3); // back from personalized info → profile
-    else if (step === 7) setStep(6); // back from productivity → create note
+    else if (step === 10) setStep(6); // back from sketch → create note
+    else if (step === 13) setStep(10); // back from INFO → sketch
+    else if (step === 14) setStep(13); // back from task → INFO
     else if (step === 29) setStep(24); // back from adventure begins → journey
     else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
     else if (step === 24) setStep(4); // back from journey → challenges
-    else if (step === 25) setStep(23); // back from showcase → improve
+    else if (step === 25) setStep(14); // back from showcase → task
     else if (step > 0 && step < 25) setStep(step - 1);
   }, [step, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask]);
 
@@ -1582,7 +1533,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 1, 2, 28, 3, 15, 4, 24, 29, 5, 5.1, 5.2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27];
+  const FLOW_ORDER: number[] = [0, 1, 2, 28, 3, 15, 4, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
