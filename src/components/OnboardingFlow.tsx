@@ -378,7 +378,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
   return (
     <div className="fixed inset-0 z-[300] flex flex-col bg-white" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 pt-3 pb-2">
+      <div className="flex items-end gap-3 px-4 pt-3 pb-2">
         <motion.button
           className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"
           onClick={handleBack}
@@ -1752,7 +1752,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         }}
       >
         {/* Top bar */}
-        <div className="flex items-center gap-3 px-4 pt-3 pb-2">
+        <div className="flex items-end gap-3 px-4 pt-3 pb-2">
           <button
             className="w-9 h-9 flex items-center justify-center rounded-full"
             onClick={handleBack}
@@ -2063,7 +2063,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
       >
-        <div className="flex items-center gap-3 px-4 pt-3 pb-2">
+        <div className="flex items-end gap-3 px-4 pt-3 pb-2">
           <motion.button
             className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"
             onClick={handleBack}
@@ -2160,7 +2160,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
       >
-        <div className="flex items-center gap-3 px-4 pt-3 pb-2">
+        <div className="flex items-end gap-3 px-4 pt-3 pb-2">
           <button className="w-9 h-9 flex items-center justify-center rounded-full" onClick={handleBack} aria-label="Back">
             <ArrowLeft className="h-5 w-5 text-[#1a1a1a]" />
           </button>
@@ -2538,7 +2538,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       }}
     >
       {/* Top bar */}
-      <div className="flex items-center gap-3 px-4 pt-3 pb-2">
+      <div className="flex items-end gap-3 px-4 pt-3 pb-2">
         <motion.button
           className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"
           onClick={handleBack}
