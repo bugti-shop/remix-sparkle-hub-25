@@ -1389,6 +1389,18 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 30) {
       if (!selectedFrustration) return;
       await setSetting('onboarding_frustration', selectedFrustration);
+      setStep(31); // → task view preference
+    } else if (step === 31) {
+      if (!selectedTaskView) return;
+      await setSetting('onboarding_task_view', selectedTaskView);
+      setStep(32); // → devices
+    } else if (step === 32) {
+      if (selectedDevices.size === 0) return;
+      await setSetting('onboarding_devices', Array.from(selectedDevices));
+      setStep(33); // → offline
+    } else if (step === 33) {
+      if (!selectedOffline) return;
+      await setSetting('onboarding_offline', selectedOffline);
       setStep(24); // → journey selection
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
