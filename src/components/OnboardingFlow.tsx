@@ -137,7 +137,17 @@ const sourceOptions = [
   'Other',
 ];
 
-const challengeOptions = [
+const previousAppOptions = [
+  'Notion',
+  'Evernote',
+  'Todoist',
+  'TickTick',
+  'Any.do',
+  'EasyNotes',
+  'None',
+];
+
+
   'Staying consistent with tasks',
   'Managing too many priorities',
   'Forgetting important deadlines',
