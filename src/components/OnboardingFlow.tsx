@@ -1561,7 +1561,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (step === 33) return !!selectedOffline;
     if (step === 9) return !!selectedWorkStyle;
     if (step === 18) return true; // theme step skipped
-    if (step === 0) return !!selectedGoal;
+    if (step === 0) return selectedGoal.size > 0;
     if (step === 1) return !!selectedSource;
     if (step === 3) return !!userName.trim();
     if (step === 4) return selectedChallenges.size > 0;
