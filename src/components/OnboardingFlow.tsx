@@ -1046,7 +1046,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   function currentStepDone() {
     if (INFO_STEPS.has(step)) return true;
     if (INTERACTIVE_STEPS.has(step)) return true;
-    if (step === 2) return !!selectedExperience;
+    if (step === 0) return selectedGoal.size > 0;
+    if (step === 3) return !!userName.trim();
     if (step === 28) return !!selectedPreviousApp;
     if (step === 30) return !!selectedFrustration;
     if (step === 31) return !!selectedTaskView;
@@ -1055,22 +1056,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (step === 34) return !!selectedUnfinished;
     if (step === 35) return !!selectedSlowdown;
     if (step === 36) return !!selectedWhyFail;
-    if (step === 9) return !!selectedWorkStyle;
-    if (step === 18) return true; // theme step skipped
-    if (step === 0) return selectedGoal.size > 0;
-    if (step === 1) return !!selectedSource;
-    if (step === 3) return !!userName.trim();
-    if (step === 4) return selectedChallenges.size > 0;
-    if (step === 7) return selectedProductivity.size > 0;
-    if (step === 8) return !!selectedFocus;
-    if (step === 11) return !!selectedSchedule;
-    if (step === 12) return selectedCelebrate.size > 0;
-    if (step === 16) return selectedProgressTrack.size > 0;
-    if (step === 17) return !!selectedConsistency;
-    if (step === 19) return !!selectedStreak;
-    if (step === 20) return selectedRemind.size > 0;
-    if (step === 22) return selectedFeatureInterest.size > 0;
-    if (step === 23) return selectedImprove.size > 0;
     return true;
   }
 
