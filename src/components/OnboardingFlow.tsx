@@ -1818,8 +1818,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Welcome screen — ownership showcase
   if (step === 27) {
-    const noteTitle = onboardingNoteTitle.trim() || 'My First Note';
-    const notePreview = getTextPreviewFromHtml(onboardingNoteContent, 60);
     const journeyObj = selectedJourneyId ? ALL_JOURNEYS.find(j => j.id === selectedJourneyId) : null;
 
     return (
