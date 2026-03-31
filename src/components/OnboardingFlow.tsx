@@ -809,7 +809,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 28) setStep(saved.step);
         if (saved.userName) setUserName(saved.userName);
         if (saved.avatarPreview) setAvatarPreview(saved.avatarPreview);
-        if (saved.selectedGoal) setSelectedGoal(saved.selectedGoal);
+        if (saved.selectedGoal) setSelectedGoal(new Set(Array.isArray(saved.selectedGoal) ? saved.selectedGoal : [saved.selectedGoal]));
         if (saved.selectedSource) setSelectedSource(saved.selectedSource);
         if (saved.selectedPreviousApp) setSelectedPreviousApp(saved.selectedPreviousApp);
         if (saved.selectedExperience) setSelectedExperience(saved.selectedExperience);
