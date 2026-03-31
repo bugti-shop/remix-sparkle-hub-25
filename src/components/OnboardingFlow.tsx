@@ -800,22 +800,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       ],
       button: t('onboarding.continue'),
     },
-    21: {
-      title: t('onboarding.info3Title'),
-      icons: [
-        { icon: PenLine, bg: '#EEF2FF', color: '#4F46E5' },
-        { icon: CheckCircle2, bg: '#ECFDF5', color: '#059669' },
-        { icon: CalendarDays, bg: '#FFF7ED', color: '#EA580C' },
-        { icon: Target, bg: '#FEF2F2', color: '#DC2626' },
-        { icon: Star, bg: '#FFF1F2', color: '#E11D48' },
-      ],
-      points: [
-        { icon: Rocket, bg: '#EEF2FF', color: '#4F46E5', text: t('onboarding.info3Point1') },
-        { icon: Star, bg: '#FFF1F2', color: '#E11D48', text: t('onboarding.info3Point2') },
-        { icon: Heart, bg: '#FEF2F2', color: '#DC2626', text: t('onboarding.info3Point3') },
-      ],
-      button: t('onboarding.letsGo'),
-    },
   }), [t]);
 
   const tFeatureShowcase = useMemo(() => [
