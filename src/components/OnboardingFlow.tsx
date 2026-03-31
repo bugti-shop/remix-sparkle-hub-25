@@ -1462,22 +1462,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   const handleBack = useCallback(async () => {
     await triggerSelectionHaptic();
-    // On interactive steps, back saves and goes FORWARD (next question)
-    if (step === 6) {
-      // Note editor handles its own saving via onSave
-      setOnboardingNoteSaved(true);
-      setStep(10); // skip to sketch
-      return;
-    }
-    if (step === 10) {
-      setSketchSaved(true);
-      setStep(13); // skip to INFO before task
-      return;
-    }
-    if (step === 14) {
-      setStep(25); // skip to showcase
-      return;
-    }
     if (step === 0) setStep(-3);
     else if (step === 3) setStep(0); // back from profile → pre-steps
     else if (step === 24) setStep(3); // back from journey → profile
@@ -1488,7 +1472,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 13) setStep(10); // back from INFO → sketch
     else if (step === 14) setStep(13); // back from task → INFO
     else if (step === 25) setStep(14); // back from showcase → task
-  }, [step, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask]);
+  }, [step, selectedJourneyId]);
 
   const handleImagePick = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
