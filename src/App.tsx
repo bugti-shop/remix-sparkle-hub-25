@@ -13,7 +13,7 @@ import { NotesProvider } from "@/contexts/NotesContext";
 import { GoogleAuthProvider } from "@/contexts/GoogleAuthContext";
 const PremiumPaywall = lazy(() => import("@/components/PremiumPaywall").then(m => ({ default: m.PremiumPaywall })));
 const OnboardingFlow = lazy(() => import("@/components/OnboardingFlow").then(m => ({ default: m.OnboardingFlow })));
-const PostOnboardingJourney = lazy(() => import("@/components/PostOnboardingJourney").then(m => ({ default: m.PostOnboardingJourney })));
+
 import { NavigationLoader } from "@/components/NavigationLoader";
 
 import { NavigationBackProvider } from "@/components/NavigationBackProvider";
