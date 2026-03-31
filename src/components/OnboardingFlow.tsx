@@ -1499,7 +1499,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 25) {
       setStep(26); // loading screen
     }
-  }, [step, selectedGoal, selectedSource, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
+  }, [step, selectedGoal, selectedSource, selectedPreviousApp, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
 
   const handleFinishWelcome = useCallback(async () => {
     triggerSelectionHaptic();
