@@ -787,6 +787,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [editTaskDesc, setEditTaskDesc] = useState('');
   
   const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
+  const [selectedFrustration, setSelectedFrustration] = useState<string | null>(null);
   const [firstStepShown, setFirstStepShown] = useState(false);
   const [showStreakDay1, setShowStreakDay1] = useState(false);
   const [showOnboardingCertificate, setShowOnboardingCertificate] = useState(false);
@@ -1373,7 +1374,19 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       if (!userName.trim()) return;
       const existing = await loadUserProfile();
       await saveUserProfile({ ...existing, name: userName.trim(), avatarUrl: avatarPreview || existing.avatarUrl });
-      setStep(24); // → journey selection (skip questions)
+      setStep(28); // → previous app question
+    } else if (step === 28) {
+      if (!selectedPreviousApp) return;
+      await setSetting('onboarding_previous_app', selectedPreviousApp);
+      if (selectedPreviousApp === 'None') {
+        setStep(24); // skip frustration if no previous app
+      } else {
+        setStep(30); // → frustration question
+      }
+    } else if (step === 30) {
+      if (!selectedFrustration) return;
+      await setSetting('onboarding_frustration', selectedFrustration);
+      setStep(24); // → journey selection
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
     } else if (step === 5 && showNotesFolderCreation) {
@@ -1464,7 +1477,9 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     await triggerSelectionHaptic();
     if (step === 0) setStep(-3);
     else if (step === 3) setStep(0); // back from profile → pre-steps
-    else if (step === 24) setStep(3); // back from journey → profile
+    else if (step === 28) setStep(3); // back from previous app → profile
+    else if (step === 30) setStep(28); // back from frustration → previous app
+    else if (step === 24) setStep(selectedPreviousApp === 'None' || !selectedPreviousApp ? 28 : 30); // back from journey → frustration or previous app
     else if (step === 29) setStep(24); // back from adventure begins → journey
     else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
     else if (step === 6) setStep(5); // back from note → folders
@@ -1496,7 +1511,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 3, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
+  const FLOW_ORDER: number[] = [0, 3, 28, 30, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
@@ -1517,6 +1532,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (INTERACTIVE_STEPS.has(step)) return true;
     if (step === 2) return !!selectedExperience;
     if (step === 28) return !!selectedPreviousApp;
+    if (step === 30) return !!selectedFrustration;
     if (step === 9) return !!selectedWorkStyle;
     if (step === 18) return true; // theme step skipped
     if (step === 0) return !!selectedGoal;
@@ -2669,6 +2685,23 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
             {renderSingleSelect(tPreviousAppOptions, selectedPreviousApp, handleSelectPreviousApp)}
           </motion.div>
         )}
+
+        {step === 30 && (
+          <motion.div key="step30" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
+              {`What's your biggest frustration using ${selectedPreviousApp}?`}
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
+              This helps us show you how Flowist does it better.
+            </motion.p>
+            {renderSingleSelect(
+              ['Too slow', 'Too expensive', 'Lacks features I need', 'Too complicated', 'Bad mobile experience', 'Other'],
+              selectedFrustration,
+              (val: string) => { triggerSelectionHaptic(); setSelectedFrustration(selectedFrustration === val ? null : val); }
+            )}
+          </motion.div>
+        )}
+
 
         {step === 3 && (
           <motion.div key="step3" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
