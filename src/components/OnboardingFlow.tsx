@@ -763,6 +763,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedLang, setSelectedLang] = useState(i18n?.language?.split('-')[0] || 'en');
   // Interactive creation states
   const [onboardingNoteTitle, setOnboardingNoteTitle] = useState('');
+  const [selectedUnfinished, setSelectedUnfinished] = useState<string | null>(null);
+  const [selectedSlowdown, setSelectedSlowdown] = useState<string | null>(null);
   const [onboardingNoteContent, setOnboardingNoteContent] = useState('');
   const [onboardingNoteSaved, setOnboardingNoteSaved] = useState(false);
   const [sketchCanvasRef, setSketchCanvasRef] = useState<HTMLCanvasElement | null>(null);
@@ -1406,6 +1408,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 33) {
       if (!selectedOffline) return;
       await setSetting('onboarding_offline', selectedOffline);
+      setStep(34); // → unfinished tasks
+    } else if (step === 34) {
+      if (!selectedUnfinished) return;
+      await setSetting('onboarding_unfinished', selectedUnfinished);
+      setStep(35); // → slowdown
+    } else if (step === 35) {
+      if (!selectedSlowdown) return;
+      await setSetting('onboarding_slowdown', selectedSlowdown);
       setStep(24); // → journey selection
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
@@ -1502,7 +1512,9 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 31) setStep(selectedPreviousApp === 'None' || !selectedPreviousApp ? 28 : 30); // back from task view → frustration or previous app
     else if (step === 32) setStep(31); // back from devices → task view
     else if (step === 33) setStep(32); // back from offline → devices
-    else if (step === 24) setStep(33); // back from journey → offline
+    else if (step === 34) setStep(33); // back from unfinished → offline
+    else if (step === 35) setStep(34); // back from slowdown → unfinished
+    else if (step === 24) setStep(35); // back from journey → slowdown
     else if (step === 29) setStep(24); // back from adventure begins → journey
     else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
     else if (step === 6) setStep(5); // back from note → folders
@@ -1559,6 +1571,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (step === 31) return !!selectedTaskView;
     if (step === 32) return selectedDevices.size > 0;
     if (step === 33) return !!selectedOffline;
+    if (step === 34) return !!selectedUnfinished;
+    if (step === 35) return !!selectedSlowdown;
     if (step === 9) return !!selectedWorkStyle;
     if (step === 18) return true; // theme step skipped
     if (step === 0) return selectedGoal.size > 0;
@@ -2783,6 +2797,38 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
               ["Critical, I'm often offline", 'Nice to have', "Doesn't matter"],
               selectedOffline,
               (val: string) => { triggerSelectionHaptic(); setSelectedOffline(selectedOffline === val ? null : val); }
+            )}
+          </motion.div>
+        )}
+
+        {step === 34 && (
+          <motion.div key="step34" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
+              How often do you end the day with unfinished tasks?
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
+              No judgment — we're here to help.
+            </motion.p>
+            {renderSingleSelect(
+              ['Everyday', 'Sometimes', 'Rarely'],
+              selectedUnfinished,
+              (val: string) => { triggerSelectionHaptic(); setSelectedUnfinished(selectedUnfinished === val ? null : val); }
+            )}
+          </motion.div>
+        )}
+
+        {step === 35 && (
+          <motion.div key="step35" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
+              Which of these slow you down the most?
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
+              Pick the one that hits hardest.
+            </motion.p>
+            {renderSingleSelect(
+              ['Switching between too many apps', 'Paying for too many subscriptions', 'Losing work when switching'],
+              selectedSlowdown,
+              (val: string) => { triggerSelectionHaptic(); setSelectedSlowdown(selectedSlowdown === val ? null : val); }
             )}
           </motion.div>
         )}
