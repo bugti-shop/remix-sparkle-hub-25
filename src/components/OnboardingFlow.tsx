@@ -1363,6 +1363,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   // 24:JOURNEY_SELECT 25:showcase 26:loading 27:welcome
 
   const goNext = useCallback(async () => {
+    try {
     triggerSelectionHaptic();
 
     if (step === 0) {
@@ -1498,6 +1499,9 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       setStep(25); // skip journey (already done), go to showcase
     } else if (step === 25) {
       setStep(26); // loading screen
+    }
+    } catch (error) {
+      console.warn('Onboarding goNext error:', error);
     }
   }, [step, selectedGoal, selectedSource, selectedPreviousApp, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
 
