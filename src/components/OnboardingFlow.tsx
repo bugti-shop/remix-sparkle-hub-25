@@ -1217,6 +1217,11 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     });
   }, []);
 
+  const handleSelectPreviousApp = useCallback(async (option: string) => {
+    triggerSelectionHaptic();
+    setSelectedPreviousApp(option);
+  }, []);
+
   const handleSelectExperience = useCallback(async (option: string) => {
     triggerSelectionHaptic();
     setSelectedExperience(option);
