@@ -1374,7 +1374,19 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       if (!userName.trim()) return;
       const existing = await loadUserProfile();
       await saveUserProfile({ ...existing, name: userName.trim(), avatarUrl: avatarPreview || existing.avatarUrl });
-      setStep(24); // → journey selection (skip questions)
+      setStep(28); // → previous app question
+    } else if (step === 28) {
+      if (!selectedPreviousApp) return;
+      await setSetting('onboarding_previous_app', selectedPreviousApp);
+      if (selectedPreviousApp === 'None') {
+        setStep(24); // skip frustration if no previous app
+      } else {
+        setStep(30); // → frustration question
+      }
+    } else if (step === 30) {
+      if (!selectedFrustration) return;
+      await setSetting('onboarding_frustration', selectedFrustration);
+      setStep(24); // → journey selection
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
     } else if (step === 5 && showNotesFolderCreation) {
