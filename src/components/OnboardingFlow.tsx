@@ -1145,7 +1145,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleToggleProgressTrack = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
+    triggerHaptic('medium');
     setSelectedProgressTrack(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
