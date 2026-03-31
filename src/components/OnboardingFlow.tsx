@@ -1022,7 +1022,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     }
   }, [step]);
 
-  const INFO_STEPS = new Set([5, 13, 15, 21]);
+  const INFO_STEPS = new Set([5, 13]);
   const INTERACTIVE_STEPS = new Set([6, 10, 14]);
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
