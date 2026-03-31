@@ -126,122 +126,6 @@ const goalOptions = [
   'Something else',
 ];
 
-const sourceOptions = [
-  'Instagram',
-  'Facebook',
-  'TikTok',
-  'YouTube',
-  'Friends and family',
-  'Creator or influencer',
-  'AI Chat (e.g. ChatGPT)',
-  'Other',
-];
-
-const previousAppOptions = [
-  'Notion',
-  'Evernote',
-  'Todoist',
-  'TickTick',
-  'Any.do',
-  'EasyNotes',
-  'None',
-];
-
-
-  const challengeOptions = [
-  'Managing too many priorities',
-  'Forgetting important deadlines',
-  'Staying motivated',
-  'Organizing notes & ideas',
-  'Building good habits',
-  'Something else',
-];
-
-const productivityOptions = [
-  'Morning routine',
-  'Time blocking',
-  'Pomodoro technique',
-  'To-do lists',
-  'Calendar scheduling',
-  'None yet',
-];
-
-const focusOptions = [
-  'Work & career',
-  'School & studies',
-  'Personal projects',
-  'Health & fitness',
-  'Creative pursuits',
-  'Daily life management',
-];
-
-const scheduleOptions = [
-  'I plan my day freely',
-  'I follow a fixed routine',
-  'I work in alternating shifts',
-  'My schedule changes often',
-  'Other',
-];
-
-const celebrateOptions = [
-  'Share my progress with friends',
-  'Reward myself with a treat',
-  'Take a well-deserved break',
-  'Start an even bigger goal',
-  'Reflect and journal about it',
-  'Something else',
-];
-
-const progressTrackOptions = [
-  'Review completed tasks weekly',
-  'Check my productivity score daily',
-  'Use streaks to stay on track',
-  'Look at my task analytics',
-  'Compare weekly progress reports',
-  'Something else',
-];
-
-const consistencyOptions = [
-  'Add tasks first thing in the morning',
-  'Plan everything the night before',
-  'Add tasks as they come up',
-  'Schedule a weekly planning session',
-  'I don\'t know yet',
-];
-
-const streakOptions = [
-  '50 days in a row (Unstoppable)',
-  '30 days in a row (Incredible)',
-  '14 days in a row (Great)',
-  '7 days in a row (Good)',
-];
-
-const remindOptions = [
-  'Push notifications',
-  'Daily summary in the morning',
-  'Evening review reminder',
-  'Location-based reminders',
-  'Calendar sync alerts',
-  'Something else',
-];
-
-const featureInterestOptions = [
-  'Habit tracking',
-  'Sketch & drawing notes',
-  'Voice notes & recordings',
-  'Task analytics & reports',
-  'Dark mode & themes',
-  'Widgets on home screen',
-];
-
-const improveOptions = [
-  'Reduce screen time',
-  'Stop procrastinating',
-  'Be more mindful',
-  'Achieve work-life balance',
-  'Learn new skills',
-  'Sleep better',
-];
 
 const PLAN_STEPS = [
   'Analyzing your answers',
@@ -2708,26 +2592,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </motion.div>
         )}
 
-        {step === 1 && (
-          <motion.div key="step1" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.howFoundUs')}
-            </motion.h1>
-            {renderSingleSelect(tSourceOptions, selectedSource, handleSelectSource)}
-          </motion.div>
-        )}
-
-        {step === 2 && (
-          <motion.div key="step2" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
-              {t('onboarding.experienceTitle')}
-            </motion.h1>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
-              {t('onboarding.experienceSubtitle')}
-            </motion.p>
-            {renderDescriptionSelect(tExperienceOptions, selectedExperience, handleSelectExperience)}
-          </motion.div>
-        )}
 
         {step === 28 && (
           <motion.div key="step28" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
@@ -2897,72 +2761,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </div>
         )}
 
-        {step === 4 && (
-          <motion.div key="step4" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.challengesTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tChallengeOptions, selectedChallenges, handleToggleChallenge)}
-          </motion.div>
-        )}
 
-
-        {step === 8 && (
-          <motion.div key="step8" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.focusTitle', { name: displayName })}
-            </motion.h1>
-            {renderSingleSelect(tFocusOptions, selectedFocus, handleSelectFocus)}
-          </motion.div>
-        )}
-
-        {step === 9 && (
-          <motion.div key="step9" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-10 overflow-y-auto pb-4">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
-              {t('onboarding.workstyleTitle')}
-            </motion.h1>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] font-['Nunito_Sans'] mb-8">
-              {t('onboarding.workstyleSubtitle')}
-            </motion.p>
-            {renderDescriptionSelect(tWorkStyleOptions, selectedWorkStyle, handleSelectWorkStyle)}
-          </motion.div>
-        )}
-
-        {step === 11 && (
-          <motion.div key="step11" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.scheduleTitle', { name: displayName })}
-            </motion.h1>
-            {renderSingleSelect(tScheduleOptions, selectedSchedule, handleSelectSchedule)}
-          </motion.div>
-        )}
-
-        {step === 12 && (
-          <motion.div key="step12" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.celebrateTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tCelebrateOptions, selectedCelebrate, handleToggleCelebrate)}
-          </motion.div>
-        )}
-
-        {step === 16 && (
-          <motion.div key="step16" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.progressTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tProgressTrackOptions, selectedProgressTrack, handleToggleProgressTrack)}
-          </motion.div>
-        )}
-
-        {step === 17 && (
-          <motion.div key="step17" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.consistencyTitle', { name: displayName })}
-            </motion.h1>
-            {renderSingleSelect(tConsistencyOptions, selectedConsistency, handleSelectConsistency)}
-          </motion.div>
-        )}
 
         {step === 36 && (
           <motion.div key="step36" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
@@ -2980,41 +2779,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </motion.div>
         )}
 
-        {step === 19 && (
-          <motion.div key="step19" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.streakTitle', { name: displayName })}
-            </motion.h1>
-            {renderSingleSelect(tStreakOptions, selectedStreak, handleSelectStreak)}
-          </motion.div>
-        )}
-
-        {step === 20 && (
-          <motion.div key="step20" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.remindTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tRemindOptions, selectedRemind, handleToggleRemind)}
-          </motion.div>
-        )}
-
-        {step === 22 && (
-          <motion.div key="step22" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.featuresTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tFeatureInterestOptions, selectedFeatureInterest, handleToggleFeatureInterest)}
-          </motion.div>
-        )}
-
-        {step === 23 && (
-          <motion.div key="step23" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.improveTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tImproveOptions, selectedImprove, handleToggleImprove)}
-          </motion.div>
-        )}
 
       </AnimatePresence>
 
