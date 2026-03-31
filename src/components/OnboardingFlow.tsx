@@ -1115,7 +1115,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleToggleProductivity = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
+    triggerHaptic('medium');
     setSelectedProductivity(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
