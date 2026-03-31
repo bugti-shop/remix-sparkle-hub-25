@@ -187,7 +187,7 @@ export const StreakDay1Screen = ({ userName, onContinue }: StreakDay1ScreenProps
           transition={{ delay: 1 }}
           onClick={onContinue}
           className="w-full py-4 rounded-2xl text-[17px] font-bold text-white cursor-pointer active:brightness-95 flex items-center justify-center gap-2"
-          style={{ background: ONBOARDING_COLOR }}
+          style={{ background: ONBOARDING_COLOR, boxShadow: `0 8px 0 0 #2a5cc0` }}
         >
           Let's Go
           <ArrowRight className="h-5 w-5" />
