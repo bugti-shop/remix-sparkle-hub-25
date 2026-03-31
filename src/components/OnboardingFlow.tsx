@@ -5,7 +5,7 @@ import { m as motion, AnimatePresence } from 'framer-motion';
 import { ALL_JOURNEYS, startJourney } from '@/utils/virtualJourneyStorage';
 import { ArrowLeft, Camera, User, Check, PenLine, CheckCircle2, CalendarDays, Target, Lightbulb, Bell, BarChart3, Star, Trophy, FlaskConical, Link, Monitor, Medal, Home, Rocket, Sprout, Heart, TrendingUp, Brain, Zap, Palette, Mic, LayoutDashboard, Shield, Plus, Pencil, Type, AlignLeft, Save, Trash2, ListTodo, ChevronRight, ListPlus, BookOpen, Briefcase, Activity, Sparkles, MapPin } from 'lucide-react';
 import { MemoryRouter } from 'react-router-dom';
-import { saveNoteToDBSingle } from '@/utils/noteStorage';
+
 import { loadTodoItems, saveTodoItems } from '@/utils/todoItemsStorage';
 import type { Note, TodoItem, TaskSection, Folder } from '@/types/note';
 import { NoteEditor } from '@/components/NoteEditor';
