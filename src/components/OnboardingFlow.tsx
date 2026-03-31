@@ -809,7 +809,15 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       try {
         const saved = await getSetting<any>('onboarding_progress_state', null);
         if (!saved || typeof saved !== 'object') return;
-        if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 28) setStep(saved.step);
+        if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 36) {
+          // Redirect removed steps to the closest valid step
+          const removedSteps = new Set([1, 2, 4, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23]);
+          if (removedSteps.has(saved.step)) {
+            setStep(0); // restart from first question
+          } else {
+            setStep(saved.step);
+          }
+        }
         if (saved.userName) setUserName(saved.userName);
         if (saved.avatarPreview) setAvatarPreview(saved.avatarPreview);
         if (saved.selectedGoal) setSelectedGoal(new Set(Array.isArray(saved.selectedGoal) ? saved.selectedGoal : [saved.selectedGoal]));
@@ -2898,14 +2906,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </motion.div>
         )}
 
-        {step === 7 && (
-          <motion.div key="step7" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.productivityTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tProductivityOptions, selectedProductivity, handleToggleProductivity)}
-          </motion.div>
-        )}
 
         {step === 8 && (
           <motion.div key="step8" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
