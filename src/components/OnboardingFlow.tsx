@@ -755,6 +755,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedRemind, setSelectedRemind] = useState<Set<string>>(new Set());
   const [selectedFeatureInterest, setSelectedFeatureInterest] = useState<Set<string>>(new Set());
   const [selectedImprove, setSelectedImprove] = useState<Set<string>>(new Set());
+  const [selectedPreviousApp, setSelectedPreviousApp] = useState<string | null>(null);
   const [selectedExperience, setSelectedExperience] = useState<string | null>(null);
   const [selectedWorkStyle, setSelectedWorkStyle] = useState<string | null>(null);
   const [selectedEnergy, setSelectedEnergy] = useState<string | null>(null);
