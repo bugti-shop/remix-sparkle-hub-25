@@ -631,22 +631,13 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedPreviousApp, setSelectedPreviousApp] = useState<string | null>(null);
   const [selectedLang, setSelectedLang] = useState(i18n?.language?.split('-')[0] || 'en');
   // Interactive creation states
-  const [onboardingNoteTitle, setOnboardingNoteTitle] = useState('');
   const [selectedUnfinished, setSelectedUnfinished] = useState<string | null>(null);
   const [selectedSlowdown, setSelectedSlowdown] = useState<string | null>(null);
   const [selectedWhyFail, setSelectedWhyFail] = useState<string | null>(null);
-  const [onboardingNoteContent, setOnboardingNoteContent] = useState('');
   const [onboardingNoteSaved, setOnboardingNoteSaved] = useState(false);
-  const [sketchCanvasRef, setSketchCanvasRef] = useState<HTMLCanvasElement | null>(null);
-  const [isDrawing, setIsDrawing] = useState(false);
   const [sketchSaved, setSketchSaved] = useState(false);
-  const [sketchDataUrl, setSketchDataUrl] = useState<string | null>(null);
-  const [sketchColor, setSketchColor] = useState('#1a1a1a');
-  const [sketchBrushSize, setSketchBrushSize] = useState(3);
-  const [onboardingTaskText, setOnboardingTaskText] = useState('');
-  const [onboardingTaskDesc, setOnboardingTaskDesc] = useState('');
   const [createdTasks, setCreatedTasks] = useState<TodoItem[]>([]);
-  const [createdTask, setCreatedTask] = useState<TodoItem | null>(null); // for step 15 detail view
+  const [createdTask, setCreatedTask] = useState<TodoItem | null>(null);
   const [isTaskInputSheetOpen, setIsTaskInputSheetOpen] = useState(true);
   const [isBatchSheetOpen, setIsBatchSheetOpen] = useState(false);
   const [showNotesFolderCreation, setShowNotesFolderCreation] = useState(false);
