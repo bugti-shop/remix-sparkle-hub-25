@@ -2675,7 +2675,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
               {t('onboarding.personalizeExperience')}
             </motion.p>
-            {renderSingleSelect(tGoalOptions, selectedGoal, handleSelectGoal)}
+            {renderMultiSelect(tGoalOptions, selectedGoal, handleToggleGoal)}
           </motion.div>
         )}
 
