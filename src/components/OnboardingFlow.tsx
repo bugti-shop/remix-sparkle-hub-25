@@ -763,6 +763,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedLang, setSelectedLang] = useState(i18n?.language?.split('-')[0] || 'en');
   // Interactive creation states
   const [onboardingNoteTitle, setOnboardingNoteTitle] = useState('');
+  const [selectedUnfinished, setSelectedUnfinished] = useState<string | null>(null);
+  const [selectedSlowdown, setSelectedSlowdown] = useState<string | null>(null);
   const [onboardingNoteContent, setOnboardingNoteContent] = useState('');
   const [onboardingNoteSaved, setOnboardingNoteSaved] = useState(false);
   const [sketchCanvasRef, setSketchCanvasRef] = useState<HTMLCanvasElement | null>(null);
