@@ -680,7 +680,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
                 {selectedDate && (
                   <span
                     className="ml-auto text-[11px] underline"
-                    onClick={(e) => { e.stopPropagation(); setSelectedDate(undefined); triggerHaptic('heavy'); }}
+                    onClick={(e) => { e.stopPropagation(); setSelectedDate(undefined); triggerHaptic('light'); }}
                   >
                     Clear
                   </span>
