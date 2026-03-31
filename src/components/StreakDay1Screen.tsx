@@ -70,13 +70,6 @@ export const StreakDay1Screen = ({ userName, onContinue }: StreakDay1ScreenProps
           transition={{ delay: 0.2 }}
           className="w-full max-w-sm bg-card rounded-2xl p-6 border shadow-sm"
         >
-          {/* Speech bubble message */}
-          <div className="relative bg-muted rounded-xl p-4 mb-6">
-            <p className="text-sm text-foreground">
-              {displayName ? `${displayName}, great start!` : 'Great start!'} Let's keep going tomorrow.
-            </p>
-            <div className="absolute -bottom-2 left-8 w-4 h-4 bg-muted rotate-45" />
-          </div>
 
           {/* Big Flame — identical to Progress page */}
           <div className="flex flex-col items-center py-6">
@@ -101,11 +94,6 @@ export const StreakDay1Screen = ({ userName, onContinue }: StreakDay1ScreenProps
                   completedToday ? "text-streak fill-streak/80" : "text-muted-foreground/30"
                 )}
               />
-              {currentStreak > 0 && (
-                <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-streak-foreground drop-shadow-md mt-2 z-20">
-                  {currentStreak}
-                </span>
-              )}
             </motion.div>
 
             <motion.div
@@ -199,7 +187,7 @@ export const StreakDay1Screen = ({ userName, onContinue }: StreakDay1ScreenProps
           transition={{ delay: 1 }}
           onClick={onContinue}
           className="w-full py-4 rounded-2xl text-[17px] font-bold text-white cursor-pointer active:brightness-95 flex items-center justify-center gap-2"
-          style={{ background: ONBOARDING_COLOR }}
+          style={{ background: ONBOARDING_COLOR, boxShadow: `0 8px 0 0 #2a5cc0` }}
         >
           Let's Go
           <ArrowRight className="h-5 w-5" />
