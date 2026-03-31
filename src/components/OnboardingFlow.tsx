@@ -678,21 +678,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         if (saved.selectedGoal) setSelectedGoal(new Set(Array.isArray(saved.selectedGoal) ? saved.selectedGoal : [saved.selectedGoal]));
         if (saved.selectedSource) setSelectedSource(saved.selectedSource);
         if (saved.selectedPreviousApp) setSelectedPreviousApp(saved.selectedPreviousApp);
-        if (saved.selectedExperience) setSelectedExperience(saved.selectedExperience);
-        if (saved.selectedWorkStyle) setSelectedWorkStyle(saved.selectedWorkStyle);
-        if (saved.selectedEnergy) setSelectedEnergy(saved.selectedEnergy);
-        if (saved.selectedTheme) setSelectedTheme(saved.selectedTheme);
-        if (saved.selectedChallenges?.length) setSelectedChallenges(new Set(saved.selectedChallenges));
-        if (saved.selectedProductivity?.length) setSelectedProductivity(new Set(saved.selectedProductivity));
-        if (saved.selectedFocus) setSelectedFocus(saved.selectedFocus);
-        if (saved.selectedSchedule) setSelectedSchedule(saved.selectedSchedule);
-        if (saved.selectedCelebrate?.length) setSelectedCelebrate(new Set(saved.selectedCelebrate));
-        if (saved.selectedProgressTrack?.length) setSelectedProgressTrack(new Set(saved.selectedProgressTrack));
-        if (saved.selectedConsistency) setSelectedConsistency(saved.selectedConsistency);
-        if (saved.selectedStreak) setSelectedStreak(saved.selectedStreak);
-        if (saved.selectedRemind?.length) setSelectedRemind(new Set(saved.selectedRemind));
-        if (saved.selectedFeatureInterest?.length) setSelectedFeatureInterest(new Set(saved.selectedFeatureInterest));
-        if (saved.selectedImprove?.length) setSelectedImprove(new Set(saved.selectedImprove));
+        // Legacy fields from removed steps are ignored
         if (saved.onboardingNoteSaved) setOnboardingNoteSaved(true);
         if (saved.sketchSaved) setSketchSaved(true);
         if (saved.selectedJourneyId) setSelectedJourneyId(saved.selectedJourneyId);
