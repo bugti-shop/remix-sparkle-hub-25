@@ -240,11 +240,11 @@ const AppContent = () => {
 
   // When subscription expires (isPro becomes false after onboarding), auto-show paywall
   useEffect(() => {
-    if (subLoading || showOnboarding || showJourneyIntro) return;
+    if (subLoading || showOnboarding) return;
     if (!isPro) {
       openPaywall();
     }
-  }, [isPro, subLoading, showOnboarding, showJourneyIntro, openPaywall]);
+  }, [isPro, subLoading, showOnboarding, openPaywall]);
 
   const handleOnboardingComplete = useCallback(() => {
     startTransition(() => {
