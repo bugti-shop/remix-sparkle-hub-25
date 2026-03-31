@@ -1479,17 +1479,15 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       return;
     }
     if (step === 0) setStep(-3);
-    else if (step === 28) setStep(2); // back from previous app → experience
-    else if (step === 3) setStep(28); // back from profile → previous app
-    else if (step === 15) setStep(3); // back from personalized info → profile
+    else if (step === 3) setStep(0); // back from profile → pre-steps
+    else if (step === 24) setStep(3); // back from journey → profile
+    else if (step === 29) setStep(24); // back from adventure begins → journey
+    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
+    else if (step === 6) setStep(5); // back from note → folders
     else if (step === 10) setStep(6); // back from sketch → create note
     else if (step === 13) setStep(10); // back from INFO → sketch
     else if (step === 14) setStep(13); // back from task → INFO
-    else if (step === 29) setStep(24); // back from adventure begins → journey
-    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
-    else if (step === 24) setStep(4); // back from journey → challenges
     else if (step === 25) setStep(14); // back from showcase → task
-    else if (step > 0 && step < 25) setStep(step - 1);
   }, [step, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask]);
 
   const handleImagePick = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
