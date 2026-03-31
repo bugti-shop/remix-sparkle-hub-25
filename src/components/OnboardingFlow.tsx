@@ -2551,9 +2551,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           <ArrowLeft className="h-5 w-5 text-[#1a1a1a]" />
         </motion.button>
         <div className="flex-1 flex flex-col gap-0.5">
-          <div className="flex justify-between items-center">
-            <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-          </div>
+          <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
           <div className="h-[17px] rounded-[6px] bg-[#e5e5e5] overflow-hidden">
             <motion.div
               className="h-full"
