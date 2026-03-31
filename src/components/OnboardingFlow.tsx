@@ -2898,14 +2898,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </motion.div>
         )}
 
-        {step === 7 && (
-          <motion.div key="step7" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.productivityTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tProductivityOptions, selectedProductivity, handleToggleProductivity)}
-          </motion.div>
-        )}
 
         {step === 8 && (
           <motion.div key="step8" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
