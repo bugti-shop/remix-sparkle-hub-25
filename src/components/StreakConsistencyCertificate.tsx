@@ -163,7 +163,7 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
         {/* User name */}
         {displayName && (
           <p style={{
-            color: '#ffffff90',
+            color: '#00000090',
             fontSize: 13,
             fontWeight: 600,
             marginTop: 12,
