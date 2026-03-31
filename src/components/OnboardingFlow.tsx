@@ -654,7 +654,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [showStreakDay1, setShowStreakDay1] = useState(false);
   const [showOnboardingCertificate, setShowOnboardingCertificate] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { openPaywall } = useSubscription();
   const { getPriorityColor } = usePriorities();
 
