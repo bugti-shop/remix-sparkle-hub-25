@@ -1992,37 +1992,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     </div>
   );
 
-  const renderDescriptionSelect = (
-    options: { label: string; description: string }[],
-    selected: string | null,
-    onSelect: (o: string) => void,
-  ) => (
-    <div className="flex flex-col gap-4">
-      {options.map((option, index) => {
-        const isSelected = selected === option.label;
-        return (
-          <motion.button
-            key={option.label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0.05 + index * 0.03 }}
-            onClick={() => onSelect(option.label)}
-            className="relative w-full text-left rounded-2xl px-5 py-5 transition-all duration-150 cursor-pointer active:brightness-95"
-            style={{
-              backgroundColor: isSelected ? `${ONBOARDING_COLOR}40` : '#ffffff',
-              border: `2px solid ${isSelected ? ONBOARDING_COLOR : '#e8e8e8'}`,
-              boxShadow: isSelected ? `0 4px 0 0 ${ONBOARDING_COLOR}` : '0 4px 0 0 #e4e8ea',
-              WebkitTapHighlightColor: 'transparent',
-            }}
-            whileTap={{ scale: 0.99, y: 1 }}
-          >
-            <span className="block text-[16px] font-bold text-[#1a1a1a] font-['Nunito_Sans']">{option.label}</span>
-            <span className="block text-[13px] text-[#767b7e] font-['Nunito_Sans'] mt-1 leading-relaxed">{option.description}</span>
-          </motion.button>
-        );
-      })}
-    </div>
-  );
 
   return (
     <div
