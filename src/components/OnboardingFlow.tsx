@@ -7,7 +7,7 @@ import { ArrowLeft, Camera, User, Check, PenLine, CheckCircle2, CalendarDays, Ta
 import { MemoryRouter } from 'react-router-dom';
 
 import { loadTodoItems, saveTodoItems } from '@/utils/todoItemsStorage';
-import type { Note, TodoItem, TaskSection, Folder } from '@/types/note';
+import type { TodoItem, TaskSection, Folder } from '@/types/note';
 import { NoteEditor } from '@/components/NoteEditor';
 import { TaskInputSheet } from '@/components/TaskInputSheet';
 import { ProfileImageCropper } from '@/components/ProfileImageCropper';
