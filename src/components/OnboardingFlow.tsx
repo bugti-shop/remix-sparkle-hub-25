@@ -901,6 +901,16 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     t('onboarding.sourceOther'),
   ], [t]);
 
+  const tPreviousAppOptions = useMemo(() => [
+    t('onboarding.prevAppNotion'),
+    t('onboarding.prevAppEvernote'),
+    t('onboarding.prevAppTodoist'),
+    t('onboarding.prevAppTickTick'),
+    t('onboarding.prevAppAnyDo'),
+    t('onboarding.prevAppEasyNotes'),
+    t('onboarding.prevAppNone'),
+  ], [t]);
+
   const tChallengeOptions = useMemo(() => [
     t('onboarding.challengeConsistent'),
     t('onboarding.challengePriorities'),
