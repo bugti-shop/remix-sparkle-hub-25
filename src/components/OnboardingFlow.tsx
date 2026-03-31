@@ -357,7 +357,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
 
   const handleCreate = () => {
     if (!folderName.trim()) return;
-    triggerHaptic('heavy');
+    triggerHaptic('medium');
     const newFolder = { id: crypto.randomUUID(), name: folderName.trim(), color: selectedColor };
     setFolders([...folders, newFolder]);
     setFolderName('');
