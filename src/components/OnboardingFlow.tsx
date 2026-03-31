@@ -942,39 +942,29 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       setShowTasksFolderCreation(false);
       setStep(6); // → create note
     } else if (step === 6) {
-      // Save note if not saved yet
-      if (!onboardingNoteSaved && (onboardingNoteTitle.trim() || onboardingNoteContent.trim())) {
-        await saveOnboardingNote();
-      }
-      setStep(10); // → sketch (skip question screens)
+      setStep(10); // → sketch
     } else if (step === 24) {
-      // Save journey selection, then show adventure begins or skip to info
       if (selectedJourneyId) {
         startJourney(selectedJourneyId);
-        setStep(29); // → adventure begins screen
+        setStep(29);
       } else {
-        setStep(5); // → info screen + folders
+        setStep(5);
       }
     } else if (step === 29) {
-      setStep(5); // adventure begins → info screen + folders
+      setStep(5);
     } else if (step === 10) {
-      // Save sketch if not saved
-      if (!sketchSaved) {
-        await saveOnboardingSketch();
-      }
-      setStep(13); // → INFO before task creation (skip question screens)
+      setStep(13);
     } else if (step === 13) {
-      setStep(14); // INFO → create task
+      setStep(14);
     } else if (step === 14) {
-      // Tasks saved via Today page, go to showcase
-      setStep(25); // → showcase (skip all question screens)
+      setStep(25);
     } else if (step === 25) {
-      setStep(26); // loading screen
+      setStep(26);
     }
     } catch (error) {
       console.warn('Onboarding goNext error:', error);
     }
-  }, [step, selectedGoal, selectedSource, selectedPreviousApp, selectedFrustration, selectedTaskView, selectedDevices, selectedOffline, selectedUnfinished, selectedSlowdown, selectedWhyFail, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
+  }, [step, selectedGoal, selectedSource, selectedPreviousApp, selectedFrustration, selectedTaskView, selectedDevices, selectedOffline, selectedUnfinished, selectedSlowdown, selectedWhyFail, userName, avatarPreview, onboardingNoteSaved, sketchSaved, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
 
   const handleFinishWelcome = useCallback(async () => {
     triggerSelectionHaptic();
