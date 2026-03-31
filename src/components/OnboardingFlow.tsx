@@ -429,7 +429,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
             {FOLDER_COLORS.map(color => (
               <button
                 key={color}
-                onClick={() => { triggerHaptic('heavy'); setSelectedColor(color); }}
+                onClick={() => { triggerHaptic('light'); setSelectedColor(color); }}
                 className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-transform active:scale-90"
                 style={{
                   backgroundColor: color,
