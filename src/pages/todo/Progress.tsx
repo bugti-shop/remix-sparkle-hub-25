@@ -165,12 +165,6 @@ const Progress = () => {
                 animate={{ scale: 1 }}
                 className="text-center mt-4"
               >
-                <h2 className={cn(
-                  "text-5xl font-bold",
-                  completedToday ? "text-streak" : "text-muted-foreground"
-                )}>
-                  {data?.currentStreak || 0}
-                </h2>
                 <p className={cn(
                   "text-lg font-medium",
                   completedToday ? "text-streak" : "text-muted-foreground"
