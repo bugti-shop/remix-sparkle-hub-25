@@ -740,7 +740,7 @@ const TodayPage = lazy(() => import('@/pages/todo/Today'));
 export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const { t } = useTranslation();
   const [step, setStep] = useState(-3); // -3 = language selection
-  const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
+  const [selectedGoal, setSelectedGoal] = useState<Set<string>>(new Set());
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
   const [userName, setUserName] = useState('');
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
@@ -809,7 +809,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 28) setStep(saved.step);
         if (saved.userName) setUserName(saved.userName);
         if (saved.avatarPreview) setAvatarPreview(saved.avatarPreview);
-        if (saved.selectedGoal) setSelectedGoal(saved.selectedGoal);
+        if (saved.selectedGoal) setSelectedGoal(new Set(Array.isArray(saved.selectedGoal) ? saved.selectedGoal : [saved.selectedGoal]));
         if (saved.selectedSource) setSelectedSource(saved.selectedSource);
         if (saved.selectedPreviousApp) setSelectedPreviousApp(saved.selectedPreviousApp);
         if (saved.selectedExperience) setSelectedExperience(saved.selectedExperience);
@@ -851,7 +851,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       step,
       userName,
       avatarPreview,
-      selectedGoal,
+      selectedGoal: Array.from(selectedGoal),
       selectedSource,
       selectedPreviousApp,
       selectedExperience,
@@ -886,13 +886,12 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Translated option arrays (must be inside component to access t())
   const tGoalOptions = useMemo(() => [
-    t('onboarding.goalStudy'),
-    t('onboarding.goalWork'),
-    t('onboarding.goalPersonal'),
-    t('onboarding.goalCreative'),
-    t('onboarding.goalHealth'),
-    t('onboarding.goalOther'),
-  ], [t]);
+    'For Notes Taking',
+    'For Task Management',
+    'For Sketch Book',
+    'For Coding',
+    'For Personal Info Savings',
+  ], []);
 
   const tSourceOptions = useMemo(() => [
     t('onboarding.sourceInstagram'),
@@ -1051,7 +1050,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   const dynamicPoints = useMemo(() => {
     const points: { icon: any; bg: string; color: string; text: string }[] = [];
-    const goalEntry = selectedGoal ? goalPointMap[selectedGoal] : null;
+    const firstGoal = selectedGoal.size > 0 ? Array.from(selectedGoal)[0] : null;
+    const goalEntry = firstGoal ? goalPointMap[firstGoal] : null;
     if (goalEntry) points.push({ icon: goalEntry.icon, bg: goalEntry.bg, color: goalEntry.color, text: t(`onboarding.${goalEntry.key}`) });
     const expEntry = selectedExperience ? expPointMap[selectedExperience] : null;
     if (expEntry) points.push({ icon: expEntry.icon, bg: expEntry.bg, color: expEntry.color, text: t(`onboarding.${expEntry.key}`) });
@@ -1136,9 +1136,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     })();
   }, []);
 
-  const handleSelectGoal = useCallback(async (option: string) => {
+  const handleToggleGoal = useCallback(async (option: string) => {
     triggerSelectionHaptic();
-    setSelectedGoal(option);
+    setSelectedGoal(prev => {
+      const next = new Set(prev);
+      if (next.has(option)) next.delete(option);
+      else next.add(option);
+      return next;
+    });
   }, []);
 
   const handleToggleProductivity = useCallback(async (option: string) => {
@@ -1556,7 +1561,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (step === 33) return !!selectedOffline;
     if (step === 9) return !!selectedWorkStyle;
     if (step === 18) return true; // theme step skipped
-    if (step === 0) return !!selectedGoal;
+    if (step === 0) return selectedGoal.size > 0;
     if (step === 1) return !!selectedSource;
     if (step === 3) return !!userName.trim();
     if (step === 4) return selectedChallenges.size > 0;
@@ -2670,7 +2675,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
               {t('onboarding.personalizeExperience')}
             </motion.p>
-            {renderSingleSelect(tGoalOptions, selectedGoal, handleSelectGoal)}
+            {renderMultiSelect(tGoalOptions, selectedGoal, handleToggleGoal)}
           </motion.div>
         )}
 
