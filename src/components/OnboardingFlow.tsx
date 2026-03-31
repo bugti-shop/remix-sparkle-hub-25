@@ -1434,11 +1434,13 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       }
       setStep(7); // → productivity (skip journey, already done earlier)
     } else if (step === 24) {
-      // Save journey selection, then continue to info screen
+      // Save journey selection, then show adventure begins or skip to info
       if (selectedJourneyId) {
         startJourney(selectedJourneyId);
+        setStep(29); // → adventure begins screen
+      } else {
+        setStep(5); // → info screen + folders
       }
-      setStep(5); // → info screen + folders
     } else if (step === 7) {
       if (selectedProductivity.size === 0) return;
       await setSetting('onboarding_productivity', Array.from(selectedProductivity));
