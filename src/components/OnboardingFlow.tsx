@@ -2288,61 +2288,113 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
            </motion.div>
 
            {/* Summary stats */}
-           <div className="flex flex-col gap-3 mt-4 px-2">
+           <div className="flex flex-col gap-3 mt-4 w-full">
              {onboardingNoteSaved && (
-               <motion.div
-                 initial={{ opacity: 0, x: -20 }}
-                 animate={{ opacity: 1, x: 0 }}
-                 transition={{ delay: 0.4 }}
-                 className="flex items-center gap-3"
-               >
-                 <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                   <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                 </div>
-                 <p className="text-[15px] font-semibold text-[#1a1a1a]">1 Note created</p>
-               </motion.div>
-             )}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
+                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                  </div>
+                  <p className="text-[15px] font-semibold text-[#1a1a1a]">1 Note created</p>
+                </motion.div>
+              )}
 
-             {sketchSaved && (
-               <motion.div
-                 initial={{ opacity: 0, x: -20 }}
-                 animate={{ opacity: 1, x: 0 }}
-                 transition={{ delay: 0.5 }}
-                 className="flex items-center gap-3"
-               >
-                 <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                   <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                 </div>
-                 <p className="text-[15px] font-semibold text-[#1a1a1a]">1 Sketch created</p>
-               </motion.div>
-             )}
+              {sketchSaved && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
+                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                  </div>
+                  <p className="text-[15px] font-semibold text-[#1a1a1a]">1 Sketch created</p>
+                </motion.div>
+              )}
 
-             {createdTasks.length > 0 && (
-               <motion.div
-                 initial={{ opacity: 0, x: -20 }}
-                 animate={{ opacity: 1, x: 0 }}
-                 transition={{ delay: 0.6 }}
-                 className="flex items-center gap-3"
-               >
-                 <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                   <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                 </div>
-                 <p className="text-[15px] font-semibold text-[#1a1a1a]">{createdTasks.length} {createdTasks.length === 1 ? 'Task' : 'Tasks'} created</p>
-               </motion.div>
-             )}
+              {createdTasks.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
+                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                  </div>
+                  <p className="text-[15px] font-semibold text-[#1a1a1a]">{createdTasks.length} {createdTasks.length === 1 ? 'Task' : 'Tasks'} created</p>
+                </motion.div>
+              )}
 
-             <motion.div
-               initial={{ opacity: 0, x: -20 }}
-               animate={{ opacity: 1, x: 0 }}
-               transition={{ delay: 0.7 }}
-               className="flex items-center gap-3"
-             >
-               <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                 <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-               </div>
-               <p className="text-[15px] font-semibold text-[#1a1a1a]">Ready to go!</p>
-             </motion.div>
-           </div>
+              {(notesFolders.length > 0 || tasksFolders.length > 0) && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.65 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
+                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                  </div>
+                  <p className="text-[15px] font-semibold text-[#1a1a1a]">{notesFolders.length + tasksFolders.length} {notesFolders.length + tasksFolders.length === 1 ? 'Folder' : 'Folders'} organized</p>
+                </motion.div>
+              )}
+
+              {selectedJourneyId && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
+                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                  </div>
+                  <p className="text-[15px] font-semibold text-[#1a1a1a]">Journey started</p>
+                </motion.div>
+              )}
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.75 }}
+                className="flex items-center gap-3"
+              >
+                <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
+                  <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                </div>
+                <p className="text-[15px] font-semibold text-[#1a1a1a]">Streak activated</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8 }}
+                className="flex items-center gap-3"
+              >
+                <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
+                  <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                </div>
+                <p className="text-[15px] font-semibold text-[#1a1a1a]">Certificates unlocked</p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.85 }}
+                className="flex items-center gap-3"
+              >
+                <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
+                  <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                </div>
+                <p className="text-[15px] font-semibold text-[#1a1a1a]">Ready to go!</p>
+              </motion.div>
+            </div>
         </div>
 
         {/* Bottom button */}
