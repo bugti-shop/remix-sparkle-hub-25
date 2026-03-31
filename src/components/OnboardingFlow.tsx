@@ -2877,36 +2877,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </div>
         )}
 
-        {step === 4 && (
-          <motion.div key="step4" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.challengesTitle', { name: displayName })}
-            </motion.h1>
-            {renderMultiSelect(tChallengeOptions, selectedChallenges, handleToggleChallenge)}
-          </motion.div>
-        )}
-
-
-        {step === 8 && (
-          <motion.div key="step8" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-6">
-              {t('onboarding.focusTitle', { name: displayName })}
-            </motion.h1>
-            {renderSingleSelect(tFocusOptions, selectedFocus, handleSelectFocus)}
-          </motion.div>
-        )}
-
-        {step === 9 && (
-          <motion.div key="step9" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-10 overflow-y-auto pb-4">
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
-              {t('onboarding.workstyleTitle')}
-            </motion.h1>
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] font-['Nunito_Sans'] mb-8">
-              {t('onboarding.workstyleSubtitle')}
-            </motion.p>
-            {renderDescriptionSelect(tWorkStyleOptions, selectedWorkStyle, handleSelectWorkStyle)}
-          </motion.div>
-        )}
 
         {step === 11 && (
           <motion.div key="step11" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
