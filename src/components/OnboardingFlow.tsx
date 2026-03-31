@@ -1417,6 +1417,10 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 35) {
       if (!selectedSlowdown) return;
       await setSetting('onboarding_slowdown', selectedSlowdown);
+      setStep(36); // → why apps fail
+    } else if (step === 36) {
+      if (!selectedWhyFail) return;
+      await setSetting('onboarding_why_fail', selectedWhyFail);
       setStep(24); // → journey selection
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
