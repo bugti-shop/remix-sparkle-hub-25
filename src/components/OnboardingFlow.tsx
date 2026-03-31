@@ -807,6 +807,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         if (saved.avatarPreview) setAvatarPreview(saved.avatarPreview);
         if (saved.selectedGoal) setSelectedGoal(saved.selectedGoal);
         if (saved.selectedSource) setSelectedSource(saved.selectedSource);
+        if (saved.selectedPreviousApp) setSelectedPreviousApp(saved.selectedPreviousApp);
         if (saved.selectedExperience) setSelectedExperience(saved.selectedExperience);
         if (saved.selectedWorkStyle) setSelectedWorkStyle(saved.selectedWorkStyle);
         if (saved.selectedEnergy) setSelectedEnergy(saved.selectedEnergy);
