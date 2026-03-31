@@ -619,7 +619,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
             {folders.map(f => (
               <motion.button
                 key={f.id}
-                onClick={() => { triggerHaptic('heavy'); setSelectedFolder(selectedFolder === f.id ? '' : f.id); }}
+                onClick={() => { triggerHaptic('light'); setSelectedFolder(selectedFolder === f.id ? '' : f.id); }}
                 className="px-3 py-1.5 rounded-xl text-[13px] font-medium cursor-pointer"
                 style={{
                   backgroundColor: selectedFolder === f.id ? '#3c78f010' : '#f3f4f6',
