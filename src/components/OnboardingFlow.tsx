@@ -2205,6 +2205,96 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     );
   }
 
+  // Adventure Begins screen (step 29) — shown after journey selection
+  if (step === 29) {
+    const selectedJourney = ALL_JOURNEYS.find(j => j.id === selectedJourneyId);
+    const firstMilestone = selectedJourney?.milestones[0];
+    return (
+      <div
+        className="fixed inset-0 z-[300] flex items-center justify-center"
+        style={{
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+          paddingTop: 'env(safe-area-inset-top, 0px)',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        }}
+        onClick={goNext}
+      >
+        <div className="flex flex-col items-center px-8 text-center">
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 0.2 }}
+            className="text-7xl mb-4"
+          >
+            {selectedJourney?.emoji}
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="text-2xl font-black text-white font-['Nunito'] tracking-tight"
+          >
+            {t('journey.yourAdventure', 'Your Adventure Begins!')}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="text-white/60 text-sm font-['Nunito_Sans'] mt-2 mb-6"
+          >
+            {selectedJourney?.name} — {selectedJourney?.totalTasks} {t('common.tasks', 'tasks')}
+          </motion.p>
+
+          {/* Milestone path preview */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.8, duration: 0.4 }}
+            className="flex items-center gap-2"
+          >
+            {selectedJourney?.milestones.slice(0, 5).map((ms, i) => (
+              <motion.div
+                key={ms.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 + i * 0.12, type: 'spring', damping: 15 }}
+                className="flex flex-col items-center"
+              >
+                <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-lg">
+                  {ms.icon}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* First milestone hint */}
+          {firstMilestone && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.4 }}
+              className="mt-6 flex items-center gap-2 text-white/50 text-xs font-['Nunito_Sans']"
+            >
+              <MapPin className="h-3.5 w-3.5" />
+              <span>{t('journey.firstStop', 'First stop')}: {firstMilestone.name}</span>
+            </motion.div>
+          )}
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ delay: 1.8 }}
+            className="text-white/30 text-xs mt-8 font-['Nunito_Sans']"
+          >
+            {t('common.tapToContinue', 'Tap to continue')}
+          </motion.p>
+        </div>
+      </div>
+    );
+  }
+
   // Feature showcase screen (step 25)
   if (step === 25) {
     return (
