@@ -1511,7 +1511,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 3, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
+  const FLOW_ORDER: number[] = [0, 3, 28, 30, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
