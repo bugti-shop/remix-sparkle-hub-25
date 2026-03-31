@@ -137,8 +137,18 @@ const sourceOptions = [
   'Other',
 ];
 
-const challengeOptions = [
-  'Staying consistent with tasks',
+const previousAppOptions = [
+  'Notion',
+  'Evernote',
+  'Todoist',
+  'TickTick',
+  'Any.do',
+  'EasyNotes',
+  'None',
+];
+
+
+  const challengeOptions = [
   'Managing too many priorities',
   'Forgetting important deadlines',
   'Staying motivated',
@@ -745,6 +755,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedRemind, setSelectedRemind] = useState<Set<string>>(new Set());
   const [selectedFeatureInterest, setSelectedFeatureInterest] = useState<Set<string>>(new Set());
   const [selectedImprove, setSelectedImprove] = useState<Set<string>>(new Set());
+  const [selectedPreviousApp, setSelectedPreviousApp] = useState<string | null>(null);
   const [selectedExperience, setSelectedExperience] = useState<string | null>(null);
   const [selectedWorkStyle, setSelectedWorkStyle] = useState<string | null>(null);
   const [selectedEnergy, setSelectedEnergy] = useState<string | null>(null);
@@ -791,11 +802,12 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       try {
         const saved = await getSetting<any>('onboarding_progress_state', null);
         if (!saved || typeof saved !== 'object') return;
-        if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 27) setStep(saved.step);
+        if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 28) setStep(saved.step);
         if (saved.userName) setUserName(saved.userName);
         if (saved.avatarPreview) setAvatarPreview(saved.avatarPreview);
         if (saved.selectedGoal) setSelectedGoal(saved.selectedGoal);
         if (saved.selectedSource) setSelectedSource(saved.selectedSource);
+        if (saved.selectedPreviousApp) setSelectedPreviousApp(saved.selectedPreviousApp);
         if (saved.selectedExperience) setSelectedExperience(saved.selectedExperience);
         if (saved.selectedWorkStyle) setSelectedWorkStyle(saved.selectedWorkStyle);
         if (saved.selectedEnergy) setSelectedEnergy(saved.selectedEnergy);
@@ -837,6 +849,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       avatarPreview,
       selectedGoal,
       selectedSource,
+      selectedPreviousApp,
       selectedExperience,
       selectedWorkStyle,
       selectedEnergy,
@@ -862,7 +875,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       firstStepShown,
     };
     setSetting('onboarding_progress_state', state);
-  }, [step, userName, avatarPreview, selectedGoal, selectedSource, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, onboardingNoteSaved, sketchSaved, createdTasks, selectedJourneyId, notesFolders, tasksFolders, selectedLang, firstStepShown]);
+  }, [step, userName, avatarPreview, selectedGoal, selectedSource, selectedPreviousApp, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, onboardingNoteSaved, sketchSaved, createdTasks, selectedJourneyId, notesFolders, tasksFolders, selectedLang, firstStepShown]);
 
   // ===== FIRST STEP CELEBRATION — triggered after welcome screen =====
   // (No longer auto-triggers at step 15; instead triggered when user taps "Let's Go" on welcome screen)
@@ -886,6 +899,16 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     t('onboarding.sourceCreator'),
     t('onboarding.sourceAI'),
     t('onboarding.sourceOther'),
+  ], [t]);
+
+  const tPreviousAppOptions = useMemo(() => [
+    t('onboarding.prevAppNotion'),
+    t('onboarding.prevAppEvernote'),
+    t('onboarding.prevAppTodoist'),
+    t('onboarding.prevAppTickTick'),
+    t('onboarding.prevAppAnyDo'),
+    t('onboarding.prevAppEasyNotes'),
+    t('onboarding.prevAppNone'),
   ], [t]);
 
   const tChallengeOptions = useMemo(() => [
@@ -1194,6 +1217,11 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     });
   }, []);
 
+  const handleSelectPreviousApp = useCallback(async (option: string) => {
+    triggerSelectionHaptic();
+    setSelectedPreviousApp(option);
+  }, []);
+
   const handleSelectExperience = useCallback(async (option: string) => {
     triggerSelectionHaptic();
     setSelectedExperience(option);
@@ -1346,7 +1374,13 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       await setSetting('onboarding_source', selectedSource);
       setStep(2);
     } else if (step === 2) {
-      setStep(3); // → profile setup (name first)
+      if (!selectedExperience) return;
+      await setSetting('onboarding_experience', selectedExperience);
+      setStep(28); // → previous app
+    } else if (step === 28) {
+      if (!selectedPreviousApp) return;
+      await setSetting('onboarding_previous_app', selectedPreviousApp);
+      setStep(3); // → profile setup
     } else if (step === 3) {
       if (!userName.trim()) return;
       const existing = await loadUserProfile();
@@ -1465,7 +1499,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 25) {
       setStep(26); // loading screen
     }
-  }, [step, selectedGoal, selectedSource, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
+  }, [step, selectedGoal, selectedSource, selectedPreviousApp, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
 
   const handleFinishWelcome = useCallback(async () => {
     triggerSelectionHaptic();
@@ -1507,7 +1541,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       return;
     }
     if (step === 0) setStep(-3);
-    else if (step === 3) setStep(2); // back from profile → experience
+    else if (step === 28) setStep(2); // back from previous app → experience
+    else if (step === 3) setStep(28); // back from profile → previous app
     else if (step === 15) setStep(3); // back from personalized info → profile
     else if (step === 7) setStep(6); // back from productivity → create note
     else if (step === 5) setStep(24); // back from info → journey
@@ -1538,7 +1573,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 1, 2, 3, 15, 4, 24, 5, 5.1, 5.2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27];
+  const FLOW_ORDER: number[] = [0, 1, 2, 28, 3, 15, 4, 24, 5, 5.1, 5.2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
@@ -1558,6 +1593,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (INFO_STEPS.has(step)) return true;
     if (INTERACTIVE_STEPS.has(step)) return true;
     if (step === 2) return !!selectedExperience;
+    if (step === 28) return !!selectedPreviousApp;
     if (step === 9) return !!selectedWorkStyle;
     if (step === 18) return true; // theme step skipped
     if (step === 0) return !!selectedGoal;
@@ -2606,6 +2642,18 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
               {t('onboarding.experienceSubtitle')}
             </motion.p>
             {renderDescriptionSelect(tExperienceOptions, selectedExperience, handleSelectExperience)}
+          </motion.div>
+        )}
+
+        {step === 28 && (
+          <motion.div key="step28" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
+              {t('onboarding.previousAppTitle')}
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
+              {t('onboarding.previousAppSubtitle')}
+            </motion.p>
+            {renderSingleSelect(tPreviousAppOptions, selectedPreviousApp, handleSelectPreviousApp)}
           </motion.div>
         )}
 
