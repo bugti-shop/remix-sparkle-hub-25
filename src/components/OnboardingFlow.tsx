@@ -1485,7 +1485,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, [onComplete, openPaywall, onboardingNoteSaved, sketchSaved, createdTasks.length, firstStepShown, userName]);
 
   const handleBack = useCallback(async () => {
-    await triggerHaptic('heavy');
+    await triggerHaptic('light');
     // On interactive steps, back saves and goes FORWARD (next question)
     if (step === 6) {
       // Note editor handles its own saving via onSave
