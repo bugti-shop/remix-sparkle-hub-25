@@ -1200,7 +1200,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectWorkStyle = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
+    triggerHaptic('medium');
     setSelectedWorkStyle(option);
   }, []);
 
