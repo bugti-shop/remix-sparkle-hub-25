@@ -183,12 +183,12 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
           zIndex: 1,
         }}>
           <div>
-            <p style={{ color: '#ffffff', fontSize: 18, fontWeight: 800, margin: 0 }}>{totalCompletions}</p>
-            <p style={{ color: '#ffffff80', fontSize: 9, margin: 0, fontWeight: 500 }}>Tasks Done</p>
+            <p style={{ color: '#000000', fontSize: 18, fontWeight: 800, margin: 0 }}>{totalCompletions}</p>
+            <p style={{ color: '#00000080', fontSize: 9, margin: 0, fontWeight: 500 }}>Tasks Done</p>
           </div>
           <div>
-            <p style={{ color: '#ffffff', fontSize: 18, fontWeight: 800, margin: 0 }}>{longestStreak}</p>
-            <p style={{ color: '#ffffff80', fontSize: 9, margin: 0, fontWeight: 500 }}>Best Streak</p>
+            <p style={{ color: '#000000', fontSize: 18, fontWeight: 800, margin: 0 }}>{longestStreak}</p>
+            <p style={{ color: '#00000080', fontSize: 9, margin: 0, fontWeight: 500 }}>Best Streak</p>
           </div>
         </div>
 
