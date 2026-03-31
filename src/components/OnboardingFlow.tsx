@@ -380,7 +380,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
       {/* Header */}
       <div className="flex items-end gap-3 px-4 pt-3 pb-2">
         <motion.button
-          className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"
+          className="w-[17px] h-[17px] flex items-center justify-center cursor-pointer"
           onClick={handleBack}
           aria-label="Back"
           whileTap={{ scale: 0.85 }}
@@ -517,7 +517,7 @@ const OnboardingTaskViewStep = ({ createdTasks, setCreatedTasks, progressPercent
     <div className="fixed inset-0 z-[300] flex flex-col bg-white" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
       {/* Onboarding progress header */}
       <div className="flex items-center gap-3 px-4 pt-1 pb-1 relative z-50 bg-white">
-        <button className="w-9 h-9 flex items-center justify-center rounded-full" onClick={handleBack} aria-label="Back">
+        <button className="w-[17px] h-[17px] flex items-center justify-center" onClick={handleBack} aria-label="Back">
           <ArrowLeft className="h-5 w-5 text-[#1a1a1a]" />
         </button>
         <div className="flex-1 flex flex-col gap-0.5">
@@ -1754,7 +1754,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         {/* Top bar */}
         <div className="flex items-end gap-3 px-4 pt-3 pb-2">
           <button
-            className="w-9 h-9 flex items-center justify-center rounded-full"
+            className="w-[17px] h-[17px] flex items-center justify-center"
             onClick={handleBack}
             aria-label="Back"
           >
@@ -1907,7 +1907,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       <div className="fixed inset-0 z-[300] flex flex-col bg-white" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
         {/* Onboarding progress header */}
         <div className="flex items-center gap-3 px-4 pt-1 pb-1 relative z-50 bg-white">
-          <button className="w-9 h-9 flex items-center justify-center rounded-full" onClick={handleBack} aria-label="Back">
+          <button className="w-[17px] h-[17px] flex items-center justify-center" onClick={handleBack} aria-label="Back">
             <ArrowLeft className="h-5 w-5 text-[#1a1a1a]" />
           </button>
           <div className="flex-1 flex flex-col gap-0.5">
@@ -2065,7 +2065,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       >
         <div className="flex items-end gap-3 px-4 pt-3 pb-2">
           <motion.button
-            className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"
+            className="w-[17px] h-[17px] flex items-center justify-center cursor-pointer"
             onClick={handleBack}
             aria-label="Back"
             whileTap={{ scale: 0.85 }}
@@ -2161,7 +2161,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         }}
       >
         <div className="flex items-end gap-3 px-4 pt-3 pb-2">
-          <button className="w-9 h-9 flex items-center justify-center rounded-full" onClick={handleBack} aria-label="Back">
+          <button className="w-[17px] h-[17px] flex items-center justify-center" onClick={handleBack} aria-label="Back">
             <ArrowLeft className="h-5 w-5 text-[#1a1a1a]" />
           </button>
           <div className="flex-1 flex flex-col gap-0.5">
@@ -2540,7 +2540,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       {/* Top bar */}
       <div className="flex items-end gap-3 px-4 pt-3 pb-2">
         <motion.button
-          className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer"
+          className="w-[17px] h-[17px] flex items-center justify-center cursor-pointer"
           onClick={handleBack}
           aria-label="Back"
           style={{ opacity: step < 0 ? 0.3 : 1, WebkitTapHighlightColor: 'transparent' }}
