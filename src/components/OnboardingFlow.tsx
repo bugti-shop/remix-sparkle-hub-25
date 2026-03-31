@@ -1363,6 +1363,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   // 24:JOURNEY_SELECT 25:showcase 26:loading 27:welcome
 
   const goNext = useCallback(async () => {
+    try {
     triggerSelectionHaptic();
 
     if (step === 0) {
