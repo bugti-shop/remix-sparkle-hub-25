@@ -661,7 +661,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
       <div className="flex flex-col gap-1.5">
         <span className="text-[12px] font-medium text-[#767b7e]">Due Date</span>
         <motion.button
-          onClick={() => { triggerHaptic('heavy'); }}
+          onClick={() => { triggerHaptic('light'); }}
           className="relative w-full cursor-pointer"
           whileTap={{ scale: 0.98 }}
         >
