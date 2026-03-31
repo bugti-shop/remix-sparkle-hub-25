@@ -1663,7 +1663,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
                 transition={{ duration: 0.25, delay: 0.1 + i * 0.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={async () => {
-                  await triggerHaptic('heavy');
+                  await triggerHaptic('medium');
                   setSelectedLang(lang.code);
                   i18n.changeLanguage(lang.code);
                   localStorage.setItem('flowist_language', lang.code);
