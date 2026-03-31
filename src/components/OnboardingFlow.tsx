@@ -1155,7 +1155,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleSelectConsistency = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
+    triggerHaptic('medium');
     setSelectedConsistency(option);
   }, []);
 
