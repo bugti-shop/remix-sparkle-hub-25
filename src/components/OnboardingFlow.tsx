@@ -1136,9 +1136,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     })();
   }, []);
 
-  const handleSelectGoal = useCallback(async (option: string) => {
+  const handleToggleGoal = useCallback(async (option: string) => {
     triggerSelectionHaptic();
-    setSelectedGoal(option);
+    setSelectedGoal(prev => {
+      const next = new Set(prev);
+      if (next.has(option)) next.delete(option);
+      else next.add(option);
+      return next;
+    });
   }, []);
 
   const handleToggleProductivity = useCallback(async (option: string) => {
