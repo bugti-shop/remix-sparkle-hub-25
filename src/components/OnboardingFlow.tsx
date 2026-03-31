@@ -4,13 +4,10 @@ import i18n from '@/i18n';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { ALL_JOURNEYS, startJourney } from '@/utils/virtualJourneyStorage';
 import { ArrowLeft, Camera, User, Check, PenLine, CheckCircle2, CalendarDays, Target, Lightbulb, Bell, BarChart3, Star, Trophy, FlaskConical, Link, Monitor, Medal, Home, Rocket, Sprout, Heart, TrendingUp, Brain, Zap, Palette, Mic, LayoutDashboard, Shield, Plus, Pencil, Type, AlignLeft, Save, Trash2, ListTodo, ChevronRight, ListPlus, BookOpen, Briefcase, Activity, Sparkles, MapPin } from 'lucide-react';
-import { TaskDetailPage } from '@/components/TaskDetailPage';
-import { TaskCompletionCircle } from '@/components/task/TaskCompletionCircle';
-import { usePriorities } from '@/hooks/usePriorities';
 import { MemoryRouter } from 'react-router-dom';
-import { saveNoteToDBSingle } from '@/utils/noteStorage';
+
 import { loadTodoItems, saveTodoItems } from '@/utils/todoItemsStorage';
-import type { Note, TodoItem, TaskSection, Folder } from '@/types/note';
+import type { TodoItem, TaskSection, Folder } from '@/types/note';
 import { NoteEditor } from '@/components/NoteEditor';
 import { TaskInputSheet } from '@/components/TaskInputSheet';
 import { ProfileImageCropper } from '@/components/ProfileImageCropper';
@@ -24,95 +21,10 @@ import { saveUserProfile, loadUserProfile } from '@/hooks/useUserProfile';
 
 import { StreakDay1Screen } from '@/components/StreakDay1Screen';
 import { StreakConsistencyCertificate } from '@/components/StreakConsistencyCertificate';
-import { getTextPreviewFromHtml } from '@/utils/contentPreview';
+
 
 const ONBOARDING_COLOR = '#3c78f0';
-const TOTAL_STEPS = 28;
 
-// Feature showcase data
-const FEATURE_SHOWCASE = [
-  { icon: CheckCircle2, bg: '#ECFDF5', color: '#059669', title: 'Smart Task Management', description: 'Organize tasks with priorities, subtasks, and smart scheduling to stay on top of everything.' },
-  { icon: PenLine, bg: '#EEF2FF', color: '#4F46E5', title: 'Rich Notes & Sketches', description: 'Capture ideas with rich text notes, voice recordings, and a full sketch editor.' },
-  { icon: Target, bg: '#FEF2F2', color: '#DC2626', title: 'Habit & Streak Tracking', description: 'Build consistent habits with streaks, challenges, and achievement badges.' },
-  { icon: Palette, bg: '#FAF5FF', color: '#9333EA', title: 'Themes & Customization', description: 'Personalize your workspace with custom themes, dark mode, and flexible layouts.' },
-  { icon: BarChart3, bg: '#FFF7ED', color: '#EA580C', title: 'Analytics & Insights', description: 'Track your productivity score, view task analytics, and get weekly progress reports.' },
-  { icon: Bell, bg: '#F0F9FF', color: '#0284C7', title: 'Smart Reminders', description: 'Never miss a deadline with push notifications, location-based, and calendar sync alerts.' },
-];
-
-// Description-style questions (Yazio-style with title + description per option)
-const experienceOptions = [
-  { label: 'Beginner', description: 'I\'m new to productivity apps and need guidance getting started.' },
-  { label: 'Intermediate', description: 'I\'ve used some tools before but want a better, more organized system.' },
-  { label: 'Advanced', description: 'I\'m experienced with productivity systems and want powerful features.' },
-];
-
-const workStyleOptions = [
-  { label: 'Structured & Planned', description: 'I prefer a clear schedule with set times for everything.' },
-  { label: 'Flexible & Adaptive', description: 'I like to adjust my plans as the day unfolds.' },
-  { label: 'Focused Sprints', description: 'I work in intense bursts followed by breaks.' },
-  { label: 'Multitasker', description: 'I juggle multiple tasks and projects simultaneously.' },
-];
-
-const energyOptions = [
-  { label: 'Early Bird', description: 'I\'m most productive in the morning and wind down by evening.' },
-  { label: 'Night Owl', description: 'I do my best work late at night when it\'s quiet.' },
-  { label: 'Afternoon Peak', description: 'My energy and focus peak in the afternoon hours.' },
-  { label: 'It Varies', description: 'My productive hours change depending on the day.' },
-];
-
-// Info screens shown between question pairs
-const INFO_SCREENS: Record<number, { title: string; icons: { icon: any; bg: string; color: string }[]; points: { icon: any; bg: string; color: string; text: string }[]; button: string }> = {
-  15: {
-    title: 'Based on Your Answers, Here\'s What We\'ll Set Up for You',
-    icons: [
-      { icon: CheckCircle2, bg: '#ECFDF5', color: '#059669' },
-      { icon: PenLine, bg: '#EEF2FF', color: '#4F46E5' },
-      { icon: Target, bg: '#FEF2F2', color: '#DC2626' },
-    ],
-    points: [
-      { icon: Lightbulb, bg: '#FFF7ED', color: '#EA580C', text: 'A personalized workspace tailored to your goals and work style.' },
-      { icon: CalendarDays, bg: '#F0F9FF', color: '#0284C7', text: 'Smart scheduling and reminders based on your preferences.' },
-      { icon: Trophy, bg: '#FEFCE8', color: '#CA8A04', text: 'Achievement tracking and streaks to keep you motivated every day.' },
-    ],
-    button: 'Sounds Great!',
-  },
-  5: {
-    title: 'Welcome to the New Productive You!',
-    icons: [],
-    points: [
-      { icon: FlaskConical, bg: '#F0F9FF', color: '#0284C7', text: 'We use proven productivity methods to help you reach your goals.' },
-      { icon: Link, bg: '#EEF2FF', color: '#4F46E5', text: 'Flowist uses smart scheduling to help you see real results.' },
-      { icon: Monitor, bg: '#FAF5FF', color: '#9333EA', text: 'Our system transforms your habits into tools that help you stay on track.' },
-    ],
-    button: 'Got It',
-  },
-  13: {
-    title: 'You\'re Building Something Great!',
-    icons: [],
-    points: [
-      { icon: TrendingUp, bg: '#ECFDF5', color: '#059669', text: 'Users who track daily see 3x more productivity gains.' },
-      { icon: Brain, bg: '#FAF5FF', color: '#9333EA', text: 'Your brain works better with organized systems — Flowist does the heavy lifting.' },
-      { icon: Zap, bg: '#FEFCE8', color: '#CA8A04', text: 'Small daily wins lead to massive life changes over time.' },
-    ],
-    button: 'Continue',
-  },
-  21: {
-    title: 'With Your Personalized Plan, There\'s No Stopping You!',
-    icons: [
-      { icon: PenLine, bg: '#EEF2FF', color: '#4F46E5' },
-      { icon: CheckCircle2, bg: '#ECFDF5', color: '#059669' },
-      { icon: CalendarDays, bg: '#FFF7ED', color: '#EA580C' },
-      { icon: Target, bg: '#FEF2F2', color: '#DC2626' },
-      { icon: Star, bg: '#FFF1F2', color: '#E11D48' },
-    ],
-    points: [
-      { icon: Rocket, bg: '#EEF2FF', color: '#4F46E5', text: 'Start seeing results within just 7 days.' },
-      { icon: Star, bg: '#FFF1F2', color: '#E11D48', text: 'Build new, productive habits to reach and maintain your goals.' },
-      { icon: Heart, bg: '#FEF2F2', color: '#DC2626', text: 'Improve your life and quality of work while doing what you love.' },
-    ],
-    button: 'Let\'s Go',
-  },
-};
 interface OnboardingFlowProps {
   onComplete: () => void;
 }
@@ -628,50 +540,22 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
   const [userName, setUserName] = useState('');
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-  const [selectedChallenges, setSelectedChallenges] = useState<Set<string>>(new Set());
-  const [selectedProductivity, setSelectedProductivity] = useState<Set<string>>(new Set());
-  const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
-  const [selectedSchedule, setSelectedSchedule] = useState<string | null>(null);
-  const [selectedCelebrate, setSelectedCelebrate] = useState<Set<string>>(new Set());
-  const [selectedProgressTrack, setSelectedProgressTrack] = useState<Set<string>>(new Set());
-  const [selectedConsistency, setSelectedConsistency] = useState<string | null>(null);
-  const [selectedStreak, setSelectedStreak] = useState<string | null>(null);
-  const [selectedRemind, setSelectedRemind] = useState<Set<string>>(new Set());
-  const [selectedFeatureInterest, setSelectedFeatureInterest] = useState<Set<string>>(new Set());
-  const [selectedImprove, setSelectedImprove] = useState<Set<string>>(new Set());
   const [selectedPreviousApp, setSelectedPreviousApp] = useState<string | null>(null);
-  const [selectedExperience, setSelectedExperience] = useState<string | null>(null);
-  const [selectedWorkStyle, setSelectedWorkStyle] = useState<string | null>(null);
-  const [selectedEnergy, setSelectedEnergy] = useState<string | null>(null);
-  const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const [selectedLang, setSelectedLang] = useState(i18n?.language?.split('-')[0] || 'en');
   // Interactive creation states
-  const [onboardingNoteTitle, setOnboardingNoteTitle] = useState('');
   const [selectedUnfinished, setSelectedUnfinished] = useState<string | null>(null);
   const [selectedSlowdown, setSelectedSlowdown] = useState<string | null>(null);
   const [selectedWhyFail, setSelectedWhyFail] = useState<string | null>(null);
-  const [onboardingNoteContent, setOnboardingNoteContent] = useState('');
   const [onboardingNoteSaved, setOnboardingNoteSaved] = useState(false);
-  const [sketchCanvasRef, setSketchCanvasRef] = useState<HTMLCanvasElement | null>(null);
-  const [isDrawing, setIsDrawing] = useState(false);
   const [sketchSaved, setSketchSaved] = useState(false);
-  const [sketchDataUrl, setSketchDataUrl] = useState<string | null>(null);
-  const [sketchColor, setSketchColor] = useState('#1a1a1a');
-  const [sketchBrushSize, setSketchBrushSize] = useState(3);
-  const [onboardingTaskText, setOnboardingTaskText] = useState('');
-  const [onboardingTaskDesc, setOnboardingTaskDesc] = useState('');
   const [createdTasks, setCreatedTasks] = useState<TodoItem[]>([]);
-  const [createdTask, setCreatedTask] = useState<TodoItem | null>(null); // for step 15 detail view
+  const [createdTask, setCreatedTask] = useState<TodoItem | null>(null);
   const [isTaskInputSheetOpen, setIsTaskInputSheetOpen] = useState(true);
-  const [isBatchSheetOpen, setIsBatchSheetOpen] = useState(false);
   const [showNotesFolderCreation, setShowNotesFolderCreation] = useState(false);
   const [showTasksFolderCreation, setShowTasksFolderCreation] = useState(false);
   const [notesFolders, setNotesFolders] = useState<{ id: string; name: string; color: string }[]>([]);
   const [tasksFolders, setTasksFolders] = useState<{ id: string; name: string; color: string }[]>([]);
-  const [editingTask, setEditingTask] = useState(false);
   const [selectedJourneyId, setSelectedJourneyId] = useState<string | null>(null);
-  const [editTaskText, setEditTaskText] = useState('');
-  const [editTaskDesc, setEditTaskDesc] = useState('');
   
   const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
   const [selectedFrustration, setSelectedFrustration] = useState<string | null>(null);
@@ -682,9 +566,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [showStreakDay1, setShowStreakDay1] = useState(false);
   const [showOnboardingCertificate, setShowOnboardingCertificate] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { openPaywall } = useSubscription();
-  const { getPriorityColor } = usePriorities();
+  
 
   // ===== ONBOARDING STATE PERSISTENCE =====
   // Load saved onboarding state on mount
@@ -707,21 +590,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         if (saved.selectedGoal) setSelectedGoal(new Set(Array.isArray(saved.selectedGoal) ? saved.selectedGoal : [saved.selectedGoal]));
         if (saved.selectedSource) setSelectedSource(saved.selectedSource);
         if (saved.selectedPreviousApp) setSelectedPreviousApp(saved.selectedPreviousApp);
-        if (saved.selectedExperience) setSelectedExperience(saved.selectedExperience);
-        if (saved.selectedWorkStyle) setSelectedWorkStyle(saved.selectedWorkStyle);
-        if (saved.selectedEnergy) setSelectedEnergy(saved.selectedEnergy);
-        if (saved.selectedTheme) setSelectedTheme(saved.selectedTheme);
-        if (saved.selectedChallenges?.length) setSelectedChallenges(new Set(saved.selectedChallenges));
-        if (saved.selectedProductivity?.length) setSelectedProductivity(new Set(saved.selectedProductivity));
-        if (saved.selectedFocus) setSelectedFocus(saved.selectedFocus);
-        if (saved.selectedSchedule) setSelectedSchedule(saved.selectedSchedule);
-        if (saved.selectedCelebrate?.length) setSelectedCelebrate(new Set(saved.selectedCelebrate));
-        if (saved.selectedProgressTrack?.length) setSelectedProgressTrack(new Set(saved.selectedProgressTrack));
-        if (saved.selectedConsistency) setSelectedConsistency(saved.selectedConsistency);
-        if (saved.selectedStreak) setSelectedStreak(saved.selectedStreak);
-        if (saved.selectedRemind?.length) setSelectedRemind(new Set(saved.selectedRemind));
-        if (saved.selectedFeatureInterest?.length) setSelectedFeatureInterest(new Set(saved.selectedFeatureInterest));
-        if (saved.selectedImprove?.length) setSelectedImprove(new Set(saved.selectedImprove));
+        // Legacy fields from removed steps are ignored
         if (saved.onboardingNoteSaved) setOnboardingNoteSaved(true);
         if (saved.sketchSaved) setSketchSaved(true);
         if (saved.selectedJourneyId) setSelectedJourneyId(saved.selectedJourneyId);
@@ -749,21 +618,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       selectedGoal: Array.from(selectedGoal),
       selectedSource,
       selectedPreviousApp,
-      selectedExperience,
-      selectedWorkStyle,
-      selectedEnergy,
-      selectedTheme,
-      selectedChallenges: Array.from(selectedChallenges),
-      selectedProductivity: Array.from(selectedProductivity),
-      selectedFocus,
-      selectedSchedule,
-      selectedCelebrate: Array.from(selectedCelebrate),
-      selectedProgressTrack: Array.from(selectedProgressTrack),
-      selectedConsistency,
-      selectedStreak,
-      selectedRemind: Array.from(selectedRemind),
-      selectedFeatureInterest: Array.from(selectedFeatureInterest),
-      selectedImprove: Array.from(selectedImprove),
       onboardingNoteSaved,
       sketchSaved,
       createdTaskIds: createdTasks.map(t => t.id),
@@ -774,7 +628,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       firstStepShown,
     };
     setSetting('onboarding_progress_state', state);
-  }, [step, userName, avatarPreview, selectedGoal, selectedSource, selectedPreviousApp, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, onboardingNoteSaved, sketchSaved, createdTasks, selectedJourneyId, notesFolders, tasksFolders, selectedLang, firstStepShown]);
+  }, [step, userName, avatarPreview, selectedGoal, selectedSource, selectedPreviousApp, onboardingNoteSaved, sketchSaved, createdTasks, selectedJourneyId, notesFolders, tasksFolders, selectedLang, firstStepShown]);
 
   // ===== FIRST STEP CELEBRATION — triggered after welcome screen =====
   // (No longer auto-triggers at step 15; instead triggered when user taps "Let's Go" on welcome screen)
@@ -809,121 +663,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     t('onboarding.prevAppNone'),
   ], [t]);
 
-  const tChallengeOptions = useMemo(() => [
-    t('onboarding.challengeConsistent'),
-    t('onboarding.challengePriorities'),
-    t('onboarding.challengeDeadlines'),
-    t('onboarding.challengeMotivated'),
-    t('onboarding.challengeOrganizing'),
-    t('onboarding.challengeHabits'),
-    t('onboarding.challengeOther'),
-  ], [t]);
-
-  const tProductivityOptions = useMemo(() => [
-    t('onboarding.prodMorning'),
-    t('onboarding.prodTimeBlock'),
-    t('onboarding.prodPomodoro'),
-    t('onboarding.prodTodoLists'),
-    t('onboarding.prodCalendar'),
-    t('onboarding.prodNone'),
-  ], [t]);
-
-  const tFocusOptions = useMemo(() => [
-    t('onboarding.focusWork'),
-    t('onboarding.focusSchool'),
-    t('onboarding.focusPersonal'),
-    t('onboarding.focusHealth'),
-    t('onboarding.focusCreative'),
-    t('onboarding.focusDaily'),
-  ], [t]);
-
-  const tScheduleOptions = useMemo(() => [
-    t('onboarding.schedFreely'),
-    t('onboarding.schedFixed'),
-    t('onboarding.schedShifts'),
-    t('onboarding.schedChanges'),
-    t('onboarding.schedOther'),
-  ], [t]);
-
-  const tCelebrateOptions = useMemo(() => [
-    t('onboarding.celebShare'),
-    t('onboarding.celebReward'),
-    t('onboarding.celebBreak'),
-    t('onboarding.celebBiggerGoal'),
-    t('onboarding.celebJournal'),
-    t('onboarding.celebOther'),
-  ], [t]);
-
-  const tProgressTrackOptions = useMemo(() => [
-    t('onboarding.progReview'),
-    t('onboarding.progScore'),
-    t('onboarding.progStreaks'),
-    t('onboarding.progAnalytics'),
-    t('onboarding.progCompare'),
-    t('onboarding.progOther'),
-  ], [t]);
-
-  const tConsistencyOptions = useMemo(() => [
-    t('onboarding.consMorning'),
-    t('onboarding.consNight'),
-    t('onboarding.consAsNeeded'),
-    t('onboarding.consWeekly'),
-    t('onboarding.consDontKnow'),
-  ], [t]);
-
-  const tStreakOptions = useMemo(() => [
-    t('onboarding.streak50'),
-    t('onboarding.streak30'),
-    t('onboarding.streak14'),
-    t('onboarding.streak7'),
-  ], [t]);
-
-  const tRemindOptions = useMemo(() => [
-    t('onboarding.remindPush'),
-    t('onboarding.remindMorning'),
-    t('onboarding.remindEvening'),
-    t('onboarding.remindLocation'),
-    t('onboarding.remindCalendar'),
-    t('onboarding.remindOther'),
-  ], [t]);
-
-  const tFeatureInterestOptions = useMemo(() => [
-    t('onboarding.featHabits'),
-    t('onboarding.featSketch'),
-    t('onboarding.featVoice'),
-    t('onboarding.featAnalytics'),
-    t('onboarding.featDarkMode'),
-    t('onboarding.featWidgets'),
-  ], [t]);
-
-  const tImproveOptions = useMemo(() => [
-    t('onboarding.impScreenTime'),
-    t('onboarding.impProcrastinating'),
-    t('onboarding.impMindful'),
-    t('onboarding.impBalance'),
-    t('onboarding.impSkills'),
-    t('onboarding.impSleep'),
-  ], [t]);
-
-  const tExperienceOptions = useMemo(() => [
-    { label: t('onboarding.expBeginner'), description: t('onboarding.expBeginnerDesc') },
-    { label: t('onboarding.expIntermediate'), description: t('onboarding.expIntermediateDesc') },
-    { label: t('onboarding.expAdvanced'), description: t('onboarding.expAdvancedDesc') },
-  ], [t]);
-
-  const tWorkStyleOptions = useMemo(() => [
-    { label: t('onboarding.wsStructured'), description: t('onboarding.wsStructuredDesc') },
-    { label: t('onboarding.wsFlexible'), description: t('onboarding.wsFlexibleDesc') },
-    { label: t('onboarding.wsSprints'), description: t('onboarding.wsSprintsDesc') },
-    { label: t('onboarding.wsMultitask'), description: t('onboarding.wsMultitaskDesc') },
-  ], [t]);
-
-  const tEnergyOptions = useMemo(() => [
-    { label: t('onboarding.energyBird'), description: t('onboarding.energyBirdDesc') },
-    { label: t('onboarding.energyOwl'), description: t('onboarding.energyOwlDesc') },
-    { label: t('onboarding.energyAfternoon'), description: t('onboarding.energyAfternoonDesc') },
-    { label: t('onboarding.energyVaries'), description: t('onboarding.energyVariesDesc') },
-  ], [t]);
 
   const displayName = (userName.trim().split(/\s+/)[0]) || 'Friend';
 
@@ -948,23 +687,11 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     const firstGoal = selectedGoal.size > 0 ? Array.from(selectedGoal)[0] : null;
     const goalEntry = firstGoal ? goalPointMap[firstGoal] : null;
     if (goalEntry) points.push({ icon: goalEntry.icon, bg: goalEntry.bg, color: goalEntry.color, text: t(`onboarding.${goalEntry.key}`) });
-    const expEntry = selectedExperience ? expPointMap[selectedExperience] : null;
-    if (expEntry) points.push({ icon: expEntry.icon, bg: expEntry.bg, color: expEntry.color, text: t(`onboarding.${expEntry.key}`) });
     points.push({ icon: Trophy, bg: '#FEFCE8', color: '#CA8A04', text: t('onboarding.infoPersonalizedPoint3') });
     return points;
-  }, [selectedGoal, selectedExperience, goalPointMap, expPointMap, t]);
+  }, [selectedGoal, goalPointMap, t]);
 
   const tInfoScreens = useMemo(() => ({
-    15: {
-      title: t('onboarding.infoPersonalizedTitle', { name: displayName }),
-      icons: [
-        { icon: CheckCircle2, bg: '#ECFDF5', color: '#059669' },
-        { icon: PenLine, bg: '#EEF2FF', color: '#4F46E5' },
-        { icon: Target, bg: '#FEF2F2', color: '#DC2626' },
-      ],
-      points: dynamicPoints,
-      button: t('onboarding.soundsGreat'),
-    },
     5: {
       title: t('onboarding.info1Title'),
       icons: [] as { icon: any; bg: string; color: string }[],
@@ -984,22 +711,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         { icon: Zap, bg: '#FEFCE8', color: '#CA8A04', text: t('onboarding.info2Point3') },
       ],
       button: t('onboarding.continue'),
-    },
-    21: {
-      title: t('onboarding.info3Title'),
-      icons: [
-        { icon: PenLine, bg: '#EEF2FF', color: '#4F46E5' },
-        { icon: CheckCircle2, bg: '#ECFDF5', color: '#059669' },
-        { icon: CalendarDays, bg: '#FFF7ED', color: '#EA580C' },
-        { icon: Target, bg: '#FEF2F2', color: '#DC2626' },
-        { icon: Star, bg: '#FFF1F2', color: '#E11D48' },
-      ],
-      points: [
-        { icon: Rocket, bg: '#EEF2FF', color: '#4F46E5', text: t('onboarding.info3Point1') },
-        { icon: Star, bg: '#FFF1F2', color: '#E11D48', text: t('onboarding.info3Point2') },
-        { icon: Heart, bg: '#FEF2F2', color: '#DC2626', text: t('onboarding.info3Point3') },
-      ],
-      button: t('onboarding.letsGo'),
     },
   }), [t]);
 
@@ -1041,220 +752,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     });
   }, []);
 
-  const handleToggleProductivity = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedProductivity(prev => {
-      const next = new Set(prev);
-      if (next.has(option)) next.delete(option);
-      else next.add(option);
-      return next;
-    });
-  }, []);
-
-  const handleSelectFocus = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedFocus(option);
-  }, []);
-
-  const handleSelectSchedule = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedSchedule(option);
-  }, []);
-
-  const handleToggleCelebrate = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedCelebrate(prev => {
-      const next = new Set(prev);
-      if (next.has(option)) next.delete(option);
-      else next.add(option);
-      return next;
-    });
-  }, []);
-
-  const handleToggleProgressTrack = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedProgressTrack(prev => {
-      const next = new Set(prev);
-      if (next.has(option)) next.delete(option);
-      else next.add(option);
-      return next;
-    });
-  }, []);
-
-  const handleSelectConsistency = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedConsistency(option);
-  }, []);
-
-  const handleSelectStreak = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedStreak(option);
-  }, []);
-
-  const handleToggleRemind = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedRemind(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
-  }, []);
-
-  const handleToggleFeatureInterest = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedFeatureInterest(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
-  }, []);
-
-  const handleToggleImprove = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedImprove(prev => { const n = new Set(prev); n.has(option) ? n.delete(option) : n.add(option); return n; });
-  }, []);
-
   const handleSelectSource = useCallback(async (option: string) => {
     triggerSelectionHaptic();
     setSelectedSource(option);
   }, []);
 
-  const handleToggleChallenge = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedChallenges(prev => {
-      const next = new Set(prev);
-      if (next.has(option)) next.delete(option);
-      else next.add(option);
-      return next;
-    });
-  }, []);
-
   const handleSelectPreviousApp = useCallback(async (option: string) => {
     triggerSelectionHaptic();
     setSelectedPreviousApp(option);
-  }, []);
-
-  const handleSelectExperience = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedExperience(option);
-  }, []);
-
-  const handleSelectWorkStyle = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedWorkStyle(option);
-  }, []);
-
-  const handleSelectEnergy = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
-    setSelectedEnergy(option);
-  }, []);
-
-  // Save note to DB
-  const saveOnboardingNote = useCallback(async () => {
-    if (!onboardingNoteTitle.trim() && !onboardingNoteContent.trim()) return;
-    const note: Note = {
-      id: crypto.randomUUID(),
-      type: 'regular',
-      title: onboardingNoteTitle.trim() || 'My First Note',
-      content: onboardingNoteContent.trim(),
-      voiceRecordings: [],
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    await saveNoteToDBSingle(note);
-    setOnboardingNoteSaved(true);
-    await triggerSelectionHaptic();
-  }, [onboardingNoteTitle, onboardingNoteContent]);
-
-  // Save sketch to DB
-  const saveOnboardingSketch = useCallback(async () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const dataUrl = canvas.toDataURL('image/png');
-    setSketchDataUrl(dataUrl);
-    const note: Note = {
-      id: crypto.randomUUID(),
-      type: 'sketch',
-      title: 'My First Sketch',
-      content: dataUrl,
-      voiceRecordings: [],
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    await saveNoteToDBSingle(note);
-    setSketchSaved(true);
-    await triggerSelectionHaptic();
-  }, []);
-
-  // Save task
-  const saveOnboardingTask = useCallback(async () => {
-    if (!onboardingTaskText.trim()) return;
-    const now = new Date();
-    const task: TodoItem = {
-      id: crypto.randomUUID(),
-      text: onboardingTaskText.trim(),
-      completed: false,
-      description: onboardingTaskDesc.trim() || undefined,
-      createdAt: now,
-      modifiedAt: now,
-    };
-    const existing = await loadTodoItems();
-    await saveTodoItems([task, ...existing]);
-    setCreatedTask(task);
-    setEditTaskText(task.text);
-    setEditTaskDesc(task.description || '');
-    await triggerSelectionHaptic();
-  }, [onboardingTaskText, onboardingTaskDesc]);
-
-  // Update task
-  const updateOnboardingTask = useCallback(async () => {
-    if (!createdTask || !editTaskText.trim()) return;
-    const updated = { ...createdTask, text: editTaskText.trim(), description: editTaskDesc.trim() || undefined };
-    const existing = await loadTodoItems();
-    const newItems = existing.map(t => t.id === updated.id ? updated : t);
-    await saveTodoItems(newItems);
-    setCreatedTask(updated);
-    setEditingTask(false);
-    await triggerSelectionHaptic();
-  }, [createdTask, editTaskText, editTaskDesc]);
-
-  // Canvas drawing handlers
-  const startDraw = useCallback((e: React.TouchEvent | React.MouseEvent) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    setIsDrawing(true);
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    ctx.beginPath();
-    ctx.moveTo((clientX - rect.left) * scaleX, (clientY - rect.top) * scaleY);
-    ctx.strokeStyle = sketchColor;
-    ctx.lineWidth = sketchBrushSize;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-  }, [sketchColor, sketchBrushSize]);
-
-  const draw = useCallback((e: React.TouchEvent | React.MouseEvent) => {
-    if (!isDrawing) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
-    ctx.lineTo((clientX - rect.left) * scaleX, (clientY - rect.top) * scaleY);
-    ctx.stroke();
-  }, [isDrawing]);
-
-  const stopDraw = useCallback(() => { setIsDrawing(false); }, []);
-
-  const clearCanvas = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }, []);
 
   // New step flow:
@@ -1349,39 +854,29 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       setShowTasksFolderCreation(false);
       setStep(6); // → create note
     } else if (step === 6) {
-      // Save note if not saved yet
-      if (!onboardingNoteSaved && (onboardingNoteTitle.trim() || onboardingNoteContent.trim())) {
-        await saveOnboardingNote();
-      }
-      setStep(10); // → sketch (skip question screens)
+      setStep(10); // → sketch
     } else if (step === 24) {
-      // Save journey selection, then show adventure begins or skip to info
       if (selectedJourneyId) {
         startJourney(selectedJourneyId);
-        setStep(29); // → adventure begins screen
+        setStep(29);
       } else {
-        setStep(5); // → info screen + folders
+        setStep(5);
       }
     } else if (step === 29) {
-      setStep(5); // adventure begins → info screen + folders
+      setStep(5);
     } else if (step === 10) {
-      // Save sketch if not saved
-      if (!sketchSaved) {
-        await saveOnboardingSketch();
-      }
-      setStep(13); // → INFO before task creation (skip question screens)
+      setStep(13);
     } else if (step === 13) {
-      setStep(14); // INFO → create task
+      setStep(14);
     } else if (step === 14) {
-      // Tasks saved via Today page, go to showcase
-      setStep(25); // → showcase (skip all question screens)
+      setStep(25);
     } else if (step === 25) {
-      setStep(26); // loading screen
+      setStep(26);
     }
     } catch (error) {
       console.warn('Onboarding goNext error:', error);
     }
-  }, [step, selectedGoal, selectedSource, selectedPreviousApp, selectedFrustration, selectedTaskView, selectedDevices, selectedOffline, selectedUnfinished, selectedSlowdown, selectedWhyFail, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
+  }, [step, selectedGoal, selectedSource, selectedPreviousApp, selectedFrustration, selectedTaskView, selectedDevices, selectedOffline, selectedUnfinished, selectedSlowdown, selectedWhyFail, userName, avatarPreview, onboardingNoteSaved, sketchSaved, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
 
   const handleFinishWelcome = useCallback(async () => {
     triggerSelectionHaptic();
@@ -1439,7 +934,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     }
   }, [step]);
 
-  const INFO_STEPS = new Set([5, 13, 15, 21]);
+  const INFO_STEPS = new Set([5, 13]);
   const INTERACTIVE_STEPS = new Set([6, 10, 14]);
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
@@ -1463,7 +958,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   function currentStepDone() {
     if (INFO_STEPS.has(step)) return true;
     if (INTERACTIVE_STEPS.has(step)) return true;
-    if (step === 2) return !!selectedExperience;
+    if (step === 0) return selectedGoal.size > 0;
+    if (step === 3) return !!userName.trim();
     if (step === 28) return !!selectedPreviousApp;
     if (step === 30) return !!selectedFrustration;
     if (step === 31) return !!selectedTaskView;
@@ -1472,22 +968,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (step === 34) return !!selectedUnfinished;
     if (step === 35) return !!selectedSlowdown;
     if (step === 36) return !!selectedWhyFail;
-    if (step === 9) return !!selectedWorkStyle;
-    if (step === 18) return true; // theme step skipped
-    if (step === 0) return selectedGoal.size > 0;
-    if (step === 1) return !!selectedSource;
-    if (step === 3) return !!userName.trim();
-    if (step === 4) return selectedChallenges.size > 0;
-    if (step === 7) return selectedProductivity.size > 0;
-    if (step === 8) return !!selectedFocus;
-    if (step === 11) return !!selectedSchedule;
-    if (step === 12) return selectedCelebrate.size > 0;
-    if (step === 16) return selectedProgressTrack.size > 0;
-    if (step === 17) return !!selectedConsistency;
-    if (step === 19) return !!selectedStreak;
-    if (step === 20) return selectedRemind.size > 0;
-    if (step === 22) return selectedFeatureInterest.size > 0;
-    if (step === 23) return selectedImprove.size > 0;
     return true;
   }
 
@@ -1497,7 +977,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Add/remove body class for z-index overrides on Radix portals
   useEffect(() => {
-    if ([6, 10, 14, 15].includes(step)) {
+    if ([6, 10, 14].includes(step)) {
       document.body.classList.add('onboarding-active');
     } else {
       document.body.classList.remove('onboarding-active');
@@ -2250,8 +1730,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Welcome screen — ownership showcase
   if (step === 27) {
-    const noteTitle = onboardingNoteTitle.trim() || 'My First Note';
-    const notePreview = getTextPreviewFromHtml(onboardingNoteContent, 60);
     const journeyObj = selectedJourneyId ? ALL_JOURNEYS.find(j => j.id === selectedJourneyId) : null;
 
     return (
@@ -2511,37 +1989,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     </div>
   );
 
-  const renderDescriptionSelect = (
-    options: { label: string; description: string }[],
-    selected: string | null,
-    onSelect: (o: string) => void,
-  ) => (
-    <div className="flex flex-col gap-4">
-      {options.map((option, index) => {
-        const isSelected = selected === option.label;
-        return (
-          <motion.button
-            key={option.label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0.05 + index * 0.03 }}
-            onClick={() => onSelect(option.label)}
-            className="relative w-full text-left rounded-2xl px-5 py-5 transition-all duration-150 cursor-pointer active:brightness-95"
-            style={{
-              backgroundColor: isSelected ? `${ONBOARDING_COLOR}40` : '#ffffff',
-              border: `2px solid ${isSelected ? ONBOARDING_COLOR : '#e8e8e8'}`,
-              boxShadow: isSelected ? `0 4px 0 0 ${ONBOARDING_COLOR}` : '0 4px 0 0 #e4e8ea',
-              WebkitTapHighlightColor: 'transparent',
-            }}
-            whileTap={{ scale: 0.99, y: 1 }}
-          >
-            <span className="block text-[16px] font-bold text-[#1a1a1a] font-['Nunito_Sans']">{option.label}</span>
-            <span className="block text-[13px] text-[#767b7e] font-['Nunito_Sans'] mt-1 leading-relaxed">{option.description}</span>
-          </motion.button>
-        );
-      })}
-    </div>
-  );
 
   return (
     <div
