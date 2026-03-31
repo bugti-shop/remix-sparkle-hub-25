@@ -765,6 +765,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [onboardingNoteTitle, setOnboardingNoteTitle] = useState('');
   const [selectedUnfinished, setSelectedUnfinished] = useState<string | null>(null);
   const [selectedSlowdown, setSelectedSlowdown] = useState<string | null>(null);
+  const [selectedWhyFail, setSelectedWhyFail] = useState<string | null>(null);
   const [onboardingNoteContent, setOnboardingNoteContent] = useState('');
   const [onboardingNoteSaved, setOnboardingNoteSaved] = useState(false);
   const [sketchCanvasRef, setSketchCanvasRef] = useState<HTMLCanvasElement | null>(null);
