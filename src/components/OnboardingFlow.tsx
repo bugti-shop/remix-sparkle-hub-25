@@ -1551,7 +1551,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 3) setStep(28); // back from profile → previous app
     else if (step === 15) setStep(3); // back from personalized info → profile
     else if (step === 7) setStep(6); // back from productivity → create note
-    else if (step === 5) setStep(24); // back from info → journey
+    else if (step === 29) setStep(24); // back from adventure begins → journey
+    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
     else if (step === 24) setStep(4); // back from journey → challenges
     else if (step === 25) setStep(23); // back from showcase → improve
     else if (step > 0 && step < 25) setStep(step - 1);
