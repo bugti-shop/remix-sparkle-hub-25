@@ -389,7 +389,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
         </motion.button>
         <div className="flex-1 flex flex-col gap-1">
           <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-          <div className="h-[6px] rounded-full bg-[#e5e5e5] overflow-hidden">
+          <div className="h-[10px] rounded-full bg-[#e5e5e5] overflow-hidden">
             <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
           </div>
         </div>
@@ -522,7 +522,7 @@ const OnboardingTaskViewStep = ({ createdTasks, setCreatedTasks, progressPercent
         </button>
         <div className="flex-1 flex flex-col gap-1">
           <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-          <div className="h-[6px] rounded-full bg-[#e5e5e5] overflow-hidden">
+          <div className="h-[10px] rounded-full bg-[#e5e5e5] overflow-hidden">
             <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
           </div>
         </div>
@@ -1535,10 +1535,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   const INFO_STEPS = new Set([5, 13, 15, 21]);
   const INTERACTIVE_STEPS = new Set([6, 10, 14]);
-  const stepCount = TOTAL_STEPS;
-  const displayStep = Math.min(step + 1, stepCount);
+
+  // Sequential flow order mapping: internal step → display position
+  const FLOW_ORDER: number[] = [-3, -2, -1, 0, 1, 2, 3, 15, 4, 24, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27];
+  const stepCount = FLOW_ORDER.length;
+  const flowIndex = FLOW_ORDER.indexOf(step);
+  const displayStep = flowIndex >= 0 ? flowIndex + 1 : Math.min(step + 4, stepCount);
   const stepLabel = `${displayStep} / ${stepCount}`;
-  const progressPercent = `${Math.min(100, Math.round(((step + (currentStepDone() ? 1 : 0.4)) / stepCount) * 100))}%`;
+  const progressPercent = `${Math.min(100, Math.round(((displayStep - 1 + (currentStepDone() ? 1 : 0.4)) / stepCount) * 100))}%`;
 
   function currentStepDone() {
     if (INFO_STEPS.has(step)) return true;
@@ -1758,7 +1762,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </button>
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-            <div className="h-[6px] rounded-full bg-[#e5e5e5] overflow-hidden">
+            <div className="h-[10px] rounded-full bg-[#e5e5e5] overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
                 style={{ backgroundColor: ONBOARDING_COLOR }}
@@ -1908,7 +1912,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </button>
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-            <div className="h-[6px] rounded-full bg-[#e5e5e5] overflow-hidden">
+            <div className="h-[10px] rounded-full bg-[#e5e5e5] overflow-hidden">
               <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
@@ -2070,7 +2074,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </motion.button>
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-            <div className="h-[6px] rounded-full bg-[#e5e5e5] overflow-hidden">
+            <div className="h-[10px] rounded-full bg-[#e5e5e5] overflow-hidden">
               <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
@@ -2162,7 +2166,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </button>
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-            <div className="h-[6px] rounded-full bg-[#e5e5e5] overflow-hidden">
+            <div className="h-[10px] rounded-full bg-[#e5e5e5] overflow-hidden">
               <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
@@ -2550,7 +2554,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           <div className="flex justify-between items-center">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
           </div>
-          <div className="h-[6px] rounded-full bg-[#e5e5e5] overflow-hidden">
+          <div className="h-[10px] rounded-full bg-[#e5e5e5] overflow-hidden">
             <motion.div
               className="h-full rounded-full"
               style={{ backgroundColor: ONBOARDING_COLOR }}
