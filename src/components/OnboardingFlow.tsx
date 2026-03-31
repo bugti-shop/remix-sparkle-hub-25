@@ -1135,7 +1135,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleToggleCelebrate = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
+    triggerHaptic('medium');
     setSelectedCelebrate(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
