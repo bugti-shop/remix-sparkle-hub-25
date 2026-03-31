@@ -772,10 +772,10 @@ export const TaskInputSheet = ({ isOpen, onClose, onAddTask, folders, selectedFo
       />
 
       <div
-        className="fixed left-0 right-0 bg-card z-[70] rounded-t-[20px] shadow-2xl pointer-events-auto transition-opacity"
+        className="fixed left-0 right-0 bg-card z-[70] rounded-t-3xl shadow-2xl pointer-events-auto transition-opacity"
         style={{ 
           bottom: keyboardHeight > 0 ? `${keyboardHeight}px` : '0px',
-          paddingBottom: keyboardHeight > 0 ? '0px' : 'env(safe-area-inset-bottom, 0px)',
+          paddingBottom: keyboardHeight > 0 ? '0px' : 'env(safe-area-inset-bottom, 8px)',
           transform: swipeOffset > 0 ? `translateY(${swipeOffset}px)` : undefined,
           opacity: swipeOffset > 60 ? 0.6 : 1,
         }}
@@ -785,11 +785,11 @@ export const TaskInputSheet = ({ isOpen, onClose, onAddTask, folders, selectedFo
         onTouchEnd={handleSwipeTouchEnd}
       >
         {/* Swipe handle */}
-        <div className="flex justify-center pt-1 pb-0">
-          <div className="w-9 h-1 rounded-full bg-muted-foreground/30" />
+        <div className="flex justify-center pt-2 pb-1">
+          <div className="w-10 h-1 rounded-full bg-muted-foreground/30" />
         </div>
-        <div className="px-4 pt-0.5 pb-1">
-          <div className="flex items-center gap-3 mb-1.5">
+        <div className="px-4 pt-1 pb-2">
+          <div className="flex items-center gap-3 mb-2">
             <Input
               ref={inputRef}
               placeholder={t('tasks.naturalLanguagePlaceholder')}
