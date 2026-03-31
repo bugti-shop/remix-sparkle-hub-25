@@ -161,16 +161,28 @@ const Progress = () => {
               </motion.div>
               
               <motion.div 
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                className="text-center mt-4"
+                initial={{ scale: 0.9, opacity: 0, y: 8 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                transition={{ delay: 0.15, type: 'spring', stiffness: 180 }}
+                className="text-center mt-5"
               >
                 <p className={cn(
-                  "text-lg font-medium",
-                  completedToday ? "text-streak" : "text-muted-foreground"
+                  "text-2xl font-extrabold tracking-tight uppercase",
+                  completedToday 
+                    ? "bg-gradient-to-r from-streak via-warning to-streak bg-clip-text text-transparent" 
+                    : "text-muted-foreground/60"
                 )}>
                   {t('streak.dayStreak', 'day streak')}
                 </p>
+                <motion.div 
+                  className={cn(
+                    "mx-auto mt-1.5 h-0.5 rounded-full",
+                    completedToday ? "bg-gradient-to-r from-transparent via-streak to-transparent w-24" : "bg-muted-foreground/20 w-16"
+                  )}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                />
                 <div className="flex justify-center mt-2">
                   <StreakSocietyBadge streak={data?.currentStreak || 0} compact />
                 </div>
