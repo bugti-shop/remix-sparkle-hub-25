@@ -134,7 +134,7 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
 
         {/* Big streak number */}
         <p style={{
-          color: '#ffffff',
+          color: '#000000',
           fontSize: 48,
           fontWeight: 900,
           margin: '12px 0 4px',
