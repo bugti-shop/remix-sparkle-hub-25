@@ -780,16 +780,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, [selectedGoal, goalPointMap, t]);
 
   const tInfoScreens = useMemo(() => ({
-    15: {
-      title: t('onboarding.infoPersonalizedTitle', { name: displayName }),
-      icons: [
-        { icon: CheckCircle2, bg: '#ECFDF5', color: '#059669' },
-        { icon: PenLine, bg: '#EEF2FF', color: '#4F46E5' },
-        { icon: Target, bg: '#FEF2F2', color: '#DC2626' },
-      ],
-      points: dynamicPoints,
-      button: t('onboarding.soundsGreat'),
-    },
     5: {
       title: t('onboarding.info1Title'),
       icons: [] as { icon: any; bg: string; color: string }[],
