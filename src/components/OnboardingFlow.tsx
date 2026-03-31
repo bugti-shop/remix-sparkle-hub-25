@@ -365,7 +365,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
   };
 
   const handleRemove = (id: string) => {
-    triggerHaptic('heavy');
+    triggerHaptic('light');
     setFolders(folders.filter(f => f.id !== id));
   };
 
