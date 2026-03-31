@@ -1367,32 +1367,13 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     triggerSelectionHaptic();
 
     if (step === 0) {
-      if (!selectedGoal) return;
-      await setSetting('onboarding_goal', selectedGoal);
-      setStep(1);
-    } else if (step === 1) {
-      if (!selectedSource) return;
-      await setSetting('onboarding_source', selectedSource);
-      setStep(2);
-    } else if (step === 2) {
-      if (!selectedExperience) return;
-      await setSetting('onboarding_experience', selectedExperience);
-      setStep(28); // → previous app
-    } else if (step === 28) {
-      if (!selectedPreviousApp) return;
-      await setSetting('onboarding_previous_app', selectedPreviousApp);
-      setStep(3); // → profile setup
+      // Skip old question screens, go straight to profile
+      setStep(3);
     } else if (step === 3) {
       if (!userName.trim()) return;
       const existing = await loadUserProfile();
       await saveUserProfile({ ...existing, name: userName.trim(), avatarUrl: avatarPreview || existing.avatarUrl });
-      setStep(15); // → personalized plan info screen (now with name)
-    } else if (step === 15) {
-      setStep(4);
-    } else if (step === 4) {
-      if (selectedChallenges.size === 0) return;
-      await setSetting('onboarding_challenges', Array.from(selectedChallenges));
-      setStep(24); // → journey selection (right after challenges)
+      setStep(24); // → journey selection (skip questions)
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
     } else if (step === 5 && showNotesFolderCreation) {
@@ -1481,35 +1462,17 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   const handleBack = useCallback(async () => {
     await triggerSelectionHaptic();
-    // On interactive steps, back saves and goes FORWARD (next question)
-    if (step === 6) {
-      // Note editor handles its own saving via onSave
-      setOnboardingNoteSaved(true);
-      setStep(10); // skip to sketch
-      return;
-    }
-    if (step === 10) {
-      setSketchSaved(true);
-      setStep(13); // skip to INFO before task
-      return;
-    }
-    if (step === 14) {
-      setStep(25); // skip to showcase
-      return;
-    }
     if (step === 0) setStep(-3);
-    else if (step === 28) setStep(2); // back from previous app → experience
-    else if (step === 3) setStep(28); // back from profile → previous app
-    else if (step === 15) setStep(3); // back from personalized info → profile
+    else if (step === 3) setStep(0); // back from profile → pre-steps
+    else if (step === 24) setStep(3); // back from journey → profile
+    else if (step === 29) setStep(24); // back from adventure begins → journey
+    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
+    else if (step === 6) setStep(5); // back from note → folders
     else if (step === 10) setStep(6); // back from sketch → create note
     else if (step === 13) setStep(10); // back from INFO → sketch
     else if (step === 14) setStep(13); // back from task → INFO
-    else if (step === 29) setStep(24); // back from adventure begins → journey
-    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
-    else if (step === 24) setStep(4); // back from journey → challenges
     else if (step === 25) setStep(14); // back from showcase → task
-    else if (step > 0 && step < 25) setStep(step - 1);
-  }, [step, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask]);
+  }, [step, selectedJourneyId]);
 
   const handleImagePick = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -1533,7 +1496,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 1, 2, 28, 3, 15, 4, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
+  const FLOW_ORDER: number[] = [0, 3, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
