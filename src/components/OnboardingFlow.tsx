@@ -1537,10 +1537,20 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const INTERACTIVE_STEPS = new Set([6, 10, 14]);
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
-  const FLOW_ORDER: number[] = [0, 1, 2, 3, 15, 4, 24, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27];
+  // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
+  const FLOW_ORDER: number[] = [0, 1, 2, 3, 15, 4, 24, 5, 5.1, 5.2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27];
   const stepCount = FLOW_ORDER.length;
-  const flowIndex = FLOW_ORDER.indexOf(step);
-  const displayStep = flowIndex >= 0 ? flowIndex + 1 : step < 0 ? 0 : Math.min(step + 1, stepCount);
+  // For step 5, determine sub-step based on folder creation state
+  const getDisplayStep = () => {
+    if (step === 5) {
+      if (showTasksFolderCreation) return FLOW_ORDER.indexOf(5.2) + 1;
+      if (showNotesFolderCreation) return FLOW_ORDER.indexOf(5.1) + 1;
+      return FLOW_ORDER.indexOf(5) + 1;
+    }
+    const flowIndex = FLOW_ORDER.indexOf(step);
+    return flowIndex >= 0 ? flowIndex + 1 : step < 0 ? 0 : Math.min(step + 1, stepCount);
+  };
+  const displayStep = getDisplayStep();
   const stepLabel = step < 0 ? '' : `${displayStep} / ${stepCount}`;
   const progressPercent = step < 0 ? '0%' : `${Math.min(100, Math.round(((displayStep - 1 + (currentStepDone() ? 1 : 0.4)) / stepCount) * 100))}%`;
 
