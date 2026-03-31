@@ -802,7 +802,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       try {
         const saved = await getSetting<any>('onboarding_progress_state', null);
         if (!saved || typeof saved !== 'object') return;
-        if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 27) setStep(saved.step);
+        if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 28) setStep(saved.step);
         if (saved.userName) setUserName(saved.userName);
         if (saved.avatarPreview) setAvatarPreview(saved.avatarPreview);
         if (saved.selectedGoal) setSelectedGoal(saved.selectedGoal);
