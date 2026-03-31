@@ -158,11 +158,6 @@ const Progress = () => {
                     completedToday ? "text-streak fill-streak/80" : "text-muted-foreground/30"
                   )} 
                 />
-                {data?.currentStreak !== undefined && data.currentStreak > 0 && (
-                  <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-streak-foreground drop-shadow-md mt-2 z-20">
-                    {data.currentStreak}
-                  </span>
-                )}
               </motion.div>
               
               <motion.div 

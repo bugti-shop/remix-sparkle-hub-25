@@ -172,14 +172,14 @@ export const recordCompletion = async (
     earnedFreeze = true;
   }
   
+  // Update total completions for every task completed
+  data.totalCompletions += 1;
+  
   // Already completed today for streak purposes - return early but with updated task count
   if (data.lastCompletionDate === today) {
     await saveStreakData(storageKey, data);
     return { data, streakIncremented: false, newMilestone: null, usedFreeze: false, earnedFreeze, usedGracePeriod: false };
   }
-  
-  // Update total completions
-  data.totalCompletions += 1;
   
   let usedGracePeriod = false;
   

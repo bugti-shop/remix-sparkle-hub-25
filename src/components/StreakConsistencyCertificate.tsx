@@ -137,11 +137,12 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
           color: '#ffffff',
           fontSize: 48,
           fontWeight: 900,
-          margin: '-8px 0 0px',
+          margin: '4px 0 4px',
           lineHeight: 1,
           position: 'relative',
           zIndex: 1,
           textShadow: `0 4px 20px ${colors.glow}60`,
+          textAlign: 'center',
         }}>
           {currentStreak}
         </p>
