@@ -14,7 +14,7 @@ import type { Note, TodoItem, TaskSection, Folder } from '@/types/note';
 import { NoteEditor } from '@/components/NoteEditor';
 import { TaskInputSheet } from '@/components/TaskInputSheet';
 import { ProfileImageCropper } from '@/components/ProfileImageCropper';
-import { triggerHaptic, triggerSelectionHaptic } from '@/utils/haptics';
+import { triggerHaptic } from '@/utils/haptics';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
