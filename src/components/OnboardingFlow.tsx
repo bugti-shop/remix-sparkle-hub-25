@@ -390,7 +390,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
         <div className="flex-1 flex flex-col gap-1">
           <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
           <div className="h-[15px] rounded-full bg-[#e5e5e5] overflow-hidden">
-            <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
+            <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
           </div>
         </div>
       </div>
@@ -523,7 +523,7 @@ const OnboardingTaskViewStep = ({ createdTasks, setCreatedTasks, progressPercent
         <div className="flex-1 flex flex-col gap-1">
           <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
           <div className="h-[15px] rounded-full bg-[#e5e5e5] overflow-hidden">
-            <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
+            <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
           </div>
         </div>
       </div>
@@ -1764,7 +1764,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
             <div className="h-[15px] rounded-full bg-[#e5e5e5] overflow-hidden">
               <motion.div
-                className="h-full rounded-r-full"
+                className="h-full rounded-full"
                 style={{ backgroundColor: ONBOARDING_COLOR }}
                 initial={{ width: '0%' }}
                 animate={{ width: progressPercent }}
@@ -1913,7 +1913,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
             <div className="h-[15px] rounded-full bg-[#e5e5e5] overflow-hidden">
-              <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
+              <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
         </div>
@@ -2075,7 +2075,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
             <div className="h-[15px] rounded-full bg-[#e5e5e5] overflow-hidden">
-              <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
+              <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
         </div>
@@ -2167,7 +2167,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
             <div className="h-[15px] rounded-full bg-[#e5e5e5] overflow-hidden">
-              <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
+              <motion.div className="h-full rounded-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
         </div>
@@ -2556,7 +2556,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </div>
           <div className="h-[15px] rounded-full bg-[#e5e5e5] overflow-hidden">
             <motion.div
-              className="h-full rounded-r-full"
+              className="h-full rounded-full"
               style={{ backgroundColor: ONBOARDING_COLOR }}
               initial={{ width: '0%' }}
               animate={{ width: progressPercent }}
