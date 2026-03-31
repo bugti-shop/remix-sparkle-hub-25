@@ -1374,7 +1374,13 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       await setSetting('onboarding_source', selectedSource);
       setStep(2);
     } else if (step === 2) {
-      setStep(3); // → profile setup (name first)
+      if (!selectedExperience) return;
+      await setSetting('onboarding_experience', selectedExperience);
+      setStep(28); // → previous app
+    } else if (step === 28) {
+      if (!selectedPreviousApp) return;
+      await setSetting('onboarding_previous_app', selectedPreviousApp);
+      setStep(3); // → profile setup
     } else if (step === 3) {
       if (!userName.trim()) return;
       const existing = await loadUserProfile();
