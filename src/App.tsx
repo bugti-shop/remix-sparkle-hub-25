@@ -13,7 +13,7 @@ import { NotesProvider } from "@/contexts/NotesContext";
 import { GoogleAuthProvider } from "@/contexts/GoogleAuthContext";
 const PremiumPaywall = lazy(() => import("@/components/PremiumPaywall").then(m => ({ default: m.PremiumPaywall })));
 const OnboardingFlow = lazy(() => import("@/components/OnboardingFlow").then(m => ({ default: m.OnboardingFlow })));
-const PostOnboardingJourney = lazy(() => import("@/components/PostOnboardingJourney").then(m => ({ default: m.PostOnboardingJourney })));
+
 import { NavigationLoader } from "@/components/NavigationLoader";
 
 import { NavigationBackProvider } from "@/components/NavigationBackProvider";
@@ -226,7 +226,7 @@ const AppRoutes = () => {
 const AppContent = () => {
   const [isAppLocked, setIsAppLocked] = useState<boolean | null>(null);
   const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
-  const [showJourneyIntro, setShowJourneyIntro] = useState(false);
+  
   const { isPro, isLoading: subLoading, openPaywall } = useSubscription();
 
   // Check onboarding status
@@ -240,16 +240,15 @@ const AppContent = () => {
 
   // When subscription expires (isPro becomes false after onboarding), auto-show paywall
   useEffect(() => {
-    if (subLoading || showOnboarding || showJourneyIntro) return;
+    if (subLoading || showOnboarding) return;
     if (!isPro) {
       openPaywall();
     }
-  }, [isPro, subLoading, showOnboarding, showJourneyIntro, openPaywall]);
+  }, [isPro, subLoading, showOnboarding, openPaywall]);
 
   const handleOnboardingComplete = useCallback(() => {
     startTransition(() => {
       setShowOnboarding(false);
-      setShowJourneyIntro(true);
     });
   }, []);
   
@@ -335,11 +334,6 @@ const AppContent = () => {
         <OnboardingFlow onComplete={handleOnboardingComplete} />
       )}
 
-      {showJourneyIntro && (
-        <Suspense fallback={null}>
-          <PostOnboardingJourney onDismiss={() => setShowJourneyIntro(false)} />
-        </Suspense>
-      )}
       
       <PremiumPaywall />
       

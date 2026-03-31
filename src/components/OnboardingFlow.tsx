@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { ALL_JOURNEYS, startJourney } from '@/utils/virtualJourneyStorage';
-import { ArrowLeft, Camera, User, Check, PenLine, CheckCircle2, CalendarDays, Target, Lightbulb, Bell, BarChart3, Star, Trophy, FlaskConical, Link, Monitor, Medal, Home, Rocket, Sprout, Heart, TrendingUp, Brain, Zap, Palette, Mic, LayoutDashboard, Shield, Plus, Pencil, Type, AlignLeft, Save, Trash2, ListTodo, ChevronRight, ListPlus, BookOpen, Briefcase, Activity, Sparkles } from 'lucide-react';
+import { ArrowLeft, Camera, User, Check, PenLine, CheckCircle2, CalendarDays, Target, Lightbulb, Bell, BarChart3, Star, Trophy, FlaskConical, Link, Monitor, Medal, Home, Rocket, Sprout, Heart, TrendingUp, Brain, Zap, Palette, Mic, LayoutDashboard, Shield, Plus, Pencil, Type, AlignLeft, Save, Trash2, ListTodo, ChevronRight, ListPlus, BookOpen, Briefcase, Activity, Sparkles, MapPin } from 'lucide-react';
 import { TaskDetailPage } from '@/components/TaskDetailPage';
 import { TaskCompletionCircle } from '@/components/task/TaskCompletionCircle';
 import { usePriorities } from '@/hooks/usePriorities';
@@ -1434,11 +1434,15 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       }
       setStep(7); // → productivity (skip journey, already done earlier)
     } else if (step === 24) {
-      // Save journey selection, then continue to info screen
+      // Save journey selection, then show adventure begins or skip to info
       if (selectedJourneyId) {
         startJourney(selectedJourneyId);
+        setStep(29); // → adventure begins screen
+      } else {
+        setStep(5); // → info screen + folders
       }
-      setStep(5); // → info screen + folders
+    } else if (step === 29) {
+      setStep(5); // adventure begins → info screen + folders
     } else if (step === 7) {
       if (selectedProductivity.size === 0) return;
       await setSetting('onboarding_productivity', Array.from(selectedProductivity));
@@ -1549,7 +1553,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 3) setStep(28); // back from profile → previous app
     else if (step === 15) setStep(3); // back from personalized info → profile
     else if (step === 7) setStep(6); // back from productivity → create note
-    else if (step === 5) setStep(24); // back from info → journey
+    else if (step === 29) setStep(24); // back from adventure begins → journey
+    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
     else if (step === 24) setStep(4); // back from journey → challenges
     else if (step === 25) setStep(23); // back from showcase → improve
     else if (step > 0 && step < 25) setStep(step - 1);
@@ -1577,7 +1582,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 1, 2, 28, 3, 15, 4, 24, 5, 5.1, 5.2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27];
+  const FLOW_ORDER: number[] = [0, 1, 2, 28, 3, 15, 4, 24, 29, 5, 5.1, 5.2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
@@ -2195,6 +2200,96 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           >
             {selectedJourneyId ? t('onboarding.startJourney') : t('onboarding.skip')}
           </motion.button>
+        </div>
+      </div>
+    );
+  }
+
+  // Adventure Begins screen (step 29) — shown after journey selection
+  if (step === 29) {
+    const selectedJourney = ALL_JOURNEYS.find(j => j.id === selectedJourneyId);
+    const firstMilestone = selectedJourney?.milestones[0];
+    return (
+      <div
+        className="fixed inset-0 z-[300] flex items-center justify-center"
+        style={{
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+          paddingTop: 'env(safe-area-inset-top, 0px)',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        }}
+        onClick={goNext}
+      >
+        <div className="flex flex-col items-center px-8 text-center">
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 0.2 }}
+            className="text-7xl mb-4"
+          >
+            {selectedJourney?.emoji}
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="text-2xl font-black text-white font-['Nunito'] tracking-tight"
+          >
+            {t('journey.yourAdventure', 'Your Adventure Begins!')}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="text-white/60 text-sm font-['Nunito_Sans'] mt-2 mb-6"
+          >
+            {selectedJourney?.name} — {selectedJourney?.totalTasks} {t('common.tasks', 'tasks')}
+          </motion.p>
+
+          {/* Milestone path preview */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.8, duration: 0.4 }}
+            className="flex items-center gap-2"
+          >
+            {selectedJourney?.milestones.slice(0, 5).map((ms, i) => (
+              <motion.div
+                key={ms.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 + i * 0.12, type: 'spring', damping: 15 }}
+                className="flex flex-col items-center"
+              >
+                <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-lg">
+                  {ms.icon}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* First milestone hint */}
+          {firstMilestone && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.4 }}
+              className="mt-6 flex items-center gap-2 text-white/50 text-xs font-['Nunito_Sans']"
+            >
+              <MapPin className="h-3.5 w-3.5" />
+              <span>{t('journey.firstStop', 'First stop')}: {firstMilestone.name}</span>
+            </motion.div>
+          )}
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ delay: 1.8 }}
+            className="text-white/30 text-xs mt-8 font-['Nunito_Sans']"
+          >
+            {t('common.tapToContinue', 'Tap to continue')}
+          </motion.p>
         </div>
       </div>
     );
