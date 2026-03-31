@@ -740,7 +740,7 @@ const TodayPage = lazy(() => import('@/pages/todo/Today'));
 export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const { t } = useTranslation();
   const [step, setStep] = useState(-3); // -3 = language selection
-  const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
+  const [selectedGoal, setSelectedGoal] = useState<Set<string>>(new Set());
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
   const [userName, setUserName] = useState('');
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
