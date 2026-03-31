@@ -628,22 +628,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
   const [userName, setUserName] = useState('');
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-  const [selectedChallenges, setSelectedChallenges] = useState<Set<string>>(new Set());
-  const [selectedProductivity, setSelectedProductivity] = useState<Set<string>>(new Set());
-  const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
-  const [selectedSchedule, setSelectedSchedule] = useState<string | null>(null);
-  const [selectedCelebrate, setSelectedCelebrate] = useState<Set<string>>(new Set());
-  const [selectedProgressTrack, setSelectedProgressTrack] = useState<Set<string>>(new Set());
-  const [selectedConsistency, setSelectedConsistency] = useState<string | null>(null);
-  const [selectedStreak, setSelectedStreak] = useState<string | null>(null);
-  const [selectedRemind, setSelectedRemind] = useState<Set<string>>(new Set());
-  const [selectedFeatureInterest, setSelectedFeatureInterest] = useState<Set<string>>(new Set());
-  const [selectedImprove, setSelectedImprove] = useState<Set<string>>(new Set());
   const [selectedPreviousApp, setSelectedPreviousApp] = useState<string | null>(null);
-  const [selectedExperience, setSelectedExperience] = useState<string | null>(null);
-  const [selectedWorkStyle, setSelectedWorkStyle] = useState<string | null>(null);
-  const [selectedEnergy, setSelectedEnergy] = useState<string | null>(null);
-  const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const [selectedLang, setSelectedLang] = useState(i18n?.language?.split('-')[0] || 'en');
   // Interactive creation states
   const [onboardingNoteTitle, setOnboardingNoteTitle] = useState('');
