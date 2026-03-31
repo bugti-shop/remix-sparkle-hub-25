@@ -1185,7 +1185,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   }, []);
 
   const handleToggleChallenge = useCallback(async (option: string) => {
-    triggerSelectionHaptic();
+    triggerHaptic('medium');
     setSelectedChallenges(prev => {
       const next = new Set(prev);
       if (next.has(option)) next.delete(option);
