@@ -1489,7 +1489,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } catch (error) {
       console.warn('Onboarding goNext error:', error);
     }
-  }, [step, selectedGoal, selectedSource, selectedPreviousApp, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
+  }, [step, selectedGoal, selectedSource, selectedPreviousApp, selectedFrustration, selectedTaskView, selectedDevices, selectedOffline, selectedUnfinished, selectedSlowdown, selectedWhyFail, userName, avatarPreview, selectedChallenges, selectedProductivity, selectedFocus, selectedSchedule, selectedCelebrate, selectedProgressTrack, selectedConsistency, selectedStreak, selectedRemind, selectedFeatureInterest, selectedImprove, selectedExperience, selectedWorkStyle, selectedEnergy, selectedTheme, onboardingNoteSaved, onboardingNoteTitle, onboardingNoteContent, saveOnboardingNote, sketchSaved, saveOnboardingSketch, createdTask, onboardingTaskText, saveOnboardingTask, editingTask, updateOnboardingTask, showNotesFolderCreation, showTasksFolderCreation, notesFolders, tasksFolders, selectedJourneyId]);
 
   const handleFinishWelcome = useCallback(async () => {
     triggerSelectionHaptic();
@@ -1552,7 +1552,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 32, 33, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
+  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 32, 33, 34, 35, 36, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
