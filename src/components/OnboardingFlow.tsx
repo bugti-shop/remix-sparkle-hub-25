@@ -1571,6 +1571,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (step === 31) return !!selectedTaskView;
     if (step === 32) return selectedDevices.size > 0;
     if (step === 33) return !!selectedOffline;
+    if (step === 34) return !!selectedUnfinished;
+    if (step === 35) return !!selectedSlowdown;
     if (step === 9) return !!selectedWorkStyle;
     if (step === 18) return true; // theme step skipped
     if (step === 0) return selectedGoal.size > 0;
