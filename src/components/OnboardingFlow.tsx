@@ -1367,32 +1367,13 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     triggerSelectionHaptic();
 
     if (step === 0) {
-      if (!selectedGoal) return;
-      await setSetting('onboarding_goal', selectedGoal);
-      setStep(1);
-    } else if (step === 1) {
-      if (!selectedSource) return;
-      await setSetting('onboarding_source', selectedSource);
-      setStep(2);
-    } else if (step === 2) {
-      if (!selectedExperience) return;
-      await setSetting('onboarding_experience', selectedExperience);
-      setStep(28); // → previous app
-    } else if (step === 28) {
-      if (!selectedPreviousApp) return;
-      await setSetting('onboarding_previous_app', selectedPreviousApp);
-      setStep(3); // → profile setup
+      // Skip old question screens, go straight to profile
+      setStep(3);
     } else if (step === 3) {
       if (!userName.trim()) return;
       const existing = await loadUserProfile();
       await saveUserProfile({ ...existing, name: userName.trim(), avatarUrl: avatarPreview || existing.avatarUrl });
-      setStep(15); // → personalized plan info screen (now with name)
-    } else if (step === 15) {
-      setStep(4);
-    } else if (step === 4) {
-      if (selectedChallenges.size === 0) return;
-      await setSetting('onboarding_challenges', Array.from(selectedChallenges));
-      setStep(24); // → journey selection (right after challenges)
+      setStep(24); // → journey selection (skip questions)
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
     } else if (step === 5 && showNotesFolderCreation) {
