@@ -2723,8 +2723,66 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </motion.div>
         )}
 
+        {step === 31 && (
+          <motion.div key="step31" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
+              How do you prefer to view your tasks?
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
+              We'll set up your default view based on this.
+            </motion.p>
+            {renderSingleSelect(
+              ['Daily list', 'Kanban board', 'Progress Board', 'Priority Board'],
+              selectedTaskView,
+              (val: string) => { triggerSelectionHaptic(); setSelectedTaskView(selectedTaskView === val ? null : val); }
+            )}
+          </motion.div>
+        )}
 
-        {step === 3 && (
+        {step === 32 && (
+          <motion.div key="step32" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
+              Do you work across multiple devices?
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
+              Select all that apply.
+            </motion.p>
+            {renderMultiSelect(
+              ['iPhone', 'iPad', 'Mac', 'Android', 'Windows', 'Single device only'],
+              selectedDevices,
+              (val: string) => {
+                triggerSelectionHaptic();
+                setSelectedDevices(prev => {
+                  const next = new Set(prev);
+                  if (val === 'Single device only') {
+                    return next.has(val) ? new Set() : new Set([val]);
+                  }
+                  next.delete('Single device only');
+                  next.has(val) ? next.delete(val) : next.add(val);
+                  return next;
+                });
+              }
+            )}
+          </motion.div>
+        )}
+
+        {step === 33 && (
+          <motion.div key="step33" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
+              How important is offline access?
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[14px] text-[#767b7e] mb-6">
+              Flowist works fully offline — just making sure it matters to you.
+            </motion.p>
+            {renderSingleSelect(
+              ["Critical, I'm often offline", 'Nice to have', "Doesn't matter"],
+              selectedOffline,
+              (val: string) => { triggerSelectionHaptic(); setSelectedOffline(selectedOffline === val ? null : val); }
+            )}
+          </motion.div>
+        )}
+
+
           <motion.div key="step3" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
             <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
               {t('onboarding.setupProfile')}
