@@ -809,7 +809,15 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       try {
         const saved = await getSetting<any>('onboarding_progress_state', null);
         if (!saved || typeof saved !== 'object') return;
-        if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 28) setStep(saved.step);
+        if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 36) {
+          // Redirect removed steps to the closest valid step
+          const removedSteps = new Set([1, 2, 4, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23]);
+          if (removedSteps.has(saved.step)) {
+            setStep(0); // restart from first question
+          } else {
+            setStep(saved.step);
+          }
+        }
         if (saved.userName) setUserName(saved.userName);
         if (saved.avatarPreview) setAvatarPreview(saved.avatarPreview);
         if (saved.selectedGoal) setSelectedGoal(new Set(Array.isArray(saved.selectedGoal) ? saved.selectedGoal : [saved.selectedGoal]));
