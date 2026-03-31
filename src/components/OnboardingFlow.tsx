@@ -639,15 +639,11 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [createdTasks, setCreatedTasks] = useState<TodoItem[]>([]);
   const [createdTask, setCreatedTask] = useState<TodoItem | null>(null);
   const [isTaskInputSheetOpen, setIsTaskInputSheetOpen] = useState(true);
-  const [isBatchSheetOpen, setIsBatchSheetOpen] = useState(false);
   const [showNotesFolderCreation, setShowNotesFolderCreation] = useState(false);
   const [showTasksFolderCreation, setShowTasksFolderCreation] = useState(false);
   const [notesFolders, setNotesFolders] = useState<{ id: string; name: string; color: string }[]>([]);
   const [tasksFolders, setTasksFolders] = useState<{ id: string; name: string; color: string }[]>([]);
-  const [editingTask, setEditingTask] = useState(false);
   const [selectedJourneyId, setSelectedJourneyId] = useState<string | null>(null);
-  const [editTaskText, setEditTaskText] = useState('');
-  const [editTaskDesc, setEditTaskDesc] = useState('');
   
   const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
   const [selectedFrustration, setSelectedFrustration] = useState<string | null>(null);
