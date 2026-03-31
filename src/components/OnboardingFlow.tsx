@@ -849,6 +849,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       avatarPreview,
       selectedGoal,
       selectedSource,
+      selectedPreviousApp,
       selectedExperience,
       selectedWorkStyle,
       selectedEnergy,
