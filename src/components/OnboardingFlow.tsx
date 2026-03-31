@@ -595,7 +595,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
             {sections.map(s => (
               <motion.button
                 key={s.id}
-                onClick={() => { triggerHaptic('heavy'); setSelectedSection(selectedSection === s.id ? '' : s.id); }}
+                onClick={() => { triggerHaptic('light'); setSelectedSection(selectedSection === s.id ? '' : s.id); }}
                 className="px-3 py-1.5 rounded-xl text-[13px] font-medium cursor-pointer"
                 style={{
                   backgroundColor: selectedSection === s.id ? `${s.color}20` : '#f3f4f6',
