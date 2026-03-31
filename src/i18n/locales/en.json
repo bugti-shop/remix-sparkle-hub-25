@@ -1654,7 +1654,7 @@
     "schedShifts": "I work in alternating shifts",
     "schedChanges": "My schedule changes often",
     "schedOther": "Other",
-    "celebrateTitle": "{{name}}, you have great achievements ahead. How will you celebrate them?",
+    "celebrateTitle": "How will you celebrate, {{name}}?",
     "celebShare": "Share my progress with friends",
     "celebReward": "Reward myself with a treat",
     "celebBreak": "Take a well-deserved break",

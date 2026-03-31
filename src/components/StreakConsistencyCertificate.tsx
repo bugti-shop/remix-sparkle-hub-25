@@ -121,7 +121,7 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
 
         {/* "I'm on a" text */}
         <p style={{
-          color: '#ffffffcc',
+          color: '#000000cc',
           fontSize: 22,
           fontWeight: 700,
           margin: 0,
@@ -134,7 +134,7 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
 
         {/* Big streak number */}
         <p style={{
-          color: '#ffffff',
+          color: '#000000',
           fontSize: 48,
           fontWeight: 900,
           margin: '12px 0 4px',
@@ -149,7 +149,7 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
 
         {/* "day productivity streak!" */}
         <p style={{
-          color: '#ffffffcc',
+          color: '#000000cc',
           fontSize: 22,
           fontWeight: 700,
           margin: 0,
@@ -163,7 +163,7 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
         {/* User name */}
         {displayName && (
           <p style={{
-            color: '#ffffff90',
+            color: '#00000090',
             fontSize: 13,
             fontWeight: 600,
             marginTop: 12,
@@ -183,12 +183,12 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
           zIndex: 1,
         }}>
           <div>
-            <p style={{ color: '#ffffff', fontSize: 18, fontWeight: 800, margin: 0 }}>{totalCompletions}</p>
-            <p style={{ color: '#ffffff80', fontSize: 9, margin: 0, fontWeight: 500 }}>Tasks Done</p>
+            <p style={{ color: '#000000', fontSize: 18, fontWeight: 800, margin: 0 }}>{totalCompletions}</p>
+            <p style={{ color: '#00000080', fontSize: 9, margin: 0, fontWeight: 500 }}>Tasks Done</p>
           </div>
           <div>
-            <p style={{ color: '#ffffff', fontSize: 18, fontWeight: 800, margin: 0 }}>{longestStreak}</p>
-            <p style={{ color: '#ffffff80', fontSize: 9, margin: 0, fontWeight: 500 }}>Best Streak</p>
+            <p style={{ color: '#000000', fontSize: 18, fontWeight: 800, margin: 0 }}>{longestStreak}</p>
+            <p style={{ color: '#00000080', fontSize: 9, margin: 0, fontWeight: 500 }}>Best Streak</p>
           </div>
         </div>
 
@@ -221,8 +221,8 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
             </div>
           </Suspense>
           <div>
-            <p style={{ color: '#ffffffcc', fontSize: 11, fontWeight: 700, margin: 0 }}>Flowist</p>
-            <p style={{ color: '#ffffff60', fontSize: 7, margin: 0 }}>Notepad & To Do List</p>
+            <p style={{ color: '#000000cc', fontSize: 11, fontWeight: 700, margin: 0 }}>Flowist</p>
+            <p style={{ color: '#00000060', fontSize: 7, margin: 0 }}>Notepad & To Do List</p>
           </div>
         </div>
 
