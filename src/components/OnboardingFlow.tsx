@@ -980,7 +980,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Add/remove body class for z-index overrides on Radix portals
   useEffect(() => {
-    if ([6, 10, 14, 15].includes(step)) {
+    if ([6, 10, 14].includes(step)) {
       document.body.classList.add('onboarding-active');
     } else {
       document.body.classList.remove('onboarding-active');
