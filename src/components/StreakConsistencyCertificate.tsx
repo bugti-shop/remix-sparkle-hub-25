@@ -149,7 +149,7 @@ export const StreakConsistencyCertificate = ({ currentStreak, totalCompletions, 
 
         {/* "day productivity streak!" */}
         <p style={{
-          color: '#ffffffcc',
+          color: '#000000cc',
           fontSize: 22,
           fontWeight: 700,
           margin: 0,
