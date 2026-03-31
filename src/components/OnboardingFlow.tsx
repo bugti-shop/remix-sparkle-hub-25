@@ -389,7 +389,7 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
         </motion.button>
         <div className="flex-1 flex flex-col gap-1">
           <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-          <div className="h-[17px] rounded-l-none rounded-r-full bg-[#e5e5e5] overflow-hidden">
+          <div className="h-[17px] rounded-l-sm rounded-r-full bg-[#e5e5e5] overflow-hidden">
             <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
           </div>
         </div>
@@ -522,7 +522,7 @@ const OnboardingTaskViewStep = ({ createdTasks, setCreatedTasks, progressPercent
         </button>
         <div className="flex-1 flex flex-col gap-1">
           <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-          <div className="h-[17px] rounded-l-none rounded-r-full bg-[#e5e5e5] overflow-hidden">
+          <div className="h-[17px] rounded-l-sm rounded-r-full bg-[#e5e5e5] overflow-hidden">
             <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
           </div>
         </div>
@@ -1762,7 +1762,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </button>
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-            <div className="h-[17px] rounded-l-none rounded-r-full bg-[#e5e5e5] overflow-hidden">
+            <div className="h-[17px] rounded-l-sm rounded-r-full bg-[#e5e5e5] overflow-hidden">
               <motion.div
                 className="h-full rounded-r-full"
                 style={{ backgroundColor: ONBOARDING_COLOR }}
@@ -1912,7 +1912,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </button>
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-            <div className="h-[17px] rounded-l-none rounded-r-full bg-[#e5e5e5] overflow-hidden">
+            <div className="h-[17px] rounded-l-sm rounded-r-full bg-[#e5e5e5] overflow-hidden">
               <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
@@ -2074,7 +2074,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </motion.button>
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-            <div className="h-[17px] rounded-l-none rounded-r-full bg-[#e5e5e5] overflow-hidden">
+            <div className="h-[17px] rounded-l-sm rounded-r-full bg-[#e5e5e5] overflow-hidden">
               <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
@@ -2166,7 +2166,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           </button>
           <div className="flex-1 flex flex-col gap-1">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
-            <div className="h-[17px] rounded-l-none rounded-r-full bg-[#e5e5e5] overflow-hidden">
+            <div className="h-[17px] rounded-l-sm rounded-r-full bg-[#e5e5e5] overflow-hidden">
               <motion.div className="h-full rounded-r-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
             </div>
           </div>
@@ -2554,7 +2554,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
           <div className="flex justify-between items-center">
             <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
           </div>
-          <div className="h-[17px] rounded-l-none rounded-r-full bg-[#e5e5e5] overflow-hidden">
+          <div className="h-[17px] rounded-l-sm rounded-r-full bg-[#e5e5e5] overflow-hidden">
             <motion.div
               className="h-full rounded-r-full"
               style={{ backgroundColor: ONBOARDING_COLOR }}
