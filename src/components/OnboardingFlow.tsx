@@ -1382,7 +1382,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       if (!selectedPreviousApp) return;
       await setSetting('onboarding_previous_app', selectedPreviousApp);
       if (selectedPreviousApp === 'None') {
-        setStep(24); // skip frustration if no previous app
+        setStep(31); // skip frustration if no previous app, go to task view
       } else {
         setStep(30); // → frustration question
       }
