@@ -148,7 +148,7 @@ const previousAppOptions = [
 ];
 
 
-  'Staying consistent with tasks',
+  const challengeOptions = [
   'Managing too many priorities',
   'Forgetting important deadlines',
   'Staying motivated',
