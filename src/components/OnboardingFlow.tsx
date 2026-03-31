@@ -1050,7 +1050,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   const dynamicPoints = useMemo(() => {
     const points: { icon: any; bg: string; color: string; text: string }[] = [];
-    const goalEntry = selectedGoal ? goalPointMap[selectedGoal] : null;
+    const firstGoal = selectedGoal.size > 0 ? Array.from(selectedGoal)[0] : null;
+    const goalEntry = firstGoal ? goalPointMap[firstGoal] : null;
     if (goalEntry) points.push({ icon: goalEntry.icon, bg: goalEntry.bg, color: goalEntry.color, text: t(`onboarding.${goalEntry.key}`) });
     const expEntry = selectedExperience ? expPointMap[selectedExperience] : null;
     if (expEntry) points.push({ icon: expEntry.icon, bg: expEntry.bg, color: expEntry.color, text: t(`onboarding.${expEntry.key}`) });
