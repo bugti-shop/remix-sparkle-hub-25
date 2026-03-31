@@ -529,7 +529,7 @@ const OnboardingTaskViewStep = ({ createdTasks, setCreatedTasks, progressPercent
       </div>
 
       {/* Real Today page embedded */}
-      <div className="flex-1 overflow-hidden relative">
+      <div className="flex-1 overflow-hidden relative onboarding-embedded">
         <Suspense fallback={null}>
           <MemoryRouter initialEntries={['/todo/today']}>
             <TodayPage />
