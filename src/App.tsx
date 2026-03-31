@@ -226,7 +226,7 @@ const AppRoutes = () => {
 const AppContent = () => {
   const [isAppLocked, setIsAppLocked] = useState<boolean | null>(null);
   const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
-  const [showJourneyIntro, setShowJourneyIntro] = useState(false);
+  
   const { isPro, isLoading: subLoading, openPaywall } = useSubscription();
 
   // Check onboarding status
