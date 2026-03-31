@@ -642,7 +642,7 @@ const OnboardingBatchTaskForm = ({ sections, folders, onAddTasks, onCancel }: {
           {priorityOptions.map(p => (
             <motion.button
               key={p.value}
-              onClick={() => { triggerHaptic('heavy'); setSelectedPriority(p.value); }}
+              onClick={() => { triggerHaptic('light'); setSelectedPriority(p.value); }}
               className="flex-1 py-2 rounded-xl text-[13px] font-medium cursor-pointer"
               style={{
                 backgroundColor: selectedPriority === p.value ? `${p.color}15` : '#f3f4f6',
