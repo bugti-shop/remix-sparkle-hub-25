@@ -334,11 +334,6 @@ const AppContent = () => {
         <OnboardingFlow onComplete={handleOnboardingComplete} />
       )}
 
-      {showJourneyIntro && (
-        <Suspense fallback={null}>
-          <PostOnboardingJourney onDismiss={() => setShowJourneyIntro(false)} />
-        </Suspense>
-      )}
       
       <PremiumPaywall />
       
