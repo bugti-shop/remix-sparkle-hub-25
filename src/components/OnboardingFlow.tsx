@@ -963,6 +963,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (INTERACTIVE_STEPS.has(step)) return true;
     if (step === 0) return selectedGoal.size > 0;
     if (step === 3) return !!userName.trim();
+    if (step === 37) return true; // commitment step — no validation needed
     if (step === 28) return !!selectedPreviousApp;
     if (step === 30) return !!selectedFrustration;
     if (step === 31) return !!selectedTaskView;
