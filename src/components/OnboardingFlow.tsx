@@ -1905,7 +1905,36 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
               transition={{ delay: 0.1 }} 
               className="text-[15px] text-[#767b7e] text-center mb-10 max-w-[300px] leading-relaxed"
             >
-              organize my thoughts, manage my tasks, and boost my productivity so I can achieve my goals.
+              {(() => {
+                const goalMessages: Record<string, string> = {
+                  'Study & Learning': 'stay organized with my studies, manage assignments, and build better learning habits so I can excel academically.',
+                  'Work & Career': 'streamline my workflow, track projects, and stay on top of deadlines so I can advance my career.',
+                  'Personal & Daily Life': 'organize my daily routine, build healthy habits, and manage personal goals so I can live a more balanced life.',
+                  'Creative Projects': 'plan my creative ideas, track progress on projects, and stay inspired so I can bring my vision to life.',
+                  'Health & Fitness': 'track my fitness goals, build healthy routines, and stay consistent so I can achieve my health targets.',
+                  'Something else': 'organize my thoughts, manage my tasks, and boost my productivity so I can achieve my goals.',
+                };
+                const goals = Array.from(selectedGoal);
+                if (goals.length === 1 && goalMessages[goals[0]]) {
+                  return goalMessages[goals[0]];
+                }
+                if (goals.length > 1) {
+                  const parts = goals.filter(g => g !== 'Something else').map(g => {
+                    const short: Record<string, string> = {
+                      'Study & Learning': 'excel in my studies',
+                      'Work & Career': 'advance my career',
+                      'Personal & Daily Life': 'organize my daily life',
+                      'Creative Projects': 'bring creative ideas to life',
+                      'Health & Fitness': 'achieve my health goals',
+                    };
+                    return short[g] || '';
+                  }).filter(Boolean);
+                  if (parts.length > 0) {
+                    return `${parts.join(', ')} — and stay productive every day.`;
+                  }
+                }
+                return 'organize my thoughts, manage my tasks, and boost my productivity so I can achieve my goals.';
+              })()}
             </motion.p>
 
             {/* Logo with pulsing ring */}
