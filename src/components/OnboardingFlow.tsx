@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { ALL_JOURNEYS, startJourney } from '@/utils/virtualJourneyStorage';
-import { ArrowLeft, Camera, User, Check, PenLine, CheckCircle2, CalendarDays, Target, Lightbulb, Bell, BarChart3, Star, Trophy, FlaskConical, Link, Monitor, Rocket, Heart, TrendingUp, Brain, Zap, Palette, Save, Trash2, BookOpen, Briefcase, Activity, Sparkles, MapPin } from 'lucide-react';
+import { ArrowLeft, Camera, User, Check, PenLine, CheckCircle2, CalendarDays, Target, Lightbulb, Bell, BarChart3, Star, Trophy, FlaskConical, Link, Monitor, Rocket, Heart, TrendingUp, Brain, Zap, Palette, Save, Trash2, BookOpen, Briefcase, Activity, Sparkles, MapPin, Plus, Folder as FolderIcon } from 'lucide-react';
 import appLogo from '@/assets/app-logo.webp';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -147,7 +147,7 @@ const PlanLoadingScreen = ({ onComplete, displayName }: { onComplete: () => void
   );
 };
 
-const FOLDER_COLORS = ['#3c78f0', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#f97316'];
+const FOLDER_COLORS = ['#3c78f0', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#f97316', '#06b6d4'];
 
 // Sub-component for folder creation in onboarding
 const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, stepLabel, handleBack, goNext }: {
@@ -182,6 +182,9 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
     ? t('onboarding.notesFolderSubtitle')
     : t('onboarding.tasksFolderSubtitle');
   const icon = type === 'notes' ? '📝' : '✅';
+  const accentGradient = type === 'notes'
+    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    : 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
 
   return (
     <div className="fixed inset-0 z-[300] flex flex-col bg-white" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
@@ -198,55 +201,85 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
         <div className="flex-1 flex flex-col gap-0.5">
           <span className="text-[11px] font-semibold text-[#999] text-right">{stepLabel}</span>
           <div className="h-[17px] rounded-[6px] bg-[#e5e5e5] overflow-hidden">
-            <motion.div className="h-full" style={{ backgroundColor: ONBOARDING_COLOR }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
+            <motion.div className="h-full rounded-[6px]" style={{ background: accentGradient }} initial={{ width: '0%' }} animate={{ width: progressPercent }} transition={{ duration: 0.5, ease: 'easeOut' }} />
           </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="flex-1 flex flex-col px-6 pt-4 overflow-y-auto pb-4">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-1">
-          <span className="text-3xl mb-2 block">{icon}</span>
-          <h1 className="text-[24px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight leading-tight">{title}</h1>
+        {/* Hero section with gradient accent */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-5"
+        >
+          <motion.div
+            initial={{ scale: 0, rotate: -20 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: 0.15, type: 'spring', stiffness: 200, damping: 15 }}
+            className="w-14 h-14 rounded-2xl flex items-center justify-center mb-3 shadow-lg"
+            style={{ background: accentGradient }}
+          >
+            <span className="text-2xl">{icon}</span>
+          </motion.div>
+          <h1 className="text-[26px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight leading-tight">{title}</h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-[13px] text-[#767b7e] font-['Nunito_Sans'] mt-1.5"
+          >
+            {subtitle}
+          </motion.p>
         </motion.div>
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="text-[13px] text-[#767b7e] font-['Nunito_Sans'] mb-5">
-          {subtitle}
-        </motion.p>
 
         {/* Create folder form */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="rounded-2xl border border-[#e8e8e8] bg-[#fafafa] p-4 mb-4"
+          transition={{ delay: 0.25, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="rounded-2xl border border-[#eee] bg-gradient-to-b from-[#fafafa] to-white p-4 mb-4 shadow-sm"
         >
-          <p className="text-[14px] font-semibold text-[#1a1a1a] font-['Nunito_Sans'] mb-3">{t('onboarding.newFolder')}</p>
+          <p className="text-[14px] font-bold text-[#1a1a1a] font-['Nunito_Sans'] mb-3 flex items-center gap-2">
+            <Plus className="h-4 w-4" style={{ color: type === 'notes' ? '#667eea' : '#11998e' }} />
+            {t('onboarding.newFolder')}
+          </p>
           <input
             type="text"
             value={folderName}
             onChange={(e) => setFolderName(e.target.value)}
             placeholder={t('onboarding.folderName')}
-            className="w-full px-4 py-3 rounded-xl border border-[#e0e0e0] bg-white text-[15px] text-[#1a1a1a] placeholder-[#aaa] outline-none focus:border-[#3c78f0] transition-colors mb-3"
+            className="w-full px-4 py-3 rounded-xl border border-[#e0e0e0] bg-white text-[15px] text-[#1a1a1a] placeholder-[#bbb] outline-none focus:border-[#3c78f0] focus:ring-2 focus:ring-[#3c78f0]/10 transition-all duration-200 mb-3"
             onKeyDown={(e) => { if (e.key === 'Enter') handleCreate(); }}
             autoFocus
           />
 
           {/* Color picker */}
-          <p className="text-[13px] font-medium text-[#767b7e] mb-2">{t('onboarding.color')}</p>
-          <div className="flex gap-2.5 mb-3">
-            {FOLDER_COLORS.map(color => (
-              <button
+          <p className="text-[12px] font-semibold text-[#999] uppercase tracking-wider mb-2">{t('onboarding.color')}</p>
+          <div className="flex gap-2 mb-4 flex-wrap">
+            {FOLDER_COLORS.map((color, i) => (
+              <motion.button
                 key={color}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.3 + i * 0.04, type: 'spring', stiffness: 300 }}
                 onClick={() => { triggerSelectionHaptic(); setSelectedColor(color); }}
-                className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-transform active:scale-90"
+                className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200"
                 style={{
                   backgroundColor: color,
-                  border: selectedColor === color ? '3px solid #1a1a1a' : '3px solid transparent',
+                  boxShadow: selectedColor === color ? `0 0 0 3px white, 0 0 0 5px ${color}` : `0 2px 8px ${color}30`,
                   transform: selectedColor === color ? 'scale(1.15)' : 'scale(1)',
                 }}
+                whileTap={{ scale: 0.85 }}
               >
-                {selectedColor === color && <Check className="h-4 w-4 text-white" />}
-              </button>
+                {selectedColor === color && (
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 400 }}>
+                    <Check className="h-4 w-4 text-white" strokeWidth={3} />
+                  </motion.div>
+                )}
+              </motion.button>
             ))}
           </div>
 
@@ -254,8 +287,8 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
           <motion.button
             onClick={handleCreate}
             disabled={!folderName.trim()}
-            className="w-full py-3 rounded-xl text-[15px] font-bold cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ backgroundColor: ONBOARDING_COLOR, color: '#ffffff' }}
+            className="w-full py-3 rounded-xl text-[15px] font-bold cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed text-white shadow-md"
+            style={{ background: folderName.trim() ? accentGradient : '#ccc' }}
             whileTap={{ scale: 0.97 }}
           >
             {t('onboarding.createFolder')}
@@ -265,41 +298,68 @@ const OnboardingFolderCreation = ({ type, folders, setFolders, progressPercent, 
         {/* Created folders list */}
         {folders.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-2xl border border-[#e8e8e8] bg-[#fafafa] overflow-hidden divide-y divide-[#e8e8e8]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="space-y-2"
           >
+            <p className="text-[12px] font-semibold text-[#999] uppercase tracking-wider px-1 mb-1">
+              {t('onboarding.foldersCreated', { count: folders.length })}
+            </p>
             {folders.map((folder, i) => (
               <motion.div
                 key={folder.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.05 }}
-                className="flex items-center gap-3 py-3.5 px-4"
+                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ delay: i * 0.06, type: 'spring', stiffness: 300, damping: 25 }}
+                className="flex items-center gap-3 py-3 px-4 rounded-xl bg-white border border-[#eee] shadow-sm"
               >
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: folder.color + '20' }}>
-                  <div className="w-4 h-4 rounded" style={{ backgroundColor: folder.color }} />
-                </div>
-                <span className="flex-1 text-[15px] font-medium text-[#1a1a1a]">{folder.name}</span>
-                <button
-                  onClick={() => handleRemove(folder.id)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer active:bg-[#f0f0f0]"
+                <motion.div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center shadow-sm"
+                  style={{ background: `linear-gradient(135deg, ${folder.color}, ${folder.color}cc)` }}
+                  whileHover={{ rotate: 5 }}
                 >
-                  <Trash2 className="h-4 w-4 text-[#999]" />
-                </button>
+                  <FolderIcon className="h-4 w-4 text-white" />
+                </motion.div>
+                <span className="flex-1 text-[15px] font-semibold text-[#1a1a1a]">{folder.name}</span>
+                <motion.button
+                  onClick={() => handleRemove(folder.id)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer hover:bg-red-50 active:bg-red-100 transition-colors"
+                  whileTap={{ scale: 0.85 }}
+                >
+                  <Trash2 className="h-4 w-4 text-[#ccc] hover:text-red-400 transition-colors" />
+                </motion.button>
               </motion.div>
             ))}
           </motion.div>
         )}
+
+        {/* Empty state */}
+        {folders.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="flex flex-col items-center justify-center py-8 opacity-40"
+          >
+            <FolderIcon className="h-10 w-10 text-[#ccc] mb-2" />
+            <p className="text-[13px] text-[#aaa]">No folders yet — create one above!</p>
+          </motion.div>
+        )}
       </div>
 
-      {/* Bottom buttons */}
+      {/* Bottom button */}
       <div className="px-6 pb-6 pt-2" style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 24px)' }}>
         <motion.button
           onClick={() => { triggerSelectionHaptic(); goNext(); }}
-          className="w-full py-3 rounded-2xl text-[17px] font-bold"
-          style={{ backgroundColor: '#333333', color: '#ffffff', boxShadow: '0 8px 0 0 #000000' }}
-          whileTap={{ scale: 0.97 }}
+          className="w-full py-3.5 rounded-2xl text-[17px] font-bold text-white"
+          style={{
+            background: folders.length > 0 ? 'linear-gradient(135deg, #1a1a1a 0%, #333 100%)' : '#888',
+            boxShadow: folders.length > 0 ? '0 8px 0 0 #000' : '0 6px 0 0 #555',
+          }}
+          whileTap={{ scale: 0.97, y: 4 }}
+          transition={{ type: 'spring', stiffness: 400 }}
         >
           {folders.length > 0 ? `${t('onboarding.continue')} · ${t('onboarding.foldersCreated', { count: folders.length })}` : t('onboarding.skip')}
         </motion.button>
