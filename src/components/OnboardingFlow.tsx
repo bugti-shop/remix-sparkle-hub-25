@@ -12,6 +12,7 @@ import type { TodoItem, TaskSection, Folder } from '@/types/note';
 import { NoteEditor } from '@/components/NoteEditor';
 import { TaskInputSheet } from '@/components/TaskInputSheet';
 import { ProfileImageCropper } from '@/components/ProfileImageCropper';
+import { LazyConfetti } from '@/components/LazyConfetti';
 import { triggerSelectionHaptic } from '@/utils/haptics';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
