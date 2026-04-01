@@ -75,6 +75,8 @@ interface NoteEditorProps {
   allNotes?: Note[];
   /** Route to navigate back to when editor closes. If not provided, stays on current route. */
   returnTo?: string;
+  /** When true, skip browser history push/pop (used inside onboarding to avoid step skipping) */
+  skipHistory?: boolean;
 }
 
 // User-created folders only - no default note type folders
