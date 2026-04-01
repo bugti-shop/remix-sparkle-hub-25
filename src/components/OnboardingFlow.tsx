@@ -782,6 +782,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       if (!userName.trim()) return;
       const existing = await loadUserProfile();
       await saveUserProfile({ ...existing, name: userName.trim(), avatarUrl: avatarPreview || existing.avatarUrl });
+      setStep(37); // → commitment screen
+    } else if (step === 37) {
       setStep(28); // → previous app question
     } else if (step === 28) {
       if (!selectedPreviousApp) return;
