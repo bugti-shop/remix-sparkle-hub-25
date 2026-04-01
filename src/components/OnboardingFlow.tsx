@@ -808,11 +808,11 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 33) {
       if (!selectedOffline) return;
       await setSetting('onboarding_offline', selectedOffline);
-      setStep(34); // → unfinished tasks
+      setStep(5); // → folders
     } else if (step === 34) {
       if (!selectedUnfinished) return;
       await setSetting('onboarding_unfinished', selectedUnfinished);
-      setStep(5); // → folders
+      setStep(35); // → slowdown
     } else if (step === 35) {
       if (!selectedSlowdown) return;
       await setSetting('onboarding_slowdown', selectedSlowdown);
