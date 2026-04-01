@@ -808,11 +808,11 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 33) {
       if (!selectedOffline) return;
       await setSetting('onboarding_offline', selectedOffline);
-      setStep(34); // → unfinished tasks
+      setStep(5); // → folders
     } else if (step === 34) {
       if (!selectedUnfinished) return;
       await setSetting('onboarding_unfinished', selectedUnfinished);
-      setStep(5); // → folders
+      setStep(35); // → slowdown
     } else if (step === 35) {
       if (!selectedSlowdown) return;
       await setSetting('onboarding_slowdown', selectedSlowdown);
@@ -854,7 +854,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         window.dispatchEvent(new Event('foldersUpdated'));
       }
       setShowTasksFolderCreation(false);
-      setStep(35); // → slowdown
+      setStep(34); // → unfinished tasks
     } else if (step === 6) {
       setStep(10); // → sketch
     } else if (step === 24) {
@@ -908,9 +908,9 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 29) setStep(24); // back from adventure begins → journey
     else if (step === 32) setStep(selectedJourneyId ? 29 : 24); // back from devices → adventure or journey
     else if (step === 33) setStep(32); // back from offline → devices
-    else if (step === 34) setStep(33); // back from unfinished → offline
-    else if (step === 5) setStep(34); // back from folders → unfinished
-    else if (step === 35) setStep(5); // back from slowdown → folders
+     else if (step === 5) setStep(33); // back from folders → offline
+    else if (step === 34) setStep(5); // back from unfinished → folders
+    else if (step === 35) setStep(34); // back from slowdown → unfinished
     else if (step === 36) setStep(35); // back from why fail → slowdown
     else if (step === 6) setStep(36); // back from note → why fail
     else if (step === 10) setStep(6); // back from sketch → create note
@@ -941,7 +941,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 24, 29, 32, 33, 34, 5, 5.1, 5.2, 35, 36, 6, 10, 13, 14, 25, 26];
+  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 24, 29, 32, 33, 5, 5.1, 5.2, 34, 35, 36, 6, 10, 13, 14, 25, 26];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
