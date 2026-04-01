@@ -854,7 +854,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         window.dispatchEvent(new Event('foldersUpdated'));
       }
       setShowTasksFolderCreation(false);
-      setStep(35); // → slowdown
+      setStep(34); // → unfinished tasks
     } else if (step === 6) {
       setStep(10); // → sketch
     } else if (step === 24) {
