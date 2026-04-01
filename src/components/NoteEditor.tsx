@@ -75,6 +75,8 @@ interface NoteEditorProps {
   allNotes?: Note[];
   /** Route to navigate back to when editor closes. If not provided, stays on current route. */
   returnTo?: string;
+  /** When true, skip browser history push/pop (used inside onboarding to avoid step skipping) */
+  skipHistory?: boolean;
 }
 
 // User-created folders only - no default note type folders
@@ -89,7 +91,7 @@ const STICKY_COLOR_VALUES = {
   orange: 'hsl(var(--sticky-orange))',
 };
 
-export const NoteEditor = ({ note, isOpen, onClose, onSave, defaultType = 'regular', defaultFolderId, allNotes = [], returnTo }: NoteEditorProps) => {
+export const NoteEditor = ({ note, isOpen, onClose, onSave, defaultType = 'regular', defaultFolderId, allNotes = [], returnTo, skipHistory = false }: NoteEditorProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { requireFeature, isPro } = useSubscription();
@@ -647,7 +649,7 @@ export const NoteEditor = ({ note, isOpen, onClose, onSave, defaultType = 'regul
 
   // When editor opens, push a history entry so "Back" closes editor instead of leaving/exiting
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || skipHistory) return;
     if (typeof window === 'undefined') return;
 
     // Small delay to ensure component is fully mounted

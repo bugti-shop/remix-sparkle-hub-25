@@ -1273,6 +1273,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
               setOnboardingNoteSaved(true);
             }}
             defaultType="regular"
+            skipHistory
           />
         </MemoryRouter>
       </div>
@@ -1292,10 +1293,10 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
               setStep(13);
             }}
             onSave={(note) => {
-              // Just mark as saved, do NOT advance — only back button (onClose) advances
               setSketchSaved(true);
             }}
             defaultType="sketch"
+            skipHistory
           />
         </MemoryRouter>
       </div>
