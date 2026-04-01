@@ -578,7 +578,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         if (!saved || typeof saved !== 'object') return;
         if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 36) {
           // Redirect removed steps to the closest valid step
-          const removedSteps = new Set([1, 2, 4, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23]);
+          const removedSteps = new Set([1, 2, 4, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23, 27]);
           if (removedSteps.has(saved.step)) {
             setStep(0); // restart from first question
           } else {
@@ -939,7 +939,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 32, 33, 34, 35, 36, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26, 27];
+  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 32, 33, 34, 35, 36, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
@@ -1725,195 +1725,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Loading screen
   if (step === 26) {
-    return <PlanLoadingScreen onComplete={() => setStep(27)} displayName={displayName} />;
-  }
-
-  // Welcome screen — ownership showcase
-  if (step === 27) {
-    const journeyObj = selectedJourneyId ? ALL_JOURNEYS.find(j => j.id === selectedJourneyId) : null;
-
-    return (
-      <div
-        className="fixed inset-0 z-[300] flex flex-col bg-white"
-        style={{
-          paddingTop: 'env(safe-area-inset-top, 0px)',
-          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-        }}
-      >
-        <div className="flex-1 min-h-0 px-6 pb-28 flex flex-col items-center justify-center">
-          {/* Avatar + Greeting */}
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-            className="flex flex-col items-center mb-6"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.1 }}
-              className="w-20 h-20 rounded-full overflow-hidden mb-4"
-              style={{ border: `3px solid ${ONBOARDING_COLOR}`, boxShadow: `0 4px 0 0 ${ONBOARDING_COLOR}` }}
-            >
-              {avatarPreview ? (
-                <img src={avatarPreview} alt="Profile" className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full bg-[#f5f6f8] flex items-center justify-center">
-                  <span className="text-2xl font-bold" style={{ color: ONBOARDING_COLOR }}>
-                    {displayName.charAt(0).toUpperCase()}
-                  </span>
-                </div>
-              )}
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-[28px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-center leading-tight"
-            >
-              Welcome, {displayName}! 🎉
-            </motion.h1>
-             <motion.p
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 1 }}
-               transition={{ delay: 0.35 }}
-               className="text-[13px] text-[#767b7e] font-['Nunito_Sans'] text-center mt-1"
-             >
-               You're all set! Flowist is ready to help you stay organized and productive.
-             </motion.p>
-           </motion.div>
-
-           {/* Summary stats */}
-           <div className="flex flex-col gap-3 mt-4 w-full">
-             {onboardingNoteSaved && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                  </div>
-                  <p className="text-[15px] font-semibold text-[#1a1a1a]">1 Note created</p>
-                </motion.div>
-              )}
-
-              {sketchSaved && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                  </div>
-                  <p className="text-[15px] font-semibold text-[#1a1a1a]">1 Sketch created</p>
-                </motion.div>
-              )}
-
-              {createdTasks.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                  </div>
-                  <p className="text-[15px] font-semibold text-[#1a1a1a]">{createdTasks.length} {createdTasks.length === 1 ? 'Task' : 'Tasks'} created</p>
-                </motion.div>
-              )}
-
-              {(notesFolders.length > 0 || tasksFolders.length > 0) && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.65 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                  </div>
-                  <p className="text-[15px] font-semibold text-[#1a1a1a]">{notesFolders.length + tasksFolders.length} {notesFolders.length + tasksFolders.length === 1 ? 'Folder' : 'Folders'} organized</p>
-                </motion.div>
-              )}
-
-              {selectedJourneyId && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.7 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                  </div>
-                  <p className="text-[15px] font-semibold text-[#1a1a1a]">Journey started</p>
-                </motion.div>
-              )}
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.75 }}
-                className="flex items-center gap-3"
-              >
-                <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                  <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                </div>
-                <p className="text-[15px] font-semibold text-[#1a1a1a]">Streak activated</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8 }}
-                className="flex items-center gap-3"
-              >
-                <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                  <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                </div>
-                <p className="text-[15px] font-semibold text-[#1a1a1a]">Certificates unlocked</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.85 }}
-                className="flex items-center gap-3"
-              >
-                <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: ONBOARDING_COLOR }}>
-                  <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-                </div>
-                <p className="text-[15px] font-semibold text-[#1a1a1a]">Ready to go!</p>
-              </motion.div>
-            </div>
-        </div>
-
-        {/* Bottom button */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 pt-3 bg-gradient-to-t from-white via-white to-transparent" style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 24px)' }}>
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            onClick={handleFinishWelcome}
-            className="w-full py-3 rounded-2xl text-[17px] font-bold cursor-pointer active:brightness-95"
-            style={{
-              backgroundColor: '#333333',
-              color: '#ffffff',
-              boxShadow: '0 8px 0 0 #000000',
-              WebkitTapHighlightColor: 'transparent',
-            }}
-            whileTap={{ scale: 0.99, y: 1 }}
-          >
-            {t('onboarding.letsGo')}
-          </motion.button>
-        </div>
-      </div>
-    );
+    return <PlanLoadingScreen onComplete={handleFinishWelcome} displayName={displayName} />;
   }
 
   const renderSingleSelect = (
