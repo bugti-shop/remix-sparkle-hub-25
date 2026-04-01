@@ -1881,7 +1881,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
             >
               {commitmentComplete && (
                 <motion.img 
-                  src={(await import('@/assets/app-logo.webp')).default}
+                  src={appLogo}
                   alt="Flowist"
                   className="w-28 h-28"
                   initial={{ scale: 0, opacity: 0 }}
