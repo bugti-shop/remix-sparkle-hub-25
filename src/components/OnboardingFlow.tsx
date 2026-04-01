@@ -788,9 +788,9 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       if (!userName.trim()) return;
       const existing = await loadUserProfile();
       await saveUserProfile({ ...existing, name: userName.trim(), avatarUrl: avatarPreview || existing.avatarUrl });
-      setStep(37); // → commitment screen
-    } else if (step === 37) {
       setStep(28); // → previous app question
+    } else if (step === 37) {
+      setStep(5); // → info/folders
     } else if (step === 28) {
       if (!selectedPreviousApp) return;
       await setSetting('onboarding_previous_app', selectedPreviousApp);
@@ -868,10 +868,10 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         startJourney(selectedJourneyId);
         setStep(29);
       } else {
-        setStep(5);
+        setStep(37); // no journey → commitment directly
       }
     } else if (step === 29) {
-      setStep(5);
+      setStep(37); // → commitment screen
     } else if (step === 10) {
       setStep(13);
     } else if (step === 13) {
@@ -907,8 +907,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     await triggerSelectionHaptic();
     if (step === 0) setStep(-3);
     else if (step === 3) setStep(0); // back from profile → pre-steps
-    else if (step === 37) setStep(3); // back from commitment → profile
-    else if (step === 28) setStep(37); // back from previous app → commitment
+    else if (step === 28) setStep(3); // back from previous app → profile
     else if (step === 30) setStep(28); // back from frustration → previous app
     else if (step === 31) setStep(selectedPreviousApp === 'None' || !selectedPreviousApp ? 28 : 30); // back from task view → frustration or previous app
     else if (step === 32) setStep(31); // back from devices → task view
@@ -918,7 +917,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 36) setStep(35); // back from why fail → slowdown
     else if (step === 24) setStep(36); // back from journey → why fail
     else if (step === 29) setStep(24); // back from adventure begins → journey
-    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
+    else if (step === 37) setStep(selectedJourneyId ? 29 : 24); // back from commitment → adventure or journey
+    else if (step === 5) setStep(37); // back from info → commitment
     else if (step === 6) setStep(5); // back from note → folders
     else if (step === 10) setStep(6); // back from sketch → create note
     else if (step === 13) setStep(10); // back from INFO → sketch
@@ -948,7 +948,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 3, 37, 28, 30, 31, 32, 33, 34, 35, 36, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26];
+  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 32, 33, 34, 35, 36, 24, 29, 37, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
