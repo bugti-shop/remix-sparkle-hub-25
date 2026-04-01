@@ -649,7 +649,7 @@ export const NoteEditor = ({ note, isOpen, onClose, onSave, defaultType = 'regul
 
   // When editor opens, push a history entry so "Back" closes editor instead of leaving/exiting
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || skipHistory) return;
     if (typeof window === 'undefined') return;
 
     // Small delay to ensure component is fully mounted
