@@ -812,7 +812,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 34) {
       if (!selectedUnfinished) return;
       await setSetting('onboarding_unfinished', selectedUnfinished);
-      setStep(35); // → slowdown
+      setStep(5); // → folders
     } else if (step === 35) {
       if (!selectedSlowdown) return;
       await setSetting('onboarding_slowdown', selectedSlowdown);
