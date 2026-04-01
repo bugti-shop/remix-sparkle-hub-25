@@ -1273,6 +1273,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
               setOnboardingNoteSaved(true);
             }}
             defaultType="regular"
+            skipHistory
           />
         </MemoryRouter>
       </div>
