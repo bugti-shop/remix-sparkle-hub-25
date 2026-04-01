@@ -917,7 +917,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 36) setStep(35); // back from why fail → slowdown
     else if (step === 24) setStep(36); // back from journey → why fail
     else if (step === 29) setStep(24); // back from adventure begins → journey
-    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
+    else if (step === 37) setStep(selectedJourneyId ? 29 : 24); // back from commitment → adventure or journey
+    else if (step === 5) setStep(37); // back from info → commitment
     else if (step === 6) setStep(5); // back from note → folders
     else if (step === 10) setStep(6); // back from sketch → create note
     else if (step === 13) setStep(10); // back from INFO → sketch
