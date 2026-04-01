@@ -2015,7 +2015,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
                 }}
               >
                 <img 
-                  src={(() => { try { return new URL('@/assets/app-logo.webp', import.meta.url).href } catch { return '' } })()}
+                  src={appLogo}
                   alt="Flowist"
                   className="w-16 h-16"
                 />
