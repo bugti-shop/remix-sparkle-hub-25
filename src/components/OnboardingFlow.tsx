@@ -1861,6 +1861,178 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         )}
 
 
+        {step === 37 && (
+          <motion.div 
+            key="step37" 
+            initial={{ opacity: 0, x: 40 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            exit={{ opacity: 0, x: -40 }} 
+            transition={{ duration: 0.15 }} 
+            className="flex-1 flex flex-col items-center justify-center px-6 relative overflow-hidden"
+          >
+            {/* Full-screen color fill on commitment complete */}
+            <motion.div 
+              className="absolute inset-0 z-10 flex items-center justify-center"
+              style={{ backgroundColor: '#3b78ed' }}
+              initial={{ scale: 0, borderRadius: '100%' }}
+              animate={commitmentComplete ? { scale: 3, borderRadius: '0%' } : { scale: 0, borderRadius: '100%' }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              {commitmentComplete && (
+                <motion.img 
+                  src={(await import('@/assets/app-logo.webp')).default}
+                  alt="Flowist"
+                  className="w-28 h-28"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.4, duration: 0.3, type: 'spring' }}
+                />
+              )}
+            </motion.div>
+
+            <motion.h1 
+              initial={{ opacity: 0, y: 16 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.2, delay: 0.05 }} 
+              className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-center leading-tight mb-3"
+            >
+              I will use Flowist to ...
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              transition={{ delay: 0.1 }} 
+              className="text-[15px] text-[#767b7e] text-center mb-10 max-w-[300px] leading-relaxed"
+            >
+              organize my thoughts, manage my tasks, and boost my productivity so I can achieve my goals.
+            </motion.p>
+
+            {/* Logo with pulsing ring */}
+            <div className="relative flex items-center justify-center mb-10">
+              {/* Outer pulse ring */}
+              <motion.div 
+                className="absolute rounded-full"
+                style={{ 
+                  width: 160, height: 160, 
+                  border: '3px solid #3b78ed',
+                  opacity: commitmentFilling ? 0.6 : 0.3
+                }}
+                animate={!commitmentComplete ? { 
+                  scale: [1, 1.15, 1], 
+                  opacity: [0.3, 0.1, 0.3] 
+                } : {}}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              {/* Inner glow ring */}
+              <motion.div 
+                className="absolute rounded-full"
+                style={{ 
+                  width: 140, height: 140, 
+                  background: `radial-gradient(circle, rgba(59,120,237,${commitmentFilling ? 0.3 : 0.15}) 0%, transparent 70%)`
+                }}
+              />
+              {/* Progress ring (fills during hold) */}
+              <svg 
+                className="absolute" 
+                width="150" height="150" 
+                viewBox="0 0 150 150"
+                style={{ transform: 'rotate(-90deg)' }}
+              >
+                <circle 
+                  cx="75" cy="75" r="65" 
+                  fill="none" 
+                  stroke="#e8e8e8" 
+                  strokeWidth="4" 
+                />
+                <motion.circle 
+                  cx="75" cy="75" r="65" 
+                  fill="none" 
+                  stroke="#3b78ed" 
+                  strokeWidth="4" 
+                  strokeLinecap="round"
+                  strokeDasharray={2 * Math.PI * 65}
+                  initial={{ strokeDashoffset: 2 * Math.PI * 65 }}
+                  animate={{ strokeDashoffset: commitmentFilling ? 0 : 2 * Math.PI * 65 }}
+                  transition={{ duration: 1.5, ease: 'linear' }}
+                />
+              </svg>
+              {/* Logo button */}
+              <motion.button
+                className="relative w-[120px] h-[120px] rounded-full flex items-center justify-center bg-white shadow-lg z-10 select-none"
+                style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'none' }}
+                whileTap={{ scale: 0.95 }}
+                onTouchStart={() => {
+                  setCommitmentFilling(true);
+                  commitHoldTimerRef.current = setTimeout(() => {
+                    setCommitmentComplete(true);
+                    triggerSelectionHaptic();
+                    setTimeout(() => {
+                      setCommitmentFilling(false);
+                      setCommitmentComplete(false);
+                      setStep(28);
+                    }, 1200);
+                  }, 1500);
+                }}
+                onTouchEnd={() => {
+                  if (commitHoldTimerRef.current) {
+                    clearTimeout(commitHoldTimerRef.current);
+                    commitHoldTimerRef.current = null;
+                  }
+                  if (!commitmentComplete) {
+                    setCommitmentFilling(false);
+                  }
+                }}
+                onMouseDown={() => {
+                  setCommitmentFilling(true);
+                  commitHoldTimerRef.current = setTimeout(() => {
+                    setCommitmentComplete(true);
+                    triggerSelectionHaptic();
+                    setTimeout(() => {
+                      setCommitmentFilling(false);
+                      setCommitmentComplete(false);
+                      setStep(28);
+                    }, 1200);
+                  }, 1500);
+                }}
+                onMouseUp={() => {
+                  if (commitHoldTimerRef.current) {
+                    clearTimeout(commitHoldTimerRef.current);
+                    commitHoldTimerRef.current = null;
+                  }
+                  if (!commitmentComplete) {
+                    setCommitmentFilling(false);
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (commitHoldTimerRef.current) {
+                    clearTimeout(commitHoldTimerRef.current);
+                    commitHoldTimerRef.current = null;
+                  }
+                  if (!commitmentComplete) {
+                    setCommitmentFilling(false);
+                  }
+                }}
+              >
+                <img 
+                  src={(() => { try { return new URL('@/assets/app-logo.webp', import.meta.url).href } catch { return '' } })()}
+                  alt="Flowist"
+                  className="w-16 h-16"
+                />
+              </motion.button>
+            </div>
+
+            <motion.p 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              transition={{ delay: 0.2 }} 
+              className="text-[15px] font-semibold text-center"
+              style={{ color: '#3b78ed' }}
+            >
+              Tap and hold the Flowist icon to commit.
+            </motion.p>
+          </motion.div>
+        )}
+
         {step === 28 && (
           <motion.div key="step28" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
             <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2, delay: 0.05 }} className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-left leading-tight mb-2">
