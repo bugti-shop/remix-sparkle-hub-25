@@ -1267,7 +1267,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
             isOpen={true}
             onClose={() => {
               setOnboardingNoteSaved(true);
-              setStep(7);
+              setStep(10);
             }}
             onSave={(note) => {
               setOnboardingNoteSaved(true);
