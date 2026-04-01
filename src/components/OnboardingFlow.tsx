@@ -565,10 +565,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedDevices, setSelectedDevices] = useState<Set<string>>(new Set());
   const [selectedOffline, setSelectedOffline] = useState<string | null>(null);
   const [firstStepShown, setFirstStepShown] = useState(false);
-  const [commitmentHeld, setCommitmentHeld] = useState(false);
-  const [commitmentFilling, setCommitmentFilling] = useState(false);
-  const [commitmentComplete, setCommitmentComplete] = useState(false);
-  const commitHoldTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showStreakDay1, setShowStreakDay1] = useState(false);
   const [showOnboardingCertificate, setShowOnboardingCertificate] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -789,8 +785,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
       const existing = await loadUserProfile();
       await saveUserProfile({ ...existing, name: userName.trim(), avatarUrl: avatarPreview || existing.avatarUrl });
       setStep(28); // → previous app question
-    } else if (step === 37) {
-      setStep(5); // → info/folders
     } else if (step === 28) {
       if (!selectedPreviousApp) return;
       await setSetting('onboarding_previous_app', selectedPreviousApp);
@@ -868,10 +862,10 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         startJourney(selectedJourneyId);
         setStep(29);
       } else {
-        setStep(37); // no journey → commitment directly
+        setStep(5); // no journey → folders directly
       }
     } else if (step === 29) {
-      setStep(37); // → commitment screen
+      setStep(5); // → folders
     } else if (step === 10) {
       setStep(13);
     } else if (step === 13) {
@@ -917,8 +911,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 36) setStep(35); // back from why fail → slowdown
     else if (step === 24) setStep(36); // back from journey → why fail
     else if (step === 29) setStep(24); // back from adventure begins → journey
-    else if (step === 37) setStep(selectedJourneyId ? 29 : 24); // back from commitment → adventure or journey
-    else if (step === 5) setStep(37); // back from info → commitment
+    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
     else if (step === 6) setStep(5); // back from note → folders
     else if (step === 10) setStep(6); // back from sketch → create note
     else if (step === 13) setStep(10); // back from INFO → sketch
@@ -948,7 +941,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 32, 33, 34, 35, 36, 24, 29, 37, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26];
+  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 32, 33, 34, 35, 36, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
@@ -969,7 +962,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     if (INTERACTIVE_STEPS.has(step)) return true;
     if (step === 0) return selectedGoal.size > 0;
     if (step === 3) return !!userName.trim();
-    if (step === 37) return true; // commitment step — no validation needed
+    
     if (step === 28) return !!selectedPreviousApp;
     if (step === 30) return !!selectedFrustration;
     if (step === 31) return !!selectedTaskView;
@@ -1863,229 +1856,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         )}
 
 
-        {step === 37 && (
-          <motion.div 
-            key="step37" 
-            initial={{ opacity: 0, x: 40 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            exit={{ opacity: 0, x: -40 }} 
-            transition={{ duration: 0.15 }} 
-            className="flex-1 flex flex-col items-center justify-center px-6 relative overflow-hidden"
-          >
-            {/* Confetti on commitment complete */}
-            {commitmentComplete && (
-              <div className="absolute inset-0 z-20 pointer-events-none">
-                <LazyConfetti
-                  width={window.innerWidth}
-                  height={window.innerHeight}
-                  numberOfPieces={200}
-                  recycle={false}
-                  colors={['#3b78ed', '#5b9aff', '#ffffff', '#ffd700', '#ff6b6b', '#4ecdc4']}
-                  style={{ position: 'fixed', top: 0, left: 0, zIndex: 20 }}
-                />
-              </div>
-            )}
-            {/* Full-screen color fill on commitment complete */}
-            <motion.div 
-              className="absolute inset-0 z-10 flex items-center justify-center"
-              style={{ backgroundColor: '#3b78ed' }}
-              initial={{ scale: 0, borderRadius: '100%' }}
-              animate={commitmentComplete ? { scale: 3, borderRadius: '0%' } : { scale: 0, borderRadius: '100%' }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-            >
-              {commitmentComplete && (
-                <>
-                  <motion.img 
-                    src={appLogo}
-                    alt="Flowist"
-                    className="w-28 h-28"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 0.3, type: 'spring' }}
-                  />
-                  <motion.p
-                    className="absolute bottom-32 text-white text-xl font-bold font-['Nunito']"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.3 }}
-                  >
-                    You're committed! 🎉
-                  </motion.p>
-                </>
-              )}
-            </motion.div>
-
-            <motion.h1 
-              initial={{ opacity: 0, y: 16 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.2, delay: 0.05 }} 
-              className="text-[32px] font-black text-[#1a1a1a] font-['Nunito'] tracking-tight text-center leading-tight mb-3"
-            >
-              I will use Flowist to ...
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ delay: 0.1 }} 
-              className="text-[15px] text-[#767b7e] text-center mb-10 max-w-[300px] leading-relaxed"
-            >
-              {(() => {
-                const goalMessages: Record<string, string> = {
-                  'Study & Learning': 'stay organized with my studies, manage assignments, and build better learning habits so I can excel academically.',
-                  'Work & Career': 'streamline my workflow, track projects, and stay on top of deadlines so I can advance my career.',
-                  'Personal & Daily Life': 'organize my daily routine, build healthy habits, and manage personal goals so I can live a more balanced life.',
-                  'Creative Projects': 'plan my creative ideas, track progress on projects, and stay inspired so I can bring my vision to life.',
-                  'Health & Fitness': 'track my fitness goals, build healthy routines, and stay consistent so I can achieve my health targets.',
-                  'Something else': 'organize my thoughts, manage my tasks, and boost my productivity so I can achieve my goals.',
-                };
-                const goals = Array.from(selectedGoal);
-                if (goals.length === 1 && goalMessages[goals[0]]) {
-                  return goalMessages[goals[0]];
-                }
-                if (goals.length > 1) {
-                  const parts = goals.filter(g => g !== 'Something else').map(g => {
-                    const short: Record<string, string> = {
-                      'Study & Learning': 'excel in my studies',
-                      'Work & Career': 'advance my career',
-                      'Personal & Daily Life': 'organize my daily life',
-                      'Creative Projects': 'bring creative ideas to life',
-                      'Health & Fitness': 'achieve my health goals',
-                    };
-                    return short[g] || '';
-                  }).filter(Boolean);
-                  if (parts.length > 0) {
-                    return `${parts.join(', ')} — and stay productive every day.`;
-                  }
-                }
-                return 'organize my thoughts, manage my tasks, and boost my productivity so I can achieve my goals.';
-              })()}
-            </motion.p>
-
-            {/* Logo with pulsing ring */}
-            <div className="relative flex items-center justify-center mb-10">
-              {/* Outer pulse ring */}
-              <motion.div 
-                className="absolute rounded-full"
-                style={{ 
-                  width: 160, height: 160, 
-                  border: '3px solid #3b78ed',
-                  opacity: commitmentFilling ? 0.6 : 0.3
-                }}
-                animate={!commitmentComplete ? { 
-                  scale: [1, 1.15, 1], 
-                  opacity: [0.3, 0.1, 0.3] 
-                } : {}}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              />
-              {/* Inner glow ring */}
-              <motion.div 
-                className="absolute rounded-full"
-                style={{ 
-                  width: 140, height: 140, 
-                  background: `radial-gradient(circle, rgba(59,120,237,${commitmentFilling ? 0.3 : 0.15}) 0%, transparent 70%)`
-                }}
-              />
-              {/* Progress ring (fills during hold) */}
-              <svg 
-                className="absolute" 
-                width="150" height="150" 
-                viewBox="0 0 150 150"
-                style={{ transform: 'rotate(-90deg)' }}
-              >
-                <circle 
-                  cx="75" cy="75" r="65" 
-                  fill="none" 
-                  stroke="#e8e8e8" 
-                  strokeWidth="4" 
-                />
-                <motion.circle 
-                  cx="75" cy="75" r="65" 
-                  fill="none" 
-                  stroke="#3b78ed" 
-                  strokeWidth="4" 
-                  strokeLinecap="round"
-                  strokeDasharray={2 * Math.PI * 65}
-                  initial={{ strokeDashoffset: 2 * Math.PI * 65 }}
-                  animate={{ strokeDashoffset: commitmentFilling ? 0 : 2 * Math.PI * 65 }}
-                  transition={{ duration: 1.5, ease: 'linear' }}
-                />
-              </svg>
-              {/* Logo button */}
-              <motion.button
-                className="relative w-[120px] h-[120px] rounded-full flex items-center justify-center bg-white shadow-lg z-10 select-none"
-                style={{ WebkitTapHighlightColor: 'transparent', touchAction: 'none' }}
-                whileTap={{ scale: 0.95 }}
-                onTouchStart={() => {
-                  setCommitmentFilling(true);
-                  commitHoldTimerRef.current = setTimeout(() => {
-                    setCommitmentComplete(true);
-                    triggerSelectionHaptic();
-                    setTimeout(() => {
-                      setCommitmentFilling(false);
-                      setCommitmentComplete(false);
-                      setStep(28);
-                    }, 1200);
-                  }, 1500);
-                }}
-                onTouchEnd={() => {
-                  if (commitHoldTimerRef.current) {
-                    clearTimeout(commitHoldTimerRef.current);
-                    commitHoldTimerRef.current = null;
-                  }
-                  if (!commitmentComplete) {
-                    setCommitmentFilling(false);
-                  }
-                }}
-                onMouseDown={() => {
-                  setCommitmentFilling(true);
-                  commitHoldTimerRef.current = setTimeout(() => {
-                    setCommitmentComplete(true);
-                    triggerSelectionHaptic();
-                    setTimeout(() => {
-                      setCommitmentFilling(false);
-                      setCommitmentComplete(false);
-                      setStep(28);
-                    }, 1200);
-                  }, 1500);
-                }}
-                onMouseUp={() => {
-                  if (commitHoldTimerRef.current) {
-                    clearTimeout(commitHoldTimerRef.current);
-                    commitHoldTimerRef.current = null;
-                  }
-                  if (!commitmentComplete) {
-                    setCommitmentFilling(false);
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (commitHoldTimerRef.current) {
-                    clearTimeout(commitHoldTimerRef.current);
-                    commitHoldTimerRef.current = null;
-                  }
-                  if (!commitmentComplete) {
-                    setCommitmentFilling(false);
-                  }
-                }}
-              >
-                <img 
-                  src={appLogo}
-                  alt="Flowist"
-                  className="w-16 h-16"
-                />
-              </motion.button>
-            </div>
-
-            <motion.p 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ delay: 0.2 }} 
-              className="text-[15px] font-semibold text-center"
-              style={{ color: '#3b78ed' }}
-            >
-              Tap and hold the Flowist icon to commit.
-            </motion.p>
-          </motion.div>
-        )}
 
         {step === 28 && (
           <motion.div key="step28" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.15 }} className="flex-1 flex flex-col px-6 pt-6 overflow-y-auto">
