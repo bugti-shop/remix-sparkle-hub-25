@@ -800,7 +800,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 31) {
       if (!selectedTaskView) return;
       await setSetting('onboarding_task_view', selectedTaskView);
-      setStep(32); // → devices
+      setStep(24); // → journey selection
     } else if (step === 32) {
       if (selectedDevices.size === 0) return;
       await setSetting('onboarding_devices', Array.from(selectedDevices));
