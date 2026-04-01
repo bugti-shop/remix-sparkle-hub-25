@@ -91,7 +91,7 @@ const STICKY_COLOR_VALUES = {
   orange: 'hsl(var(--sticky-orange))',
 };
 
-export const NoteEditor = ({ note, isOpen, onClose, onSave, defaultType = 'regular', defaultFolderId, allNotes = [], returnTo }: NoteEditorProps) => {
+export const NoteEditor = ({ note, isOpen, onClose, onSave, defaultType = 'regular', defaultFolderId, allNotes = [], returnTo, skipHistory = false }: NoteEditorProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { requireFeature, isPro } = useSubscription();
