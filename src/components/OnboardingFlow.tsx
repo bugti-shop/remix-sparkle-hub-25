@@ -1289,7 +1289,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
             isOpen={true}
             onClose={() => {
               setSketchSaved(true);
-              setStep(11);
+              setStep(13);
             }}
             onSave={(note) => {
               // Just mark as saved, do NOT advance — only back button (onClose) advances
