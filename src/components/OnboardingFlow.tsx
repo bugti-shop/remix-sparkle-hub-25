@@ -820,7 +820,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 36) {
       if (!selectedWhyFail) return;
       await setSetting('onboarding_why_fail', selectedWhyFail);
-      setStep(24); // → journey selection
+      setStep(5); // → folders
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
     } else if (step === 5 && showNotesFolderCreation) {
