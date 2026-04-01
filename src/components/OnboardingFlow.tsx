@@ -871,7 +871,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         setStep(5);
       }
     } else if (step === 29) {
-      setStep(5);
+      setStep(37); // → commitment screen
     } else if (step === 10) {
       setStep(13);
     } else if (step === 13) {
