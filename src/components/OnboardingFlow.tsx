@@ -800,7 +800,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 31) {
       if (!selectedTaskView) return;
       await setSetting('onboarding_task_view', selectedTaskView);
-      setStep(32); // → devices
+      setStep(24); // → journey selection
     } else if (step === 32) {
       if (selectedDevices.size === 0) return;
       await setSetting('onboarding_devices', Array.from(selectedDevices));
@@ -820,7 +820,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     } else if (step === 36) {
       if (!selectedWhyFail) return;
       await setSetting('onboarding_why_fail', selectedWhyFail);
-      setStep(24); // → journey selection
+      setStep(5); // → folders
     } else if (step === 5 && !showNotesFolderCreation && !showTasksFolderCreation) {
       setShowNotesFolderCreation(true); // INFO → Notes folder creation
     } else if (step === 5 && showNotesFolderCreation) {
@@ -862,10 +862,10 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         startJourney(selectedJourneyId);
         setStep(29);
       } else {
-        setStep(5); // no journey → folders directly
+        setStep(32); // no journey → devices directly
       }
     } else if (step === 29) {
-      setStep(5); // → folders
+      setStep(32); // → devices
     } else if (step === 10) {
       setStep(13);
     } else if (step === 13) {
@@ -904,14 +904,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 28) setStep(3); // back from previous app → profile
     else if (step === 30) setStep(28); // back from frustration → previous app
     else if (step === 31) setStep(selectedPreviousApp === 'None' || !selectedPreviousApp ? 28 : 30); // back from task view → frustration or previous app
-    else if (step === 32) setStep(31); // back from devices → task view
+    else if (step === 24) setStep(31); // back from journey → task view
+    else if (step === 29) setStep(24); // back from adventure begins → journey
+    else if (step === 32) setStep(selectedJourneyId ? 29 : 24); // back from devices → adventure or journey
     else if (step === 33) setStep(32); // back from offline → devices
     else if (step === 34) setStep(33); // back from unfinished → offline
     else if (step === 35) setStep(34); // back from slowdown → unfinished
     else if (step === 36) setStep(35); // back from why fail → slowdown
-    else if (step === 24) setStep(36); // back from journey → why fail
-    else if (step === 29) setStep(24); // back from adventure begins → journey
-    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
+    else if (step === 5) setStep(36); // back from info → why fail
     else if (step === 6) setStep(5); // back from note → folders
     else if (step === 10) setStep(6); // back from sketch → create note
     else if (step === 13) setStep(10); // back from INFO → sketch
@@ -941,7 +941,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Sequential flow order mapping: internal step → display position (exclude pre-steps -3,-2,-1)
   // Step 5 has 3 sub-screens (info, notes folders, tasks folders) — use 5.1/5.2 as virtual entries
-  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 32, 33, 34, 35, 36, 24, 29, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26];
+  const FLOW_ORDER: number[] = [0, 3, 28, 30, 31, 24, 29, 32, 33, 34, 35, 36, 5, 5.1, 5.2, 6, 10, 13, 14, 25, 26];
   const stepCount = FLOW_ORDER.length;
   // For step 5, determine sub-step based on folder creation state
   const getDisplayStep = () => {
