@@ -868,7 +868,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         startJourney(selectedJourneyId);
         setStep(29);
       } else {
-        setStep(5);
+        setStep(37); // no journey → commitment directly
       }
     } else if (step === 29) {
       setStep(37); // → commitment screen
