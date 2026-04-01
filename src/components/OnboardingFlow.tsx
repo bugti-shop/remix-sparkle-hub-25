@@ -565,10 +565,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
   const [selectedDevices, setSelectedDevices] = useState<Set<string>>(new Set());
   const [selectedOffline, setSelectedOffline] = useState<string | null>(null);
   const [firstStepShown, setFirstStepShown] = useState(false);
-  const [commitmentHeld, setCommitmentHeld] = useState(false);
-  const [commitmentFilling, setCommitmentFilling] = useState(false);
-  const [commitmentComplete, setCommitmentComplete] = useState(false);
-  const commitHoldTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [showStreakDay1, setShowStreakDay1] = useState(false);
   const [showOnboardingCertificate, setShowOnboardingCertificate] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
