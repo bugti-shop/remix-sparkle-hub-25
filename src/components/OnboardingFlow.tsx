@@ -862,10 +862,10 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         startJourney(selectedJourneyId);
         setStep(29);
       } else {
-        setStep(5); // no journey → folders directly
+        setStep(32); // no journey → devices directly
       }
     } else if (step === 29) {
-      setStep(5); // → folders
+      setStep(32); // → devices
     } else if (step === 10) {
       setStep(13);
     } else if (step === 13) {
