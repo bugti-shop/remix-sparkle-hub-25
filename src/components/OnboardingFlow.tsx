@@ -1725,7 +1725,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
 
   // Loading screen
   if (step === 26) {
-    return <PlanLoadingScreen onComplete={() => setStep(27)} displayName={displayName} />;
+    return <PlanLoadingScreen onComplete={handleFinishWelcome} displayName={displayName} />;
   }
 
   // Welcome screen — ownership showcase
