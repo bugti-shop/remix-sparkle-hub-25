@@ -578,7 +578,7 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         if (!saved || typeof saved !== 'object') return;
         if (typeof saved.step === 'number' && saved.step >= -2 && saved.step <= 36) {
           // Redirect removed steps to the closest valid step
-          const removedSteps = new Set([1, 2, 4, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23]);
+          const removedSteps = new Set([1, 2, 4, 7, 8, 9, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23, 27]);
           if (removedSteps.has(saved.step)) {
             setStep(0); // restart from first question
           } else {
