@@ -1871,6 +1871,19 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
             transition={{ duration: 0.15 }} 
             className="flex-1 flex flex-col items-center justify-center px-6 relative overflow-hidden"
           >
+            {/* Confetti on commitment complete */}
+            {commitmentComplete && (
+              <div className="absolute inset-0 z-20 pointer-events-none">
+                <LazyConfetti
+                  width={window.innerWidth}
+                  height={window.innerHeight}
+                  numberOfPieces={200}
+                  recycle={false}
+                  colors={['#3b78ed', '#5b9aff', '#ffffff', '#ffd700', '#ff6b6b', '#4ecdc4']}
+                  style={{ position: 'fixed', top: 0, left: 0, zIndex: 20 }}
+                />
+              </div>
+            )}
             {/* Full-screen color fill on commitment complete */}
             <motion.div 
               className="absolute inset-0 z-10 flex items-center justify-center"
@@ -1880,14 +1893,24 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
               {commitmentComplete && (
-                <motion.img 
-                  src={appLogo}
-                  alt="Flowist"
-                  className="w-28 h-28"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.3, type: 'spring' }}
-                />
+                <>
+                  <motion.img 
+                    src={appLogo}
+                    alt="Flowist"
+                    className="w-28 h-28"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.3, type: 'spring' }}
+                  />
+                  <motion.p
+                    className="absolute bottom-32 text-white text-xl font-bold font-['Nunito']"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6, duration: 0.3 }}
+                  >
+                    You're committed! 🎉
+                  </motion.p>
+                </>
               )}
             </motion.div>
 
