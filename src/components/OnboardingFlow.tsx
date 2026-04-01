@@ -904,14 +904,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     else if (step === 28) setStep(3); // back from previous app → profile
     else if (step === 30) setStep(28); // back from frustration → previous app
     else if (step === 31) setStep(selectedPreviousApp === 'None' || !selectedPreviousApp ? 28 : 30); // back from task view → frustration or previous app
-    else if (step === 32) setStep(31); // back from devices → task view
+    else if (step === 24) setStep(31); // back from journey → task view
+    else if (step === 29) setStep(24); // back from adventure begins → journey
+    else if (step === 32) setStep(selectedJourneyId ? 29 : 24); // back from devices → adventure or journey
     else if (step === 33) setStep(32); // back from offline → devices
     else if (step === 34) setStep(33); // back from unfinished → offline
     else if (step === 35) setStep(34); // back from slowdown → unfinished
     else if (step === 36) setStep(35); // back from why fail → slowdown
-    else if (step === 24) setStep(36); // back from journey → why fail
-    else if (step === 29) setStep(24); // back from adventure begins → journey
-    else if (step === 5) setStep(selectedJourneyId ? 29 : 24); // back from info → adventure or journey
+    else if (step === 5) setStep(36); // back from info → why fail
     else if (step === 6) setStep(5); // back from note → folders
     else if (step === 10) setStep(6); // back from sketch → create note
     else if (step === 13) setStep(10); // back from INFO → sketch
