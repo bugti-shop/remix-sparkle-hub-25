@@ -862,10 +862,10 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
         startJourney(selectedJourneyId);
         setStep(29);
       } else {
-        setStep(37); // no journey → commitment directly
+        setStep(5); // no journey → folders directly
       }
     } else if (step === 29) {
-      setStep(37); // → commitment screen
+      setStep(5); // → folders
     } else if (step === 10) {
       setStep(13);
     } else if (step === 13) {
