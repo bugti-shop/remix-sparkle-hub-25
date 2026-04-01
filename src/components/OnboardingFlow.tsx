@@ -901,7 +901,8 @@ export const OnboardingFlow = ({ onComplete }: OnboardingFlowProps) => {
     await triggerSelectionHaptic();
     if (step === 0) setStep(-3);
     else if (step === 3) setStep(0); // back from profile → pre-steps
-    else if (step === 28) setStep(3); // back from previous app → profile
+    else if (step === 37) setStep(3); // back from commitment → profile
+    else if (step === 28) setStep(37); // back from previous app → commitment
     else if (step === 30) setStep(28); // back from frustration → previous app
     else if (step === 31) setStep(selectedPreviousApp === 'None' || !selectedPreviousApp ? 28 : 30); // back from task view → frustration or previous app
     else if (step === 32) setStep(31); // back from devices → task view
